@@ -1,0 +1,206 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ card?.Description }} Item Card </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="card" color="light" >
+
+    <ion-card-header color="success">
+      <ion-card-title>
+        <ion-card-title style="color:white"> {{ card?.Description }} Details</ion-card-title>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col center text-center size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Type Of Grade
+              </ion-label>
+              
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Type_Of_Grade?card?.Type_Of_Grade: 'Not Set' }}</h4>
+              </ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Base Unit of Measure
+              </ion-label>              
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4> {{ card?.Base_Unit_of_Measure?card?.Base_Unit_of_Measure: 'Not Set' }}</h4>
+              </ion-text>             
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Inventory
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Inventory?card?.Inventory: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Qty on Purchase Order
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Qty_on_Purch_Order?card?.Qty_on_Purch_Order: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Qty on Production Order
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Qty_on_Prod_Order?card?.Qty_on_Prod_Order: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Costing Method
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Costing_Method?card?.Costing_Method: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Manufacturing Policy
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Manufacturing_Policy?card?.Manufacturing_Policy: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Inventory Posting Group
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Inventory_Posting_Group?card?.Inventory_Posting_Group: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Sales Unit of Measure
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Sales_Unit_of_Measure?card?.Sales_Unit_of_Measure: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-wrap">
+                Replenishment_System
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item lines="none">
+              <ion-text>
+                <h4>{{ card?.Replenishment_System?card?.Replenishment_System: 'Not Set' }}</h4>
+              </ion-text>              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+
+      </ion-grid>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

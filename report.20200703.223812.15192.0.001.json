@@ -1,0 +1,481 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200703.223812.15192.0.001.json",
+    "dumpEventTime": "2020-07-03T22:38:12Z",
+    "dumpEventTimeStamp": "1593805092991",
+    "processId": 15192,
+    "cwd": "D:\\mobile\\Kipchabo",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:/mobile/Kipchabo/node_modules/@angular/compiler-cli/ngcc/src/execution/cluster/worker.js",
+      "--source",
+      "D:\\mobile\\Kipchabo\\node_modules",
+      "--properties",
+      "es2015",
+      "browser",
+      "module",
+      "main",
+      "--first-only",
+      "--create-ivy-entry-points",
+      "--async",
+      "--tsconfig",
+      "D:/mobile/Kipchabo/tsconfig.app.json"
+    ],
+    "nodejsVersion": "v12.13.1",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.13.1",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.13.1/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 154265,
+        "nice": 0,
+        "sys": 131531,
+        "idle": 310140,
+        "irq": 15562
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 138937,
+        "nice": 0,
+        "sys": 108234,
+        "idle": 348281,
+        "irq": 2781
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 182375,
+        "nice": 0,
+        "sys": 126625,
+        "idle": 286453,
+        "irq": 1796
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 158015,
+        "nice": 0,
+        "sys": 109640,
+        "idle": 327781,
+        "irq": 1640
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 142953,
+        "nice": 0,
+        "sys": 101984,
+        "idle": 350500,
+        "irq": 2906
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 133015,
+        "nice": 0,
+        "sys": 80281,
+        "idle": 382140,
+        "irq": 2062
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 180515,
+        "nice": 0,
+        "sys": 109343,
+        "idle": 305578,
+        "irq": 2812
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 154171,
+        "nice": 0,
+        "sys": 85734,
+        "idle": 355531,
+        "irq": 1750
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "VirtualBox Host-Only Network",
+        "internal": false,
+        "mac": "0a:00:27:00:00:15",
+        "address": "fe80::8026:692a:8e62:95bb",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 21
+      },
+      {
+        "name": "VirtualBox Host-Only Network",
+        "internal": false,
+        "mac": "0a:00:27:00:00:15",
+        "address": "192.168.56.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VirtualBox Host-Only Network #2",
+        "internal": false,
+        "mac": "0a:00:27:00:00:05",
+        "address": "fe80::5e1:84cb:68b2:57cf",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 5
+      },
+      {
+        "name": "VirtualBox Host-Only Network #2",
+        "internal": false,
+        "mac": "0a:00:27:00:00:05",
+        "address": "192.168.99.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "c0:b6:f9:a0:05:00",
+        "address": "fe80::174:ec5a:cb74:3f8a",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 12
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "c0:b6:f9:a0:05:00",
+        "address": "192.168.1.118",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "vEthernet (Default Switch)",
+        "internal": false,
+        "mac": "00:15:5d:b2:39:89",
+        "address": "fe80::2458:95f6:e337:622c",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 31
+      },
+      {
+        "name": "vEthernet (Default Switch)",
+        "internal": false,
+        "mac": "00:15:5d:b2:39:89",
+        "address": "192.168.186.65",
+        "netmask": "255.255.255.240",
+        "family": "IPv4"
+      }
+    ],
+    "host": "FRANCIS"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7a9201729",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9205b4c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9204b08",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a92f369b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9af82de",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9ae0321",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99adbec",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9989be3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9987edb",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99b355d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99b5264",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99ab353",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99a9b24",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a99cadf5",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9736ca7",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7a9f2404d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000003ed5cbc5538",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 162078720,
+    "totalCommittedMemory": 162078720,
+    "usedMemory": 127335912,
+    "availableMemory": 2067900760,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16759808,
+        "used": 3364240,
+        "available": 13395568
+      },
+      "old_space": {
+        "memorySize": 92647424,
+        "committedMemory": 92647424,
+        "capacity": 90416888,
+        "used": 90236792,
+        "available": 180096
+      },
+      "code_space": {
+        "memorySize": 2523136,
+        "committedMemory": 2523136,
+        "capacity": 1070816,
+        "used": 1044544,
+        "available": 26272
+      },
+      "map_space": {
+        "memorySize": 1052672,
+        "committedMemory": 1052672,
+        "capacity": 722800,
+        "used": 722800,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 31989760,
+        "committedMemory": 31989760,
+        "capacity": 31931688,
+        "used": 31931688,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16759808,
+        "used": 0,
+        "available": 16759808
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 11.75,
+    "kernelCpuSeconds": 0.953,
+    "cpuConsumptionPercent": 79.3937,
+    "maxRss": 197672960,
+    "pageFaults": {
+      "IORequired": 159400,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 1360,
+      "writes": 108
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\",
+    "allusersprofile": "C:\\ProgramData",
+    "appdata": "C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming",
+    "BROWSERSLIST_IGNORE_OLD_DATA": "1",
+    "chocolateyinstall": "C:\\ProgramData\\chocolatey",
+    "chocolateylastpathupdate": "132223835753697581",
+    "commonprogramfiles": "C:\\Program Files\\Common Files",
+    "commonprogramfiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "commonprogramw6432": "C:\\Program Files\\Common Files",
+    "computername": "FRANCIS",
+    "comspec": "C:\\Windows\\system32\\cmd.exe",
+    "dp0": "D:\\mobile\\Kipchabo\\node_modules\\.bin\\",
+    "driverdata": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "force_color": "1",
+    "homedrive": "C:",
+    "homepath": "\\Users\\HP ELITEBOOK 840 G5",
+    "ionic_cli_bin": "C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming\\npm\\node_modules\\ionic\\bin\\ionic",
+    "ionic_cli_lib": "C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming\\npm\\node_modules\\ionic",
+    "ionic_cli_local_error": "LOCAL_CLI_NOT_FOUND",
+    "localappdata": "C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Local",
+    "logonserver": "\\\\FRANCIS",
+    "msmpi_bin": "C:\\Program Files\\Microsoft MPI\\Bin\\",
+    "number_of_processors": "8",
+    "onedrive": "C:\\Users\\HP ELITEBOOK 840 G5\\OneDrive",
+    "onedriveconsumer": "C:\\Users\\HP ELITEBOOK 840 G5\\OneDrive",
+    "os": "Windows_NT",
+    "path": "D:\\mobile\\Kipchabo\\node_modules\\.bin;C:\\Program Files\\Microsoft MPI\\Bin\\;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming\\npm;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\ProgramData\\chocolatey\\bin;C:\\php;C:\\Program Files\\Microsoft\\Web Platform Installer\\;C:\\composer;C:\\Program Files (x86)\\Calibre2\\;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\DTS\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\150\\DTS\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.6\\;D:\\Sublime Text Build 3211;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\dotnet\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\DTS\\Binn\\;C:\\Program Files (x86)\\GnuWin32\\bin;C:\\Program Files\\nodejs\\;D:\\Sublime Text Build 3211\\;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Local\\Android\\Sdk\\platforms;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Local\\Android\\Sdk\\platform-tools;D:\\Installs\\putty\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\140\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DTS\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\140\\DTS\\Binn\\;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\HP ELITEBOOK 840 G5\\.dotnet\\tools;C:\\Users\\HP ELITEBOOK 840 G5\\AppData\\Roaming\\npm;C:\\Program Files\\Oracle\\VirtualBox;D:\\Installs\\Microsoft VS Code\\bin",
+    "pathext": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.CPL",
+    "processor_architecture": "AMD64",
+    "processor_identifier": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "processor_level": "6",
+    "processor_revision": "8e0a",
+    "programdata": "C:\\ProgramData",
+    "programfiles": "C:\\Program Files",
+    "programfiles(x86)": "C:\\Program Files (x86)",
+    "programw6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "psmodulepath": "C:\\Users\\HP ELITEBOOK 840 G5\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\Tools\\PowerShell\\Modules\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\PowerShell\\Modules\\",
+    "public": "C:\\Users\\Public",
+    "systemdrive": "C:",
+    "systemroot": "C:\\Windows",
+    "temp": "C:\\Users\\HPELIT~1\\AppData\\Local\\Temp",
+    "tmp": "C:\\Users\\HPELIT~1\\AppData\\Local\\Temp",
+    "userdomain": "FRANCIS",
+    "userdomain_roamingprofile": "FRANCIS",
+    "username": "HP ELITEBOOK 840 G5",
+    "userprofile": "C:\\Users\\HP ELITEBOOK 840 G5",
+    "vbox_msi_install_path": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "WEBPACK_DEV_SERVER": "true",
+    "windir": "C:\\Windows",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\SYSTEM32\\ntmarta.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\wshbth.dll"
+  ]
+}

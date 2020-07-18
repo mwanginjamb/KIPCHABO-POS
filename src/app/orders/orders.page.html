@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="3" >Customer</ion-col>
+    <ion-col size="3">Location Code</ion-col>
+    <ion-col size="3">Ship To</ion-col>
+    <ion-col size="3">Amount</ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+  <ion-virtual-scroll [items]="Navorders" approxItemHeight="47.2px">
+             
+            <ion-item 
+              [routerLink] = "['/','orders',order.No]"
+             detail
+             *virtualItem="let order" > 
+
+             <ion-grid>
+                <ion-row>
+
+                  <ion-col size="3">
+                    <ion-label>
+                      <h3>{{ order.Sell_to_Customer_Name}}</h3>
+                    </ion-label>
+                  </ion-col>
+
+                  <ion-col size="3">
+                    <ion-label>
+                      <h3>{{ order.Location_Code}}</h3>
+                    </ion-label>
+                  </ion-col>
+
+                  <ion-col size="3">
+                    <ion-label>
+                      <h3>{{ order.Ship_to_Name}}</h3>
+                    </ion-label>
+                  </ion-col>
+
+                  <ion-col size="3">
+                    <ion-label>
+                      <h3>{{ order.Amount_Including_VAT}}</h3>
+                    </ion-label>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+                    
+        </ion-item>
+      
+  </ion-virtual-scroll>
+
+ 
+
+ 
+</ion-content>

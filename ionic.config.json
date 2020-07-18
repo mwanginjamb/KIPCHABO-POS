@@ -1,5 +1,14 @@
 {
   "name": "Kipchabo",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "http://192.168.1.118/"
+    }
+  ]
 }

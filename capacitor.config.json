@@ -1,0 +1,19 @@
+{
+  "appId": "com.Kapchabo-pos.iansoft",
+  "appName": "Kipchabo-POS",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "http://192.168.1.118"
+    }
+  ],
+  "cordova": {}
+}
