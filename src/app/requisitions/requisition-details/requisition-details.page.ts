@@ -40,15 +40,19 @@ model = {};
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.itemSub = this.itemService.items.subscribe( items => {
-      this.items = items;
-    });
-
     // get card details
 
     this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
       this.card = [...cardInfo][0];
       // console.log(this.card.TransferLines?.Transfer_Order_Line);
+    });
+  }
+
+  ionViewDidEnter() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    // get card details
+    this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
+      this.card = [...cardInfo][0];
     });
   }
 
@@ -62,6 +66,16 @@ model = {};
      ).then( modalEl => {
        modalEl.present();
      });
+  }
+
+  onUpdateLine(LineNo: number) {
+    this.modalCtrl.create({
+      component: LinesComponent,
+      componentProps: { docId: this.id, LineNo }
+    })
+    .then( modalEl => {
+      modalEl.present();
+    } );
   }
 
 // Get Units of Measure

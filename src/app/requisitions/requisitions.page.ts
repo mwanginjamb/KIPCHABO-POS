@@ -30,6 +30,12 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   }
 
 
+  ionViewDidEnter(){
+    this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
+      this.requisitions = result;
+      console.log(this.requisitions);
+    });
+  }
 
   search($event) {
 

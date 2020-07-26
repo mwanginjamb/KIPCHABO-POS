@@ -5,7 +5,8 @@ import { take } from 'rxjs/operators';
 import { RequisitionService } from '../requisition.service';
 import { Unit } from 'src/app/models/unit.model';
 import { Requisitionline } from 'src/app/models/requisitionline.model';
-import { ModalController, NavController, ToastController } from '@ionic/angular';
+import { ModalController, NavController, ToastController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 export enum Planning_Flexibility {
@@ -21,21 +22,34 @@ export enum Planning_Flexibility {
 export class LinesComponent implements OnInit, OnDestroy {
 
   @Input() docId: string;
+  @Input() LineNo: number;
 
   items = [];
   itemSub: Subscription;
+  updateLineSub: Subscription;
   units = [];
   unitSub: Subscription;
 
-  line = new Requisitionline();
-  constructor(private itemService: ItemService, private requisitionService: RequisitionService, private modalCtrl: ModalController,
-              private navCtrl: NavController, private toastCtrl: ToastController ) { }
+  line: Requisitionline = new Requisitionline();
+  constructor(
+      private itemService: ItemService,
+      private requisitionService: RequisitionService,
+      private modalCtrl: ModalController,
+      private navCtrl: NavController,
+      private toastCtrl: ToastController,
+      private alertCtrl: AlertController,
+      private router: Router,
+       ) { }
 
   ngOnInit() {
 
     this.itemSub = this.itemService.items.subscribe( items => {
       this.items = items;
     });
+    // If a Line_No is provided, then we are updating
+    if ( this.LineNo ){
+      this.FetchLinetoUpdate();
+    }
   }
 
   getUnit($event) {
@@ -65,11 +79,58 @@ addLine() {
   });
 }
 
+updateLine() {
+
+// Format Date to YYYY-MM-DD
+const recDate = new Date(this.line.Receipt_Date);
+const month = (recDate.getMonth() + 1) > 9 ? recDate.getMonth() + 1 : `0` + (recDate.getMonth() + 1);
+const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
+this.line.Receipt_Date =  `${recDate.getFullYear()}-${month}-${day}`;
+
+
+this.requisitionService.updateRequisitionLine(this.line).subscribe( line => {
+    if ( typeof line !== 'string'){
+        console.log(line);
+        this.toastCtrl.create({
+          message: `${line.Description} Requisition Line Updated Successfully.`,
+          duration: 2000
+        }).then((toastData) => {
+          toastData.present();
+        });
+
+        this.modalCtrl.dismiss();
+        // this.router.navigate(['/requisitions/' + line.Document_No]);
+
+    }else {
+       // Alert the error
+       this.alertCtrl.create(
+        {
+          header: 'Operation Error',
+          message: 'Message : ' + line,
+          buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
+        }
+      ).then( alertEl => {
+        alertEl.present();
+      });
+    }
+});
+
+}
+
+FetchLinetoUpdate(){
+  this.updateLineSub = this.requisitionService.getLine(this.docId, this.LineNo)
+  .subscribe(res => {
+   Object.assign(this.line, res);
+  });
+}
+
 // Closing component modal
 
 onCancel() {
   this.modalCtrl.dismiss();
 }
+
+
 
 ngOnDestroy() {
   if (this.itemSub) {
@@ -79,6 +140,11 @@ ngOnDestroy() {
   if (this.unitSub) {
     this.unitSub.unsubscribe();
   }
+
+  if (this.updateLineSub) {
+    this.updateLineSub.unsubscribe();
+  }
+
 }
 
 

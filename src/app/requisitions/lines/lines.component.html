@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>New Requisition Line</ion-title>
+    <ion-title>{{line.Line_No?'Update': 'New'}} Requisition Line</ion-title>
 
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
@@ -36,14 +36,28 @@
           <ion-input [(ngModel)]="line.Pieces" type="number"></ion-input>
         </ion-item>
 
+        <ion-item *ngIf="line.Line_No">
+          <ion-label  position="floating">Quantity Received</ion-label>
+          <ion-input [(ngModel)]="line.Quantity_Received" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="line.Line_No">
+          <ion-label position="floating">Receipt Date</ion-label>
+          <ion-datetime [(ngModel)]="line.Receipt_Date" type="number" displayFormat="YYYY-MM-DD"></ion-datetime>
+        </ion-item>
+
         
 
 
       </ion-list>
 
 
-      <ion-button color="primary" (click)="addLine()" expand="block" fill="outline" >
+      <ion-button  *ngIf="!line.Line_No" color="primary" (click)="addLine()" expand="block" fill="outline" >
         Add Line
+      </ion-button>
+
+      <ion-button *ngIf="line.Line_No"  color="primary" (click)="updateLine()" expand="block" fill="outline" >
+        Update Line
       </ion-button>
 
     </ion-col>
