@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrdersPageRoutingModule } from './orders-routing.module';
 
 import { OrdersPage } from './orders.page';
+import { PopoverComponent } from './popover/popover.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { OrdersPage } from './orders.page';
     IonicModule,
     OrdersPageRoutingModule
   ],
-  declarations: [OrdersPage]
+  entryComponents: [ PopoverComponent ],
+  declarations: [OrdersPage, PopoverComponent]
 })
 export class OrdersPageModule {}

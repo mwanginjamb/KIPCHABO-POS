@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../order.service';
-import { Order } from '../models/order';
 import { tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Salesorder } from 'src/app/models/salesorder.model';
+import { Salesorderline } from 'src/app/models/salesorderline.model';
+import { ModalController } from '@ionic/angular';
+import { LinesComponent } from '../lines/lines.component';
+
 
 @Component({
   selector: 'app-order-detail',
@@ -12,30 +16,43 @@ import { Subscription } from 'rxjs';
 })
 export class OrderDetailPage implements OnInit {
 
- order: Order ;
+  No = null;
+  cardSub: Subscription ;
+  card: Salesorder = new Salesorder();
+  line: Salesorderline;
 
-  constructor( private activatedRoute: ActivatedRoute, private orderService: OrderService) { }
+  constructor( private activatedRoute: ActivatedRoute, private orderService: OrderService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(paramMap => {
-      if ( !paramMap.has('orderNo')) {
-          // redirect back
-          return;
-      }
-      const No = paramMap.get('orderNo');
-      console.log(No);
+    this.No = this.activatedRoute.snapshot.paramMap.get('No');
 
-      this.getOrder(No).subscribe(data => {
-        console.log(data[0]);
-        this.order = data[0];
-      });
-
+    this.cardSub = this.orderService.ordercard(this.No).subscribe( result => {
+      this.card = result;
+      console.log(result);
     });
-    
+
   }
 
-   getOrder(No){
-    return  this.orderService.getOrder(No);
+
+  onAddLine() {
+    this.modalCtrl.create(
+      {
+        component: LinesComponent,
+        componentProps: { docID: this.No }
+      }
+    ).then( modalEl => {
+      modalEl.present();
+    });
+  }
+
+  onUpdateLine(LineNo: string) {
+    this.modalCtrl.create({
+      component: LinesComponent,
+      componentProps: { docID: this.No, LineNo }
+    })
+    .then( modalEl => {
+      modalEl.present();
+    } );
   }
 
 

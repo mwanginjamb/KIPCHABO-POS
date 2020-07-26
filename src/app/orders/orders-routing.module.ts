@@ -9,9 +9,9 @@ const routes: Routes = [
     component: OrdersPage
   },
   {
-    path: 'order-detail',
-    loadChildren: () => import('./order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
-  }
+    path: 'new-order',
+    loadChildren: () => import('./new-order/new-order.module').then( m => m.NewOrderPageModule)
+  },
 ];
 
 @NgModule({

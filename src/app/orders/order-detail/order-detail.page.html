@@ -1,9 +1,211 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>order-detail {{order.Amount}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sales Order - {{card?.No}} Details </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
- 
+
+  <ion-grid>
+    <ion-row>
+      <ion-col >
+         <ion-card>
+           <ion-card-header>
+             <ion-card-title>
+               General Card Details
+             </ion-card-title>
+           </ion-card-header>
+
+           <ion-card-content>
+
+             <ion-row>
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Customer</ion-label>
+                   <ion-input [(ngModel)]="card.Sell_to_Customer_Name"></ion-input>
+                 </ion-item>
+               </ion-col>
+
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Requested Delivery Date</ion-label>
+                   <ion-input [(ngModel)]="card.Requested_Delivery_Date"></ion-input>
+                 </ion-item>
+               </ion-col>
+             </ion-row>
+
+             <ion-row>
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Contact</ion-label>
+                   <ion-input [(ngModel)]="card.Sell_to_Address"></ion-input>
+                 </ion-item>
+               </ion-col>
+
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Ext. Doc. No.</ion-label>
+                   <ion-input [(ngModel)]="card.External_Document_No"></ion-input>
+                 </ion-item>
+               </ion-col>
+             </ion-row>
+
+             <ion-row>
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Posting Date</ion-label>
+                   <ion-input [(ngModel)]="card.Posting_Date"></ion-input>
+                 </ion-item>
+               </ion-col>
+
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">IC Partner Code</ion-label>
+                   <ion-input [(ngModel)]="card.Sell_to_IC_Partner_Code"></ion-input>
+                 </ion-item>
+               </ion-col>
+             </ion-row>
+
+             <ion-row>
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Order Date: </ion-label>
+                   <ion-input [(ngModel)]="card.Order_Date"></ion-input>
+                 </ion-item>
+               </ion-col>
+
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Status:</ion-label>
+                   <ion-input [(ngModel)]="card.Status"></ion-input>
+                 </ion-item>
+               </ion-col>
+             </ion-row>
+
+             <ion-row>
+               <ion-col >
+                 <ion-item>
+                   <ion-label position="floating">Due Date: </ion-label>
+                   <ion-input [ngModel]="card.Due_Date"></ion-input>
+                 </ion-item>
+               </ion-col>
+
+               
+             </ion-row>
+
+           </ion-card-content>
+
+         </ion-card>
+
+
+          <!--Start Lines Card-->
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Lines</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row *ngIf="card?.Status === 'Open' ">
+                  <ion-col>
+                    <ion-list>
+                      <ion-item>
+                        <ion-button type="button" outline color="primary" (click)="onAddLine()" >New</ion-button>
+                      </ion-item>
+                    </ion-list>
+                    
+                  </ion-col>
+                </ion-row>
+
+                <ion-row scrollX="true">
+                  <ion-col>
+                    <ion-label>Description</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Location Code</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Quantity</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Unit </ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Line Amount (Exl. VAT)</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Qty. to Invoice</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Shipment Date</ion-label>
+                  </ion-col>
+
+                </ion-row>
+              
+                 
+               
+                <ion-list *ngFor="let item of card?.SalesLines?.Sales_Order_Line">
+                    <ion-row >
+                      <ion-col> 
+                        <ion-item (click)="onUpdateLine(item?.Line_No)" color="primary">                         
+                            <ion-label>{{item.Description}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{item.Location_Code}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{item.Quantity}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{item.Unit_of_Measure}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{item.Line_Amount}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{ item.Qty_to_Invoice }}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                      <ion-col> 
+                        <ion-item>                         
+                            <ion-label>{{item.Shipment_Date | date }}</ion-label>
+                        </ion-item>
+                      </ion-col>
+  
+                    </ion-row>   
+                </ion-list>
+                 
+                
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          <!--End Lines Card-->
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

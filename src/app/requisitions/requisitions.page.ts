@@ -12,6 +12,7 @@ import { ReqPopoverComponent } from './req-popover/req-popover.component';
 })
 export class RequisitionsPage implements OnInit, OnDestroy {
 
+  isLoading = false;
   constructor(
     private requisitionService: RequisitionService,
     private menuCtrl: MenuController,
@@ -23,16 +24,20 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   searchTerm: string = null;
 
   ngOnInit() {
+      this.isLoading = true;
       this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
         this.requisitions = result;
+        this.isLoading = false;
         console.log(this.requisitions);
       });
   }
 
 
   ionViewDidEnter(){
+    this.isLoading = true;
     this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
       this.requisitions = result;
+      this.isLoading = false;
       console.log(this.requisitions);
     });
   }

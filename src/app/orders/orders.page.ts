@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrderService } from './order.service';
-import { Order } from './models/order';
 import { Subscription } from 'rxjs';
+import { Salesorder } from '../models/salesorder.model';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from './popover/popover.component';
 
 @Component({
   selector: 'app-orders',
@@ -9,16 +11,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit, OnDestroy {
-   Navorders: any;
-   itemSub: Subscription;
+   orders: Salesorder[];
+   orderSub: Subscription;
+   isLoading = false;
 
-  constructor( private orderService: OrderService) { }
+  constructor( private orderService: OrderService, private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
-    this.itemSub = this.orderService.orders
+    this.isLoading = true;
+    this.orderSub = this.orderService.orders
     .subscribe(result => {
       console.log(result);
-      this.Navorders = [...result];
+      this.orders = [...result];
+      this.isLoading = false;
     });
 
   }
@@ -26,9 +31,18 @@ export class OrdersPage implements OnInit, OnDestroy {
   ionViewWillEnter() {
   }
 
+  async presentPopover(event) {
+    return await this.popoverCtrl.create({
+      component: PopoverComponent,
+      event
+    }).then(pop => {
+      pop.present();
+    });
+  }
+
   ngOnDestroy() {
-    if (this.itemSub ) {
-      this.itemSub.unsubscribe();
+    if (this.orderSub ) {
+      this.orderSub.unsubscribe();
     }
   }
 

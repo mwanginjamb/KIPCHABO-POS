@@ -12,6 +12,7 @@ import { Platform } from '@ionic/angular';
 export class ItemsPage implements OnInit, OnDestroy {
 
 Items: any;
+isLoading = true;
 
 itemSub: Subscription;
 searchTerm: string = null;
@@ -21,7 +22,7 @@ appSub: Subscription;
   constructor( private itemService: ItemService, public platform: Platform) {
     this.appSub = this.platform.backButton.subscribeWithPriority(666666, () => {
       if ( this.constructor.name === 'ItemsPage' ) {
-          if (window.confirm("Do you want to exit the app?")) {
+          if (window.confirm(`Do you want to exit the app?`)) {
             navigator['app'].exitApp();
           }
       }
@@ -29,11 +30,12 @@ appSub: Subscription;
    }
 
   ngOnInit() {
-
+    this.isLoading = true;
     this.itemSub = this.itemService.items
     .subscribe(result => {
       console.log(result);
       this.Items = [...result];
+      this.isLoading = false;
     });
 
   }
