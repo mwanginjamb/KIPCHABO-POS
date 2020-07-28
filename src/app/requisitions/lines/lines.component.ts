@@ -64,18 +64,35 @@ export class LinesComponent implements OnInit, OnDestroy {
 addLine() {
   this.requisitionService.postLine(this.line).subscribe( line => {
     // console.log(line);
-    if ( line.Line_No ) {
-      // this.navCtrl.navigateForward('/requisitions/' + this.docId);
+    if ( typeof line !== 'string' ) {
       this.modalCtrl.dismiss();
       // Show a Toast Notification
       this.toastCtrl.create({
         message: `${line.Description} Requisition Line Added Successfully.`,
-        duration: 2000
+        duration: 2000,
+        position: 'top'
       }).then((toastData) => {
         toastData.present();
       });
-
+    } else {
+      this.alertCtrl.create({
+        header: 'Operation Error',
+        message: 'Message : ' + line,
+        buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
+      }).then( alertEl => {
+        alertEl.present();
+      });
     }
+  }, error => {
+    console.log(error.error);
+    this.alertCtrl.create({
+      header: 'Service Error!',
+      message: 'Connection problem: ' + error ,
+      buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
+    })
+    .then(alertEl => {
+      alertEl.present();
+    });
   });
 }
 
@@ -93,7 +110,8 @@ this.requisitionService.updateRequisitionLine(this.line).subscribe( line => {
         console.log(line);
         this.toastCtrl.create({
           message: `${line.Description} Requisition Line Updated Successfully.`,
-          duration: 2000
+          duration: 3000,
+          position: 'top'
         }).then((toastData) => {
           toastData.present();
         });
@@ -113,6 +131,16 @@ this.requisitionService.updateRequisitionLine(this.line).subscribe( line => {
         alertEl.present();
       });
     }
+}, error => {
+    console.log(error.error);
+    this.alertCtrl.create({
+      header: 'Service Error!',
+      message: 'Connection problem: ' + error.error ,
+      buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
+    })
+    .then(alertEl => {
+      alertEl.present();
+    });
 });
 
 }
@@ -121,6 +149,16 @@ FetchLinetoUpdate(){
   this.updateLineSub = this.requisitionService.getLine(this.docId, this.LineNo)
   .subscribe(res => {
    Object.assign(this.line, res);
+  }, error => {
+    console.log(error.error);
+    this.alertCtrl.create({
+      header: 'Service Error!',
+      message: 'Connection problem: ' + error.error.message ,
+      buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
+    })
+    .then(alertEl => {
+      alertEl.present();
+    });
   });
 }
 

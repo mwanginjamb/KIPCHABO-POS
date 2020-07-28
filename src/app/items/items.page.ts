@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemService } from './item.service';
 import { map } from 'rxjs/operators';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-items',
@@ -19,23 +19,33 @@ searchTerm: string = null;
 searched: {} = null;
 appSub: Subscription;
 
-  constructor( private itemService: ItemService, public platform: Platform) {
-    this.appSub = this.platform.backButton.subscribeWithPriority(666666, () => {
+  constructor( private itemService: ItemService, public platform: Platform, public alertCtrl: AlertController) {
+    /* this.appSub = this.platform.backButton.subscribeWithPriority(666666, () => {
       if ( this.constructor.name === 'ItemsPage' ) {
           if (window.confirm(`Do you want to exit the app?`)) {
             navigator['app'].exitApp();
           }
       }
-    });
+    });*/
    }
 
   ngOnInit() {
     this.isLoading = true;
-    this.itemSub = this.itemService.items
-    .subscribe(result => {
+    this.itemSub = this.itemService.items.subscribe(result => {
       console.log(result);
       this.Items = [...result];
       this.isLoading = false;
+    }, error => {
+      this.isLoading = false;
+      console.log(error.error);
+      this.alertCtrl.create({
+        header: 'Service Error!',
+        message: 'Connection problem: ' + error.error.message ,
+        buttons: [{ text: 'Okay'}]
+      })
+      .then(alertEl => {
+        alertEl.present();
+      });
     });
 
   }

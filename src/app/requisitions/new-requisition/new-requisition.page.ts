@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController, AlertController } from '@ionic/angular';
 import { Requisition } from '../requisition.model';
 import { NgForm } from '@angular/forms';
 import { RequisitionService } from '../requisition.service';
 import { Subscription } from 'rxjs';
 import { Location } from 'src/app/models/location.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-requisition',
@@ -23,7 +24,12 @@ export class NewRequisitionPage implements OnInit {
   departments: any;
   projects: any;
 
-  constructor( private popoverCtrl: PopoverController, private requisitionService: RequisitionService) { }
+  constructor( 
+    private popoverCtrl: PopoverController,
+    private requisitionService: RequisitionService,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
+    private router: Router) { }
 
   ngOnInit() {
     this.popoverCtrl.dismiss();
@@ -43,10 +49,36 @@ export class NewRequisitionPage implements OnInit {
   }
 
   onRequisitionupdate(form: NgForm) {
-    console.log('This requisition');
-    console.log(this.requisition);
     this.requisitionPostSub = this.requisitionService.postRequisition(this.requisition).subscribe(res => {
-      console.log(res);
+      if ( typeof res !== 'string' ) {
+        // Show a Toast Notification
+        this.toastCtrl.create({
+          message: `${res.No} Requisition Line Added Successfully.`,
+          duration: 2000,
+          position: 'top'
+        }).then((toastData) => {
+          toastData.present();
+          this.router.navigate(['/', 'requisitions', res.No]);
+        });
+      } else {
+        this.alertCtrl.create({
+          header: 'Operation Error',
+          message: 'Message : ' + res,
+          buttons: [{ text: 'Okay' }]
+        }).then( alertEl => {
+          alertEl.present();
+        });
+      }
+    }, error => {
+      console.log(error.error);
+      this.alertCtrl.create({
+        header: 'Service Error!',
+        message: 'Connection problem: ' + error ,
+        buttons: [{ text: 'Okay' }]
+      })
+      .then(alertEl => {
+        alertEl.present();
+      });
     });
   }
 

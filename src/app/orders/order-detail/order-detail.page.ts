@@ -7,6 +7,8 @@ import { Salesorder } from 'src/app/models/salesorder.model';
 import { Salesorderline } from 'src/app/models/salesorderline.model';
 import { ModalController } from '@ionic/angular';
 import { LinesComponent } from '../lines/lines.component';
+import { Invoice } from 'src/app/models/invoice.model';
+import { Salesinvoiceline } from 'src/app/models/salesinvoiceline.model';
 
 
 @Component({
@@ -18,8 +20,8 @@ export class OrderDetailPage implements OnInit {
 
   No = null;
   cardSub: Subscription ;
-  card: Salesorder = new Salesorder();
-  line: Salesorderline;
+  card: Invoice = new Invoice();
+  line: Salesinvoiceline;
 
   constructor( private activatedRoute: ActivatedRoute, private orderService: OrderService, private modalCtrl: ModalController) { }
 

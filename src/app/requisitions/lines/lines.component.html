@@ -19,14 +19,14 @@
 
         <ion-item>
           <ion-label position="floating">Item</ion-label>
-          <ion-select [(ngModel)]="line.Item_No" (ionChange)="getUnit($event)" placeholder="Select Item">
+          <ion-select [(ngModel)]="line.Item_No" (ionChange)="getUnit($event)" [selectedText]="line.Description" placeholder="Select Item">
             <ion-select-option *ngFor="let item of items" [value]="item.No" >{{ item.Description }}</ion-select-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Unit of Measure</ion-label>
-          <ion-select [(ngModel)] = "line.Unit" placeholder="Select Unit">
+          <ion-select [(ngModel)] = "line.Unit" [selectedText]="line.Unit_of_Measure" placeholder="Select Unit">
             <ion-select-option *ngFor="let unit of units" [value]="unit.Code" >{{ unit.Code }}</ion-select-option>
           </ion-select>
         </ion-item>

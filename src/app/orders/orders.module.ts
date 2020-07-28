@@ -8,6 +8,7 @@ import { OrdersPageRoutingModule } from './orders-routing.module';
 
 import { OrdersPage } from './orders.page';
 import { PopoverComponent } from './popover/popover.component';
+import { LinesComponent } from './lines/lines.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { PopoverComponent } from './popover/popover.component';
     IonicModule,
     OrdersPageRoutingModule
   ],
-  entryComponents: [ PopoverComponent ],
-  declarations: [OrdersPage, PopoverComponent]
+  entryComponents: [ PopoverComponent, LinesComponent ],
+  declarations: [OrdersPage, PopoverComponent, LinesComponent]
 })
 export class OrdersPageModule {}

@@ -1,12 +1,72 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Sales Order Line</ion-title>
-
+    <ion-title>{{line.No?'Update': 'New'}} Sales Invoice Line</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
-  </ion-toolbar>  
+
+  </ion-toolbar>
 </ion-header>
+
+<ion-content>
+
+  <ion-row>
+    <ion-col size-sm="6" offset-sm="3">
+      <ion-list>
+        
+        <ion-item>
+          <ion-label position="floating">Item</ion-label>
+          <ion-select [(ngModel)]="line.No" (ionChange)="getUnit($event)" [selectedText]="line.Description" placeholder="Select Item">
+            <ion-select-option *ngFor="let item of items" [value]="item?.No" >{{ item.Description }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Location Code</ion-label>
+          <ion-select [(ngModel)]="line.Location_Code" required [selectedText]="line.Location_Code" placeholder="Select Location">
+            <ion-select-option *ngFor="let loc of locations" [value]="loc?.Code">{{loc.Name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Unit of Measure</ion-label>
+          <ion-select [(ngModel)]="line.Unit_of_Measure_Code" [selectedText]="line.Unit_of_Measure" placeholder="Select Unit">
+            <ion-select-option *ngFor="let unit of units" [value]="unit.Code" >{{ unit.Code }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label  position="floating">Quantity</ion-label>
+          <ion-input [(ngModel)]="line.Quantity" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item >
+          <ion-label position="floating">Unit Price</ion-label>
+          <ion-input [(ngModel)]="line.Unit_Price" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="line.Line_No">
+          <ion-label position="floating">Line Amount</ion-label>
+          <ion-input [(ngModel)]="line.Line_Amount" type="number" disabled ></ion-input>
+        </ion-item>
+
+        
+
+
+      </ion-list>
+
+
+      <ion-button  *ngIf="!line.Line_No" color="primary" (click)="addLine()" expand="block" fill="outline" >
+        Add Line
+      </ion-button>
+
+      <ion-button *ngIf="line.Line_No"  color="primary" (click)="updateLine()" expand="block" fill="outline" >
+        Update Line
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+
+</ion-content>

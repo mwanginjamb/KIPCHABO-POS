@@ -1,12 +1,89 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="./orders"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>new-order</ion-title>
+    <ion-title>New Sales Invoice</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #Req="ngForm" (ngSubmit)="onInvoiceupdate(Req)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  Invoice Form
+                </ion-card-title>
+              </ion-card-header>
 
+              <ion-card-content>
+
+                <ion-row>
+                  <ion-col >
+                    <ion-item>
+                      <ion-label position="floating">No.</ion-label>
+                      <ion-input type="text" [(ngModel)]="invoice.No" name="No"></ion-input>
+                    </ion-item>
+                  </ion-col>
+
+                  
+                    <ion-col>
+                      <ion-label position="floating">Key</ion-label>
+                      <ion-input type="text" [(ngModel)]="invoice.Key" name="Key"></ion-input>
+                    </ion-col>
+                 
+                </ion-row>
+
+                <ion-row>
+                  <ion-col >
+                    <ion-item>
+                      <ion-label position="floating">Customer.</ion-label>                
+                      <ion-select [(ngModel)]="invoice.Sell_to_Customer_Name" name="Sell_to_Customer_Name" [selectedText]="invoice.Sell_to_Customer_Name" placeholder="Select ...">
+                        <ion-select-option *ngFor="let cust of customers" [value]="cust.No">{{cust.Name}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-col >
+                    <ion-item>
+                      <ion-label position="floating">Due Date</ion-label>
+                                         
+                      <ion-datetime type="date" [(ngModel)]="invoice.Due_Date" name="Due_Date"></ion-datetime>
+                    
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col >
+                    <ion-item>
+                      <ion-label position="floating">Posting Date</ion-label>
+                      <ion-datetime type="date" [(ngModel)]="invoice.Posting_Date" name="Posting_Date"></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-col >
+                    <ion-item>
+                      <ion-label position="floating">Status</ion-label>
+                      <ion-input type="text" [(ngModel)]="invoice.Status" name="Status"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>                
+
+                <ion-row>
+                  <ion-col size-sm="6" offset-sm="3">
+                    <ion-button type="submit" color="primary" expand="block">Save Details</ion-button>
+                  </ion-col>
+                </ion-row>
+
+              </ion-card-content>
+
+            </ion-card> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Requisition } from './requisition.model';
 import { RequisitionService } from './requisition.service';
 import { Subscription } from 'rxjs';
-import { MenuController, PopoverController } from '@ionic/angular';
+import { MenuController, PopoverController, AlertController } from '@ionic/angular';
 import { ReqPopoverComponent } from './req-popover/req-popover.component';
 
 @Component({
@@ -16,7 +16,8 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   constructor(
     private requisitionService: RequisitionService,
     private menuCtrl: MenuController,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    public alertCtrl: AlertController
     ) { }
 
   requisitions: Array<Requisition>;
@@ -29,6 +30,17 @@ export class RequisitionsPage implements OnInit, OnDestroy {
         this.requisitions = result;
         this.isLoading = false;
         console.log(this.requisitions);
+      }, error => {
+        this.isLoading = false;
+        console.log(error.error);
+        this.alertCtrl.create({
+          header: 'Service Error!',
+          message: 'Connection problem: ' + error.error.message ,
+          buttons: [{ text: 'Okay' }]
+        })
+        .then(alertEl => {
+          alertEl.present();
+        });
       });
   }
 
