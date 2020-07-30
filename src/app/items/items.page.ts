@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ItemService } from './item.service';
 import { map } from 'rxjs/operators';
 import { Platform, AlertController } from '@ionic/angular';
+import { BackButtonEvent } from '@ionic/core';
 
 @Component({
   selector: 'app-items',
@@ -27,6 +28,22 @@ appSub: Subscription;
           }
       }
     });*/
+
+    const routerEl = document.querySelector('ion-router');
+    document.addEventListener('ionBackButton', (ev: BackButtonEvent) => {
+      ev.detail.register(-1, () => {
+        const path = window.location.pathname;
+        if (path === routerEl.root) {
+          if (window.confirm(`Do you want to exit the app?`)) {
+            navigator['app'].exitApp();
+          }
+        }
+      });
+    });
+
+
+
+
    }
 
   ngOnInit() {

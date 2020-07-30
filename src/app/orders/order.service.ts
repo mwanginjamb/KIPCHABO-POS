@@ -55,7 +55,7 @@ export class OrderService {
   postInvoice(invoice: Invoice) {
     invoice.Posting_Date = this.formatDate(invoice.Posting_Date);
     invoice.Due_Date = this.formatDate(invoice.Due_Date);
-    return this.http.post(`${this.url}site/update-invoice`, JSON.stringify(invoice) );
+    return this.http.post<Invoice>(`${this.url}site/update-invoice`, JSON.stringify(invoice) );
   }
 
   // Get Customers

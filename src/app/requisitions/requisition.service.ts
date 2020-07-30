@@ -63,7 +63,7 @@ export class RequisitionService {
   // Post Lines Data
 
   postLine(line: Requisitionline) {
-    return this.http.post< Requisitionline >(`${this.url}site/addline`, JSON.stringify(line) );
+    return this.http.post(`${this.url}site/addline`, JSON.stringify(line) );
   }
 
   // Update Line

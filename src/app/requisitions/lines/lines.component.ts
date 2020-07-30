@@ -63,12 +63,12 @@ export class LinesComponent implements OnInit, OnDestroy {
 
 addLine() {
   this.requisitionService.postLine(this.line).subscribe( line => {
-    // console.log(line);
-    if ( typeof line !== 'string' ) {
+    console.log(line);
+    if ( line ) {
       this.modalCtrl.dismiss();
       // Show a Toast Notification
       this.toastCtrl.create({
-        message: `${line.Description} Requisition Line Added Successfully.`,
+        message: `Requisition Line Added Successfully.`,
         duration: 2000,
         position: 'top'
       }).then((toastData) => {

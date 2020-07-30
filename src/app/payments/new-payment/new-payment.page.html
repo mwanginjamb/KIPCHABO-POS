@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="payments"></ion-back-button>
+     </ion-buttons>
+    <ion-title> New Cash Receipt Card -  {{ card?.Receipt_No}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="Suggestlines(card.Receipt_No, card.Receive_From_Customer_No)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-row>
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Receipt No.</ion-label>
+        <ion-input [(ngModel)]="card.Receipt_No" readonly></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Bank Account</ion-label>
+        <ion-select [(ngModel)]="card.Receiving_Bank_Account_No" [selectedText]="card.Bank_Account_Name" (ionChange)="updateReceipt(card)" placeholder="Receiving Bank A/C">
+          <ion-select-option *ngFor="let bank of banks" [value]="bank.No">{{bank.Name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Customer.</ion-label>                
+        <ion-select [(ngModel)]="card.Receive_From_Customer_No" name="Receive_From_Customer_No" (ionChange)="updateReceipt(card)" [selectedText]="card.Customer_Name" placeholder="Select ...">
+          <ion-select-option *ngFor="let cust of customers" [value]="cust.No">{{cust.Name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Posting Date: </ion-label>
+        <ion-datetime type="date" name="Posting_Date" [(ngModel)]="card.Posting_Date" (ionChange)="updateReceipt(card)" readonly></ion-datetime>
+      </ion-item>
+    </ion-col>
+
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Created On:</ion-label>
+        <ion-datetime [(ngModel)]="card.Created_On" readonly text-muted></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+ 
+
+</ion-content>

@@ -65,6 +65,25 @@ const routes: Routes = [
 
     ]
   },
+  {
+    path: 'payments',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./payments/payments.module').then( m => m.PaymentsPageModule)
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./payments/payment-detail/payment-detail.module').then( m => m.PaymentDetailPageModule )
+      },
+      {
+        path: 'new-payment',
+        loadChildren: () => import('./payments/new-payment/new-payment.module').then( m => m.NewPaymentPageModule)
+      }
+    ]
+
+  }
+
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 export class Invoice {
     constructor(
         public Key?: string,
-        public No? ,
+        public No?: string ,
         public Sell_to_Customer_Name? ,
         public Sell_to_Address? ,
         public Sell_to_Address_2? ,
