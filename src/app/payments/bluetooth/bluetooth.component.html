@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Select Bluetooth Printer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-button color="primary" expand="block" (click)="listPrinters()">Scan
+
+</ion-button>
+
+  <ion-list>
+    <ion-list-header *ngIf="!scanning">Available Devices</ion-list-header>
+
+    <ion-item *ngFor="let dev of  btDevices" (click)="selectPrinter(dev.id)">{{dev.name}}</ion-item>
+    
+  </ion-list>
+
+  <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>
+
+</ion-content>
+    
+

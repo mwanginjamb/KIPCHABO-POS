@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PopoverComponent } from '../orders/popover/popover.component';
 import { PaymentPopoverComponent } from './payment-popover/payment-popover.component';
-import { PopoverController, ToastController, AlertController } from '@ionic/angular';
+import { PopoverController, ToastController, AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { PaymentsService } from './payments.service';
 import { Receipt } from '../models/receipt.model';
+import { PrintService } from './print.service';
+import { BluetoothComponent } from './bluetooth/bluetooth.component';
 
 @Component({
   selector: 'app-payments',
@@ -18,15 +20,22 @@ export class PaymentsPage implements OnInit, OnDestroy {
   isLoading = true;
   searchTerm: string = null;
 
+
   constructor(
     private popoverCtrl: PopoverController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private PaymentService: PaymentsService
+    private modalCtrl: ModalController,
+    private PaymentService: PaymentsService,
+    public printService: PrintService
     ) { }
 
   ngOnInit() {
     this.FetchPayments();
+  }
+
+  ionViewDidEnter(){
+      this.showBluetoothDevices();
   }
 
   async presentPopover(event) {
@@ -56,8 +65,19 @@ export class PaymentsPage implements OnInit, OnDestroy {
   }
 
   searchPayment($event){
-
+    return true;
   }
+
+  showBluetoothDevices(){
+    this.modalCtrl.create(
+      {
+        component: BluetoothComponent,
+      }
+    ).then( modalEl => {
+      modalEl.present();
+    });
+  }
+
 
   ngOnDestroy(){
     if ( this.paymentsSub ){

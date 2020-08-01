@@ -32,7 +32,7 @@ url = environment.url;
   }
 
   suggestlines(receiptNo: string, customerNo: string) {
-    return this.http.get(`${this.url}site/suggestlines?receiptNo=${receiptNo}&customerNo=${customerNo}`).pipe(take(1));
+    return this.http.get<{ return_value }>(`${this.url}site/suggestlines?receiptNo=${receiptNo}&customerNo=${customerNo}`).pipe(take(1));
   }
 
   updateReceipt(receipt: Receipt){
