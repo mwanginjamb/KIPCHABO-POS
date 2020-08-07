@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController, PopoverController } from '@ionic/angular';
 import { PrintService } from '../print.service';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
+import { Postedsalesinvoice } from 'src/app/models/postedsalesinvoice.model';
+import { CurrencyPipe, getLocaleCurrencyCode } from '@angular/common';
 
 
 @Component({
@@ -16,17 +18,42 @@ export class BluetoothComponent implements OnInit {
   pairedDevices: any = null;
   unpairedDevices: any = null;
 
+  @Input() No;
+  @Input() Card: Postedsalesinvoice;
+
+  myString: string = null;
+
   constructor(
      private modalCtrl: ModalController,
      private printService: PrintService,
      private bluetoothSerial: BluetoothSerial,
      private alertCtrl: AlertController,
-     private toastCtrl: ToastController
+     private toastCtrl: ToastController,
+     private popOverCtrl: PopoverController
      ) {
     this.bluetoothSerial.enable();
    }
 
   ngOnInit() {
+    this.popOverCtrl.dismiss();
+    this.myString =   `
+    Kipchabo Tea Factory.
+
+    Customer: ${this.Card?.Sell_to_Customer_Name}
+
+
+    Item | Quantity  | Unit Price (Ksh) | Total  (Incl. VAT)
+
+    `;
+
+    this.Card.SalesInvLines.Posted_Sales_Invoice_Line.forEach(line => {
+      this.myString += `
+    ${line.Description}  | ${line.Quantity} | ${line.Unit_Price} | ${line.Line_Amount } \r\n` ;
+    });
+
+    this.myString += `                  Total Amount: ${this.Card?.Amount_Including_VAT}`;
+    // console.log(`DOC NO TO PRINT`);
+    console.log(this.myString);
   }
 
   closeModal(){
@@ -45,7 +72,7 @@ export class BluetoothComponent implements OnInit {
 
    success = (data) => {
      this.deviceConnected();
-     this.print();
+     this.print(this.myString);
    }
 
    fail = (error) => {
@@ -85,13 +112,8 @@ export class BluetoothComponent implements OnInit {
     });
   }
 
-  print(){
-    const message = `Kipchabo Tea Factory
-                    1. Tea 50g : 4,500
-                    2. Tea 100g :3,600
-                    3. Tea 1000g : 5,700`;
-
-    this.printService.sendToBluetoothPrinter(message);
+  print(stringtoPrint){
+    this.printService.sendToBluetoothPrinter(stringtoPrint);
   }
 
   async showToast(text){

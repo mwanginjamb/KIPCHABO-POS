@@ -9,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { LinesComponent } from '../lines/lines.component';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Salesinvoiceline } from 'src/app/models/salesinvoiceline.model';
+import { PaymentsService } from 'src/app/payments/payments.service';
 
 
 @Component({
@@ -23,7 +24,11 @@ export class OrderDetailPage implements OnInit {
   card: Invoice = new Invoice();
   line: Salesinvoiceline;
 
-  constructor( private activatedRoute: ActivatedRoute, private orderService: OrderService, private modalCtrl: ModalController) { }
+  constructor( 
+    private activatedRoute: ActivatedRoute,
+    private orderService: OrderService,
+    private modalCtrl: ModalController,
+    private paymentservice: PaymentsService) { }
 
   ngOnInit() {
     this.No = this.activatedRoute.snapshot.paramMap.get('No');
@@ -44,6 +49,15 @@ export class OrderDetailPage implements OnInit {
       }
     ).then( modalEl => {
       modalEl.present();
+    });
+  }
+
+  post(No){
+    console.log(No);
+    this.orderService.postSalesInvoice(No).subscribe(res => {
+      this.paymentservice.showToast(`Sales Invoice Posted Successfully.`);
+    }, error => {
+      alert(error);
     });
   }
 

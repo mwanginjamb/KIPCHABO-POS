@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-     <ion-back-button defaultHref="payments"></ion-back-button>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="postedsales"></ion-back-button>
     </ion-buttons>
-    <ion-title>Cash Receipt Card -  {{ card?.Receipt_No}} </ion-title>
+    <ion-title>Posted Sales Invoice - {{ card.No}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" fill="clear" (click)="presentPopover($event)">
+        <ion-icon  name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>      
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,26 +26,18 @@
 
            <ion-card-content>
 
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-              <ion-fab-button color="warning" (click)="post(card.Receipt_No)">
-                <ion-icon name="add"></ion-icon>
-              </ion-fab-button>
-            </ion-fab>
-
              <ion-row>
                <ion-col >
                  <ion-item>
-                   <ion-label position="floating">Receipt No.</ion-label>
-                   <ion-input [(ngModel)]="card.Receipt_No"></ion-input>
+                   <ion-label position="floating">Customer.</ion-label>
+                   <ion-input [(ngModel)]="card.Sell_to_Customer_Name"></ion-input>
                  </ion-item>
                </ion-col>
 
                <ion-col >
                  <ion-item>
-                   <ion-label position="floating">Bank Account</ion-label>
-                   <ion-select [(ngModel)]="card.Receiving_Bank_Account_No" [selectedText]="card.Bank_Account_Name" aria-placeholder="Receiving Bank A/C">
-                     <ion-select-option *ngFor="let bank of banks" [value]="bank.No">{{bank.Name}}</ion-select-option>
-                   </ion-select>
+                   <ion-label position="floating">Due Date</ion-label>
+                   <ion-input [value]="card.Due_Date | date"></ion-input>
                  </ion-item>
                </ion-col>
              </ion-row>
@@ -52,14 +49,14 @@
                <ion-col >
                  <ion-item>
                    <ion-label position="floating">Posting Date: </ion-label>
-                   <ion-input [(ngModel)]="card.Posting_Date"></ion-input>
+                   <ion-input [value]="card.Posting_Date | date"></ion-input>
                  </ion-item>
                </ion-col>
 
                <ion-col >
                  <ion-item>
-                   <ion-label position="floating">Created On:</ion-label>
-                   <ion-input [(ngModel)]="card.Created_On"></ion-input>
+                   <ion-label position="floating">Closed:</ion-label>
+                   <ion-input [value]="card.Closed?'Yes':'No'"></ion-input>
                  </ion-item>
                </ion-col>
              </ion-row>
@@ -82,71 +79,73 @@
 
                 <ion-row scrollX="true">
                   <ion-col>
-                    <ion-label>Customer Name</ion-label>
+                    <ion-label>Description</ion-label>
                   </ion-col>
 
                   <ion-col>
-                    <ion-label>Invoice No.</ion-label>
+                    <ion-label>Quantity</ion-label>
                   </ion-col>
 
                   <ion-col>
-                    <ion-label>Amount</ion-label>
+                    <ion-label>Unit </ion-label>
                   </ion-col>
 
                   <ion-col>
-                    <ion-label>Amount To Receipt</ion-label>
+                    <ion-label>Unit Price</ion-label>
                   </ion-col>
 
-                  <ion-col *ngIf="card.Posted">
-                    <ion-label>Remaining Amount </ion-label>
+                  <ion-col>
+                    <ion-label>Line Amt. Incl. VAT </ion-label>
                   </ion-col>
 
-                  <ion-col *ngIf="!card.Posted">
-                    <ion-label>Select Invoice </ion-label>
+                  <ion-col>
+                    <ion-label>Discount %</ion-label>
                   </ion-col>
 
                 </ion-row>
               
                  
                
-                <ion-list *ngFor="let line of card?.Cash_Receipt_Line?.Cash_Receipt_Line">
+                <ion-list *ngFor="let line of card?.SalesInvLines?.Posted_Sales_Invoice_Line">
                     <ion-row >
                         
                       <ion-col> 
                         <ion-item>                         
-                            <ion-label>{{line.Customer_Name}}</ion-label>
+                            <ion-label>{{line.Description}}</ion-label>
                         </ion-item>
                       </ion-col>
   
                       <ion-col> 
                         <ion-item>                         
-                            <ion-label>{{line.Invoice_No}}</ion-label>
+                            <ion-label>{{line.Quantity}}</ion-label>
                         </ion-item>
                       </ion-col>
   
                       <ion-col> 
                         <ion-item>                         
-                            <ion-label>{{line.Amount | currency: 'Ksh. '}}</ion-label>
+                            <ion-label>{{line.Unit_of_Measure_Code}}</ion-label>
                         </ion-item>
                       </ion-col>
 
                       <ion-col> 
                         <ion-item>                         
-                            <ion-input type="number" [value]="line.Amount_To_Receipt" (ionBlur)="setAmountToReceipt(line.Customer_No, line.Line_No, card.Receipt_No, $event)"></ion-input>
+                          <ion-label>{{line.Unit_Price}}</ion-label>
                         </ion-item>
                       </ion-col>
   
-                      <ion-col *ngIf="card.Posted"> 
+                      <ion-col > 
                         <ion-item>                         
-                            <ion-label>{{line.Remaining_Amount | currency: 'Ksh. '}}</ion-label>
+                            <ion-label>{{ line.Line_Amount }}</ion-label>
                         </ion-item>
                       </ion-col>
 
-                      <ion-col *ngIf="!card.Posted"> 
+                      <ion-col > 
                         <ion-item>                         
-                            <ion-checkbox slot="end" [checked]="line.Select" color="primary" (ionChange)="selectInvoice(line.Customer_No, line.Line_No, card.Receipt_No)"></ion-checkbox>
+                          <ion-label>{{ line.Line_Discount_Percent}}</ion-label>
                         </ion-item>
                       </ion-col>
+
+                      
   
                      
   

@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { Receipt } from '../models/receipt.model';
 import { PopoverComponent } from '../orders/popover/popover.component';
 import { OrderService } from '../orders/order.service';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class PaymentsService {
 
 url = environment.url;
 
-  constructor( private http: HttpClient, private orderService: OrderService) { }
+  constructor( private http: HttpClient, private orderService: OrderService, private toastCtrl: ToastController) { }
 
   get Payments() {
     return this.http.get< Receipt[] >(`${this.url}site/get?service=Payments`).pipe(take(1));
@@ -42,6 +43,31 @@ url = environment.url;
 
   get Customers() {
     return this.http.get(`${this.url}site/receipting-customers`).pipe(take(1));
+  }
+
+  selectLine(CustomerNo: string, Line: number, ReceiptNo: string){
+    const payload = {Customer_No: CustomerNo, Line_No: Line, Receipt_No: ReceiptNo };
+    return this.http.post(`${this.url}site/updatecashreceiptline`, JSON.stringify(payload));
+  }
+
+  setAmountToReceipt(CustomerNo: string, Line: number, ReceiptNo: string, AmountToReceipt: number){
+    const payload = {Customer_No: CustomerNo, Line_No: Line, Receipt_No: ReceiptNo, Amount_To_Receipt: AmountToReceipt  };
+    // console.log(payload); return;
+    return this.http.post(`${this.url}site/updateamounttoreceipt`, JSON.stringify(payload));
+  }
+
+  postReceipt(No){
+    return this.http.get(`${this.url}site/postreceipt?No=${No}`);
+  }
+
+  async showToast(text){
+    return await this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    }).then( toastEl => {
+      toastEl.present();
+    });
   }
 
 }

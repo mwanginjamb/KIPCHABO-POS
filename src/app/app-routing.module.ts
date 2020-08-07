@@ -8,8 +8,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'items',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   {
     path: 'orders',
@@ -82,6 +86,19 @@ const routes: Routes = [
       }
     ]
 
+  },
+  {
+    path: 'postedsales',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./postedsalesinvoices/postedsalesinvoices.module').then( m => m.PostedsalesinvoicesPageModule)
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./postedsalesinvoices/sale-detail/sale-detail.module').then( m => m.SaleDetailPageModule)
+      }
+    ]
   }
 
 ];

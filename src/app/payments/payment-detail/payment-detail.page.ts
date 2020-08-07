@@ -42,4 +42,31 @@ export class PaymentDetailPage implements OnInit {
     });
   }
 
+  selectInvoice(CustomerNo: string, Line: number, ReceiptNo: string){
+    // console.log(`Cust: ${CustomerNo} Line: ${Line} and Rec: ${ReceiptNo}`); return;
+    this.paymentService.selectLine(CustomerNo, Line, ReceiptNo).subscribe(res => {
+      // console.log(res);
+      this.paymentService.showToast(' Invoice Line Updated Successfully.');
+    }, error => {
+      alert(error);
+    });
+  }
+
+  post(ReceiptNo){
+    console.log(ReceiptNo);
+    this.paymentService.postReceipt(ReceiptNo).subscribe(res => {
+      this.paymentService.showToast(`Document Posted Successfully.`);
+    }, error => {
+      alert(error);
+    });
+  }
+
+  setAmountToReceipt(CustomerNo: string, Line: number, ReceiptNo: string, $event){
+    this.paymentService.setAmountToReceipt(CustomerNo, Line, ReceiptNo, $event.target.value).subscribe(res => {
+      this.paymentService.showToast(' Invoice Line Updated Successfully.');
+    }, error => {
+      alert(error);
+    });
+  }
+
 }

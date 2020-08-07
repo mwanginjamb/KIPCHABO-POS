@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center" color="primary">
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <section class="ion-text-center">
+    <ion-icon name="Person"></ion-icon>
+    <h4>Welcome, <br>
+      Francis Iansoft 
+    </h4>
+  </section>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 col-sm-12 [routerLink]="['../postedsales']">
+        <ion-card ion-text-center padding color="warning">
+            <ion-icon name="cart"></ion-icon>
+            <h2>Sales</h2>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-6 col-sm-12 [routerLink]="['../payments']">
+        <ion-card ion-text-center padding color="warning">
+            <ion-icon name="card"></ion-icon>
+            <h2>Payments</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6 col-sm-12 [routerLink]="['../items']">
+        <ion-card ion-text-center padding color="warning">
+            <ion-icon name="pricetag"></ion-icon>
+            <h2>Items</h2>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-6 col-sm-12 [routerLink]="['../requisitions','released-requisitions']">
+        <ion-card ion-text-center padding color="warning">
+            <ion-icon name="basket"></ion-icon>
+            <h2>Requisitions</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!--<ion-list-header>Reports</ion-list-header>
+
+    <ion-row>
+      <ion-col col-6 col-sm-12 >
+        <ion-card ion-text-center padding color="success">
+            <ion-icon name="document"></ion-icon>
+            <h2>Sales</h2>
+        </ion-card>
+      </ion-col>
+
+     
+    </ion-row>-->
+
+   
+
+    
+
+
+  </ion-grid>
+
+</ion-content>

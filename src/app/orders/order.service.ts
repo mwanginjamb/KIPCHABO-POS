@@ -64,6 +64,10 @@ export class OrderService {
     return this.http.get(`${this.url}site/get?service=CustomerList`).pipe(take(1));
   }
 
+  postSalesInvoice(No){
+    return this.http.get(`${this.url}site/postsaleinvoice?No=${No}`);
+  }
+
   // Format date utility
 
   formatDate(datestring: string) {

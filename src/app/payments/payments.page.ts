@@ -35,7 +35,7 @@ export class PaymentsPage implements OnInit, OnDestroy {
   }
 
   ionViewDidEnter(){
-      this.showBluetoothDevices();
+      // this.showBluetoothDevices();
   }
 
   async presentPopover(event) {
@@ -65,7 +65,18 @@ export class PaymentsPage implements OnInit, OnDestroy {
   }
 
   searchPayment($event){
-    return true;
+    const searchItems = [...this.payments];
+    // Begin search only if searchTerm is provided
+    if (this.searchTerm.trim().length && this.searchTerm !== '') {
+      this.payments = searchItems.filter((payment) => {
+        if ( payment.Customer_Name && payment.Customer_Name.length > 1 ){
+          return ( payment.Customer_Name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
+        }
+     });
+      return;
+    }else{ // Search Term not provide display all items
+      this.FetchPayments();
+    }
   }
 
   showBluetoothDevices(){

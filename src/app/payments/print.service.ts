@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { ToastController } from '@ionic/angular';
+
 @Injectable({
   providedIn: 'root'
 })

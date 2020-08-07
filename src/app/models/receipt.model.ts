@@ -14,9 +14,10 @@ export class Receipt {
         public Total_Amount?,
         public Created_By?,
         public Created_On?,
+        public Posted?: boolean,
         public Cash_Receipt_Line?: { Cash_Receipt_Line: [{
-            Amount?, Amount_To_Receipt?,Amount_WthHold?, Customer_Name?, Customer_No?, 
-            Invoice_No?,Key?, Remaining_Amount?,Select?, Tax_WithHold?,V_A_T_Percent?
+            Amount?, Amount_To_Receipt?, Amount_WthHold?, Customer_Name?, Customer_No?,
+            Invoice_No?,Key?, Remaining_Amount?, Select?: boolean, Tax_WithHold?, V_A_T_Percent?, Receipt_No?, Line_No?
         }]}
 
     ) {}
