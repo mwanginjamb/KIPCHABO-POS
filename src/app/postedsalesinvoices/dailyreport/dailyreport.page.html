@@ -1,22 +1,36 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Posted Sales Invoices</ion-title>
+    <ion-title class="ion-text-center">Daily Sales Report </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div *ngIf="isLoading" class="ion-text-center">
-    <ion-spinner  name="crescent"></ion-spinner>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Start Date</ion-label>
+          <ion-datetime type="date" required (ionBlur)="FilterSalebyDate($event)"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-searchbar [(ngModel)]="searchTerm" debounce="2000" (ionChange)="searchSale($event)"></ion-searchbar>
-  
 
-  <ion-grid fixed>
+  <ion-card *ngIf="success">
+    <ion-card-header color="success">
+      <ion-card-title>Daily Sales Summary</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-label>Totals: {{ Total | currency:'Ksh.' }}</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-grid fixed *ngIf="success">
 
     <ion-row>
       <ion-col col-12 col-sm>Posting Date</ion-col>
@@ -27,7 +41,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-virtual-scroll [items]="sales" approxItemHeight="47.2px">
+  <ion-virtual-scroll [items]="sales" approxItemHeight="47.2px" *ngIf="success">
                
     <ion-item 
       [routerLink] = "['/','postedsales',sale.No]"
@@ -73,5 +87,6 @@
   </ion-item>
   
   </ion-virtual-scroll>
+
 
 </ion-content>

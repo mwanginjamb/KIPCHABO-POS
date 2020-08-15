@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
 import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
+import { PaymentsService } from '../payments/payments.service';
+import { OrderService } from '../orders/order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
 export class SalesService {
 
   url = environment.url;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private orderService: OrderService) { }
 
   get Sales() {
     return this.http.get< Postedsalesinvoice[] >(`${this.url}site/get?service=PostedSalesInvoices`).pipe(take(1));
@@ -19,4 +21,18 @@ export class SalesService {
   getSale(id: string){
     return this.http.get< Postedsalesinvoice >(`${this.url}site/sale/?id=${id}`).pipe(take(1));
   }
+
+  formatDate(date){
+    return this.orderService.formatDate(date);
+  }
+
+  FilterSales(startDate){
+    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}`).pipe(take(1));
+  }
+
+  FilterSalesbyRange(startDate, endDate){
+    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}&enddate=${endDate}`).pipe(take(1));
+  }
+
+
 }

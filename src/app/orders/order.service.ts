@@ -61,7 +61,7 @@ export class OrderService {
   // Get Customers
 
   get Customers() {
-    return this.http.get(`${this.url}site/get?service=CustomerList`).pipe(take(1));
+    return this.http.get(`${this.url}site/receipting-customers`).pipe(take(1));
   }
 
   postSalesInvoice(No){

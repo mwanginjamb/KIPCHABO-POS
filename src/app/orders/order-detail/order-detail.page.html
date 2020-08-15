@@ -9,8 +9,8 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="warning" (click)="post(card.No)">
-      <ion-icon name="add"></ion-icon>
+    <ion-fab-button color="success" (click)="post(card.No)">
+      <ion-icon name="send"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-grid>
@@ -29,14 +29,14 @@
                <ion-col >
                  <ion-item>
                    <ion-label position="floating">Customer</ion-label>
-                   <ion-input [(ngModel)]="card.Sell_to_Customer_Name"></ion-input>
+                   <ion-input [(ngModel)]="card.Sell_to_Customer_Name" readonly></ion-input>
                  </ion-item>
                </ion-col>
 
                <ion-col >
                  <ion-item>
                    <ion-label position="floating">Due Date</ion-label>
-                   <ion-input [(ngModel)]="card.Due_Date"></ion-input>
+                   <ion-input [(ngModel)]="card.Due_Date" readonly></ion-input>
                  </ion-item>
                </ion-col>
              </ion-row>
@@ -48,14 +48,14 @@
                <ion-col >
                  <ion-item>
                    <ion-label position="floating">Posting Date: </ion-label>
-                   <ion-input [(ngModel)]="card.Posting_Date"></ion-input>
+                   <ion-input [(ngModel)]="card.Posting_Date" readonly></ion-input>
                  </ion-item>
                </ion-col>
 
                <ion-col >
                  <ion-item>
                    <ion-label position="floating">Status:</ion-label>
-                   <ion-input [(ngModel)]="card.Status"></ion-input>
+                   <ion-input [(ngModel)]="card.Status" readonly></ion-input>
                  </ion-item>
                </ion-col>
              </ion-row>

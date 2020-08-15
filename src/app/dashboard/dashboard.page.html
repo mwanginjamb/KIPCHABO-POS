@@ -46,19 +46,46 @@
       </ion-col>
     </ion-row>
 
-    <!--<ion-list-header>Reports</ion-list-header>
+    
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Reports</ion-card-title>
+  </ion-card-header>
+</ion-card>
 
     <ion-row>
-      <ion-col col-6 col-sm-12 >
+      <ion-col col-6 col-sm-12 (click)="showDaily()">
         <ion-card ion-text-center padding color="success">
             <ion-icon name="document"></ion-icon>
-            <h2>Sales</h2>
+            <h2>Daily Sales</h2>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-6 col-sm-12 (click)="showMonthly()">
+        <ion-card ion-text-center padding color="success">
+            <ion-icon name="document"></ion-icon>
+            <h2>Monthly Sales</h2>
         </ion-card>
       </ion-col>
 
      
-    </ion-row>-->
+    </ion-row>
 
+    <ion-row>
+      <ion-col col-6 col-sm-12 (click)="showDailyPayments()">
+        <ion-card ion-text-center padding color="success">
+            <ion-icon name="document"></ion-icon>
+            <h2>D.Payments</h2>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-6 col-sm-12 (click)="showMonthlyPayments()">
+        <ion-card ion-text-center padding color="success">
+            <ion-icon name="document"></ion-icon>
+            <h2>M.Payments</h2>
+        </ion-card>
+      </ion-col> 
+    </ion-row>
    
 
     

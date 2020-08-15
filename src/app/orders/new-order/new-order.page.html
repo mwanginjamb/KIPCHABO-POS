@@ -25,14 +25,14 @@
                   <ion-col >
                     <ion-item>
                       <ion-label position="floating">No.</ion-label>
-                      <ion-input type="text" [(ngModel)]="invoice.No" name="No"></ion-input>
+                      <ion-input type="text" [(ngModel)]="invoice.No" name="No" readonly></ion-input>
                     </ion-item>
                   </ion-col>
 
                   
                     <ion-col>
                       <ion-label position="floating">Key</ion-label>
-                      <ion-input type="text" [(ngModel)]="invoice.Key" name="Key"></ion-input>
+                      <ion-input type="text" [(ngModel)]="invoice.Key" name="Key" readonly></ion-input>
                     </ion-col>
                  
                 </ion-row>
@@ -61,14 +61,14 @@
                   <ion-col >
                     <ion-item>
                       <ion-label position="floating">Posting Date</ion-label>
-                      <ion-datetime type="date" [(ngModel)]="invoice.Posting_Date" name="Posting_Date"></ion-datetime>
+                      <ion-datetime type="date" [(ngModel)]="invoice.Posting_Date" name="Posting_Date" readonly></ion-datetime>
                     </ion-item>
                   </ion-col>
 
                   <ion-col >
                     <ion-item>
                       <ion-label position="floating">Status</ion-label>
-                      <ion-input type="text" [(ngModel)]="invoice.Status" name="Status"></ion-input>
+                      <ion-input type="text" [(ngModel)]="invoice.Status" name="Status" readonly></ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>                

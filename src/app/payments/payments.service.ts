@@ -60,6 +60,20 @@ url = environment.url;
     return this.http.get(`${this.url}site/postreceipt?No=${No}`);
   }
 
+  getTotals(elements, subjectColumn){
+    let sum = 0;
+    elements.forEach(obj => {
+      console.log(obj);
+      for (const property in obj){
+         if ( property === subjectColumn && !isNaN(+obj[property]) ){
+          console.log(+obj[property]);
+          sum += +obj[property];
+        }
+      }
+    });
+    return sum;
+  }
+
   async showToast(text){
     return await this.toastCtrl.create({
       message: text,
@@ -68,6 +82,18 @@ url = environment.url;
     }).then( toastEl => {
       toastEl.present();
     });
+  }
+
+  formatDate(date){
+    return this.orderService.formatDate(date);
+  }
+
+  FilterReceipts(startDate){
+    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}`).pipe(take(1));
+  }
+
+  FilterReceiptsbyRange(startDate, endDate){
+    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}&enddate=${endDate}`).pipe(take(1));
   }
 
 }

@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'sale-detail',
     loadChildren: () => import('./sale-detail/sale-detail.module').then( m => m.SaleDetailPageModule)
+  },
+  {
+    path: 'dailyreport',
+    loadChildren: () => import('./dailyreport/dailyreport.module').then( m => m.DailyreportPageModule)
+  },
+  {
+    path: 'monthlyreport',
+    loadChildren: () => import('./monthlyreport/monthlyreport.module').then( m => m.MonthlyreportPageModule)
   }
 ];
 

@@ -83,6 +83,14 @@ const routes: Routes = [
       {
         path: 'new-payment',
         loadChildren: () => import('./payments/new-payment/new-payment.module').then( m => m.NewPaymentPageModule)
+      },
+      {
+        path: 'daily-report',
+        loadChildren: () => import('./payments/daily-report/daily-report.module').then( m => m.DailyReportPageModule)
+      },
+      {
+        path: 'monthly-report',
+        loadChildren: () => import('./payments/monthly-report/monthly-report.module').then( m => m.MonthlyReportPageModule)
       }
     ]
 
@@ -97,6 +105,14 @@ const routes: Routes = [
       {
         path: ':id',
         loadChildren: () => import('./postedsalesinvoices/sale-detail/sale-detail.module').then( m => m.SaleDetailPageModule)
+      },
+      {
+        path: 'dailyreport',
+        loadChildren: () => import('./postedsalesinvoices/dailyreport/dailyreport.module').then( m => m.DailyreportPageModule)
+      },
+      {
+        path: 'monthlyreport',
+        loadChildren: () => import('./postedsalesinvoices/monthlyreport/monthlyreport.module').then( m => m.MonthlyreportPageModule)
       }
     ]
   }

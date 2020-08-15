@@ -15,6 +15,14 @@ const routes: Routes = [
   {
     path: 'new-payment',
     loadChildren: () => import('./new-payment/new-payment.module').then( m => m.NewPaymentPageModule)
+  },
+  {
+    path: 'daily-report',
+    loadChildren: () => import('./daily-report/daily-report.module').then( m => m.DailyReportPageModule)
+  },
+  {
+    path: 'monthly-report',
+    loadChildren: () => import('./monthly-report/monthly-report.module').then( m => m.MonthlyReportPageModule)
   }
 ];
 

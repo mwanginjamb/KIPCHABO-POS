@@ -38,6 +38,7 @@ export class PrintService {
     this.disconnectBluetoothPrinter();
   }
 
+
   async showToast(text){
     return await this.toastCtrl.create({
       message: text,
