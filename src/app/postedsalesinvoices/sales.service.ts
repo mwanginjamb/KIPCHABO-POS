@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
 import { PaymentsService } from '../payments/payments.service';
 import { OrderService } from '../orders/order.service';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { OrderService } from '../orders/order.service';
 export class SalesService {
 
   url = environment.url;
-  constructor(private http: HttpClient, private orderService: OrderService) { }
+  constructor(private http: HttpClient, private orderService: OrderService, private toastCtrl: ToastController) { }
 
   get Sales() {
     return this.http.get< Postedsalesinvoice[] >(`${this.url}site/get?service=PostedSalesInvoices`).pipe(take(1));
@@ -32,6 +33,16 @@ export class SalesService {
 
   FilterSalesbyRange(startDate, endDate){
     return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}&enddate=${endDate}`).pipe(take(1));
+  }
+
+  async showToast(text){
+    return await this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    }).then( toastEl => {
+      toastEl.present();
+    });
   }
 
 

@@ -29,15 +29,17 @@ export class MonthlyreportPage implements OnInit, OnDestroy {
     const endDate = this.salesService.formatDate(this.FilterRange.endDate);
     if (Date.parse(startDate) &&  Date.parse(endDate)){
       this.SalesSub = this.salesService.FilterSalesbyRange(startDate, endDate).subscribe( res => {
+        if (typeof res === 'string'){
+          this.salesService.showToast(res);
+          this.sales = [];
+          this.Total = 0;
+          this.success = false ;
+          return;
+        }
+
         this.sales = res;
         this.Total = this.getTotals(this.sales);
-
-        if (typeof res === 'object'){
-          this.success = true;
-        }else{
-          this.sales = [];
-          this.success = false;
-        }
+        this.success = (typeof res === 'object') ? true : false;
       });
     }else{
       return 'No Date Supplied';

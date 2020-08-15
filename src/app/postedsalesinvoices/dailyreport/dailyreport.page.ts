@@ -26,6 +26,15 @@ export class DailyreportPage implements OnInit, OnDestroy {
     const startDate = this.salesService.formatDate($event.target.value);
     if (Date.parse(startDate) ){
       this.salesSub = this.salesService.FilterSales(startDate).subscribe( res => {
+
+        if (typeof res === 'string'){
+          this.salesService.showToast(res);
+          this.sales = [];
+          this.Total = 0;
+          this.success = false;
+          return;
+        }
+
         this.sales = res;
         this.Total = this.getTotals(this.sales);
         this.success = (typeof res === 'object') ? true : false;

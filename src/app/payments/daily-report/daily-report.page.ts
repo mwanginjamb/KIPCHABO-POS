@@ -27,6 +27,9 @@ export class DailyReportPage implements OnInit, OnDestroy {
       this.receiptSub = this.paymentService.FilterReceipts(startDate).subscribe( res => {
         if (typeof res === 'string'){
           this.paymentService.showToast(res);
+          this.receipts = [];
+          this.Total = 0;
+          this.success = false;
           return;
         }
         this.receipts = res;
