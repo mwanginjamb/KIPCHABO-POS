@@ -29,4 +29,8 @@ export class DashboardPage implements OnInit {
     return this.router.navigate(['./payments/monthly-report']);
   }
 
+  showAvailability(){
+    return this.router.navigate(['./items/availability']);
+  }
+
 }

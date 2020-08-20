@@ -42,7 +42,16 @@ const routes: Routes = [
      {
        path: ':id',
        loadChildren: () => import('./items/item-detail/item-detail.module').then( m => m.ItemDetailPageModule )
-     }
+     },
+     {
+      path: 'availability',
+      loadChildren: () => import('./items/availability-by-location/availability-by-location.module')
+      .then( m => m.AvailabilityByLocationPageModule)
+    },
+    {
+      path: 'availability-card/:No',
+      loadChildren: () => import('./items/availability-card/availability-card.module').then( m => m.AvailabilityCardPageModule)
+    }
     ],
   },
   {

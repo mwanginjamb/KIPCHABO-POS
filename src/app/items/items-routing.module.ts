@@ -12,6 +12,14 @@ const routes: Routes = [
     path: 'item-detail',
     loadChildren: () => import('./item-detail/item-detail.module').then( m => m.ItemDetailPageModule)
   },
+  {
+    path: 'availability',
+    loadChildren: () => import('./availability-by-location/availability-by-location.module').then( m => m.AvailabilityByLocationPageModule)
+  },
+  {
+    path: 'availability-card',
+    loadChildren: () => import('./availability-card/availability-card.module').then( m => m.AvailabilityCardPageModule)
+  },
   /*{
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)

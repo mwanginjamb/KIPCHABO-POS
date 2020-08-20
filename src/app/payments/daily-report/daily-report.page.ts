@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Receipt } from 'src/app/models/receipt.model';
 import { PaymentsService } from '../payments.service';
-import { Console } from 'console';
+
 
 @Component({
   selector: 'app-daily-report',

@@ -84,7 +84,6 @@ export class RequisitionService {
   }
 
   // Format date utility
-
   formatDate(datestring: string) {
     // Format Date to YYYY-MM-DD
     const recDate = new Date(datestring);

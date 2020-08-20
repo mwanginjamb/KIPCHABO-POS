@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PaymentDetailPageRoutingModule } from './payment-detail-routing.module';
 
 import { PaymentDetailPage } from './payment-detail.page';
+import { ReceiptPopoverComponent } from '../receipt-popover/receipt-popover.component';
+import { BluetoothComponent } from '../bluetooth/bluetooth.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { PaymentDetailPage } from './payment-detail.page';
     IonicModule,
     PaymentDetailPageRoutingModule
   ],
-  declarations: [PaymentDetailPage]
+  entryComponents: [ReceiptPopoverComponent, BluetoothComponent],
+  declarations: [PaymentDetailPage, ReceiptPopoverComponent, BluetoothComponent]
 })
 export class PaymentDetailPageModule {}

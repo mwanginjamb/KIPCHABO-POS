@@ -80,6 +80,43 @@
             </ion-item>
           </ion-menu-toggle>
          
+          <ion-item-divider>
+            <ion-label>Reports</ion-label>
+          </ion-item-divider>
+
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="showDailySales()" button>
+              <ion-icon name="clipboard" slot="start"></ion-icon>
+              <ion-label>Daily Sales</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="showMonthlySales()" button>
+              <ion-icon name="clipboard" slot="start"></ion-icon>
+              <ion-label>Monthly Sales</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="showDailyReceipts()" button>
+              <ion-icon name="clipboard" slot="start"></ion-icon>
+              <ion-label>Daily Cash Receipts</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="showMonthlyReceipts()" button>
+              <ion-icon name="clipboard" slot="start"></ion-icon>
+              <ion-label>Monthly Cash Receipts</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="showAvailability()" button>
+              <ion-icon name="clipboard" slot="start"></ion-icon>
+              <ion-label>Stock Availability By Location</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
         </ion-list>
       </ion-content>

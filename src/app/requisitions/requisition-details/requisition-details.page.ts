@@ -93,6 +93,15 @@ model = {};
     });
    }*/
 
+   refresh(event){
+    this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
+      this.card = [...cardInfo][0];
+      if (event){
+        event.target.complete();
+      }
+    });
+  }
+
    ngOnDestroy() {
 
      if ( this.itemSub ) {

@@ -26,7 +26,7 @@
 
         <ion-item>
           <ion-label position="floating">Unit of Measure</ion-label>
-          <ion-select [(ngModel)] = "line.Unit" [selectedText]="line.Unit_of_Measure" placeholder="Select Unit">
+          <ion-select [(ngModel)] = "line.Unit" [selectedText]="line.Unit" placeholder="Select Unit">
             <ion-select-option *ngFor="let unit of units" [value]="unit.Code" >{{ unit.Code }}</ion-select-option>
           </ion-select>
         </ion-item>

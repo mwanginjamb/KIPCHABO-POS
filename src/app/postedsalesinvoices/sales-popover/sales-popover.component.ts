@@ -22,7 +22,7 @@ export class SalesPopoverComponent implements OnInit {
     return await this.modalCtrl.create(
       {
         component: BluetoothComponent,
-        componentProps: { No: this.No, Card: this.Card },
+        componentProps: { No: this.No, Card: this.Card, Printable: 'Invoice' },
       }
     ).then( modalEl => {
       modalEl.present();

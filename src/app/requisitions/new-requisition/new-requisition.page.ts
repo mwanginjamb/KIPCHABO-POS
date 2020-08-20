@@ -53,7 +53,7 @@ export class NewRequisitionPage implements OnInit {
       if ( typeof res !== 'string' ) {
         // Show a Toast Notification
         this.toastCtrl.create({
-          message: `${res.No} Requisition Line Added Successfully.`,
+          message: `${res.No} Requisition Added Successfully.`,
           duration: 2000,
           position: 'top'
         }).then((toastData) => {
@@ -110,5 +110,6 @@ export class NewRequisitionPage implements OnInit {
       this.projects = dim;
     });
   }
+
 
 }

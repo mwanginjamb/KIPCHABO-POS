@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ɵConsole } from '@angular/core';
 import { ModalController, AlertController, ToastController, PopoverController } from '@ionic/angular';
 import { PrintService } from '../print.service';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { Postedsalesinvoice } from 'src/app/models/postedsalesinvoice.model';
 import { CurrencyPipe, getLocaleCurrencyCode } from '@angular/common';
+import { Receipt } from 'src/app/models/receipt.model';
+import { PaymentsService } from '../payments.service';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class BluetoothComponent implements OnInit {
   unpairedDevices: any = null;
 
   @Input() No;
-  @Input() Card: Postedsalesinvoice;
+  @Input() Card: Postedsalesinvoice ;
+  @Input() receiptCard: Receipt;
+  @Input() Printable;
 
   myString: string = null;
 
@@ -29,31 +33,14 @@ export class BluetoothComponent implements OnInit {
      private bluetoothSerial: BluetoothSerial,
      private alertCtrl: AlertController,
      private toastCtrl: ToastController,
-     private popOverCtrl: PopoverController
+     private popOverCtrl: PopoverController,
+     private paymentService: PaymentsService
      ) {
     this.bluetoothSerial.enable();
    }
 
   ngOnInit() {
     this.popOverCtrl.dismiss();
-    this.myString =   `
-    Kipchabo Tea Factory.
-
-    Customer: ${this.Card?.Sell_to_Customer_Name}
-
-
-    Item | Quantity  | Unit Price (Ksh) | Total  (Incl. VAT)
-
-    `;
-
-    this.Card.SalesInvLines.Posted_Sales_Invoice_Line.forEach(line => {
-      this.myString += `
-    ${line.Description}  | ${line.Quantity} | ${line.Unit_Price} | ${line.Line_Amount } \r\n` ;
-    });
-
-    this.myString += `                  Total Amount: ${this.Card?.Amount_Including_VAT}`;
-    // console.log(`DOC NO TO PRINT`);
-    console.log(this.myString);
   }
 
   closeModal(){
@@ -72,6 +59,11 @@ export class BluetoothComponent implements OnInit {
 
    success = (data) => {
      this.deviceConnected();
+     if (this.Printable === 'Invoice'){
+      this.generatePostedSalesInvoicePrintable();
+     }else if (this.Printable === 'Receipt'){
+      this.generateReceiptPrintable();
+     }
      this.print(this.myString);
    }
 
@@ -124,6 +116,57 @@ export class BluetoothComponent implements OnInit {
     }).then( toastEl => {
       toastEl.present();
     });
+  }
+
+  generatePostedSalesInvoicePrintable(){
+    this.myString =   `
+    Kipchabo Tea Factory Ltd.
+
+    Customer: ${this.Card?.Sell_to_Customer_Name}
+
+    Sale Date: ${this.Card.Posting_Date}
+
+    Invoice No: ${this.Card.No}
+
+    Item | Quantity  | Unit Price (Ksh) | Total  (Incl. VAT)
+
+    `;
+
+    this.Card.SalesInvLines.Posted_Sales_Invoice_Line.forEach(line => {
+      this.myString += `
+    ${line.Description}  | ${line.Quantity} | ${line.Unit_Price} | ${line.Line_Amount } \r\n` ;
+    });
+
+    this.myString += `
+
+     Total Amount: ${this.Card?.Amount_Including_VAT}
+     `;
+
+  }
+
+  generateReceiptPrintable(){
+
+    this.myString =   `
+    Kipchabo Tea Factory Receipt.
+
+    Customer: ${this.receiptCard?.Customer_Name}
+
+
+    Invoice No | Amount  | Amount to receipt 
+
+    `;
+
+    this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line.forEach(line => {
+      this.myString += `
+    ${line.Invoice_No}  | ${line.Amount} | ${line.Amount_To_Receipt}  \r\n` ;
+    });
+
+    const Total = this.paymentService.getTotals(this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line, 'Amount_To_Receipt');
+
+    this.myString += `
+
+               Total Amount: ${Total}
+                   `;
   }
 
 }

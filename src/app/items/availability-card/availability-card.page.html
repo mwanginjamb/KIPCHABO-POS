@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/items/availability"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Item Balance Card - {{card?.No}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card>
+    <ion-grid>
+      <ion-list *ngFor="let line of card?.ItemAvailLocLines?.Item_Avail_by_Location_Lines">
+          <ion-row >              
+            <ion-col> 
+              <ion-item>                         
+                  <ion-label>{{line.Name}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col> 
+              <ion-item>                         
+                  <ion-label>{{line?.ProjAvailableBalance}}</ion-label>
+              </ion-item>
+            </ion-col>          
+
+          </ion-row>
+       </ion-list>
+    </ion-grid>
+  </ion-card>
+
+  
+    
+  
+</ion-content>

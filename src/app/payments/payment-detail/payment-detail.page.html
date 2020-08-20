@@ -4,10 +4,16 @@
      <ion-back-button defaultHref="payments"></ion-back-button>
     </ion-buttons>
     <ion-title>Cash Receipt Card -  {{ card?.Receipt_No}} </ion-title>
+    <ion-buttons slot="end" *ngIf="card?.Posted">
+      <ion-button slot="icon-only" fill="clear" (click)="presentPopover($event)">
+        <ion-icon  name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>      
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="card?.Receipt_No">
 
   <ion-grid>
     <ion-row>
