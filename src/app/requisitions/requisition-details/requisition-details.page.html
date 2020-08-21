@@ -9,8 +9,14 @@
 
 <ion-content>
 
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullMin="100" pullMax="200">
+    <ion-refresher-content
+    pullingIcon="arrow-down-outline"
+    pullingText="Pull to Refresh"
+    refreshingSpinner="crescent"
+    refreshingText="Refreshing..."
+    >
+  </ion-refresher-content>
   </ion-refresher>
 
   <ion-grid>
