@@ -25,7 +25,7 @@ searched: {} = null;
   ngOnInit() {
     this.isLoading = true;
     this.itemSub = this.itemService.items.subscribe(result => {
-      console.log(result);
+      // console.log(result);
       this.Items = [...result];
       this.isLoading = false;
     }, error => {

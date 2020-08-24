@@ -3,30 +3,30 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/items/availability"></ion-back-button>
     </ion-buttons>
-    <ion-title>Item Balance Card - {{card?.No}}</ion-title>
+    <ion-title>Item Balance Card - {{ItemCard?.Description}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-row>
+    <ion-col >
+      <ion-item>
+        <ion-label position="floating">Search Balance By Location</ion-label>
+  
+        <ion-select (ionChange)="searchByLocation($event)" name="locationCode" placeholder="Select Location">
+          <ion-select-option *ngFor="let loc of locations" [value]="loc.Code">{{loc.Name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 
   <ion-card>
     <ion-grid>
-      <ion-list *ngFor="let line of card?.ItemAvailLocLines?.Item_Avail_by_Location_Lines">
-          <ion-row >              
-            <ion-col> 
-              <ion-item>                         
-                  <ion-label>{{line.Name}}</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col> 
-              <ion-item>                         
-                  <ion-label>{{line?.ProjAvailableBalance}}</ion-label>
-              </ion-item>
-            </ion-col>          
-
-          </ion-row>
-       </ion-list>
+     <ion-col>
+       <h3>Balance for: <b> {{ItemCard?.Description}}</b></h3>
+       <p>Remaining Quantity: {{TotalRemainingQuantity}}</p>
+     </ion-col>
     </ion-grid>
   </ion-card>
 
