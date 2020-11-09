@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
      <ion-back-button defaultHref="payments"></ion-back-button>
     </ion-buttons>
@@ -27,9 +27,9 @@
 
            <ion-card-content>
 
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab *ngIf="!card.Posted" vertical="bottom" horizontal="end" slot="fixed">
               <ion-fab-button color="warning" (click)="post(card.Receipt_No)">
-                <ion-icon name="add"></ion-icon>
+                <ion-icon name="send"></ion-icon>
               </ion-fab-button>
             </ion-fab>
 

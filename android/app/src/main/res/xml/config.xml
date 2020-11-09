@@ -10,6 +10,10 @@
     <param name="android-package" value="com.megster.cordova.BluetoothSerial"/>
   </feature>
 
+  <feature name="Scan">
+    <param name="android-package" value="com.neutrinos.plugin.Scan"/>
+  </feature>
+
   <feature name="File">
     <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
     <param name="onload" value="true"/>

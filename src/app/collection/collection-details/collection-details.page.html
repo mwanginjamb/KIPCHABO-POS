@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Green Leaf Collection Card - {{card?.No}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title> General Card Details </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Farmer Name</ion-label>
+                  <ion-input
+                    [(ngModel)]="card.Farmer_Name"
+                    readonly
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Shade Name</ion-label>
+                  <ion-input [(ngModel)]="card.Shade_Name" readonly></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Farmer No.</ion-label>
+                  <ion-input [(ngModel)]="card.Farmer_No" readonly></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Net Kg</ion-label>
+                  <ion-input [(ngModel)]="card.Net_Kg" readonly></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+
+          <!--Start Lines Card-->
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Lines</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-list>
+                      <ion-item>
+                        <ion-button
+                          type="button"
+                          outline
+                          color="primary"
+                          (click)="onAddLine()"
+                          >New</ion-button
+                        >
+                      </ion-item>
+                    </ion-list>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row scrollX="true">
+                  <ion-col>
+                    <ion-label>#</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Produce Desc.</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-label>Weight</ion-label>
+                  </ion-col>
+                </ion-row>
+
+                <ion-list
+                  *ngFor="let item of card?.Farmers_Lines?.Farmers_Lines"
+                >
+                  <ion-row>
+                    <ion-col>
+                      <ion-item
+                        (click)="onUpdateLine(item?.Weighment_No)"
+                        color="primary"
+                      >
+                        <ion-label>{{item.Weighment_No}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>{{item.Produce_Description}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>{{item.Kgs}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-list>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          <!--End Lines Card-->
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

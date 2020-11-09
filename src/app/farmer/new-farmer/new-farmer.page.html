@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/farmer"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Onboard Farmer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onAddFarmer()">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.Name"
+            name="Name"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Phone No.</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.Phone_No"
+            name="Phone_No"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Total Acreage</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.Total_acreage"
+            name="Total_acreage"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">National ID No.</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.National_ID_No"
+            name="voucher_No"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+     
+  
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Route Code</ion-label>
+          <ion-select
+            [(ngModel)]="farmer.Route_code"
+            name="Route_Code"
+            placeholder="Select ..."
+            (ionChange)="fetchShades(farmer.Route_code)"
+          >
+            <ion-select-option
+              *ngFor="let route of tearoutes"
+              [value]="route.Route_No"
+              >{{route.Route_Name}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Buying Center</ion-label>
+          <ion-select
+            [(ngModel)]="farmer.Buying_Center_Code"
+            name="Buying_Center_Code"
+            placeholder="Select ..."
+          >
+            <ion-select-option *ngFor="let bc of shades" [value]="bc.Shade_No"
+              >{{bc.Shade_Name}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <!-----PIN DETAILS-->
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">PIN No.</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.PIN_No"
+            name="PIN_No"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Land Registration</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="farmer.Land_Rgistration"
+            name="Land_Rgistration"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <!-----INSPECTION-->
+  
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Inspection Date</ion-label>
+  
+          <ion-datetime
+            [(ngModel)]="farmer.Inspection_Date"
+            name="Inspection_Date"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Tea Type Planted</ion-label>
+  
+          <ion-select
+            [(ngModel)]="farmer.Type_Of_Tea_Planted"
+            name="Type_Of_Tea_Planted"
+            placeholder="Select ..."
+          >
+            <ion-select-option *ngFor="let type of teaTypes" [value]="type"
+              >{{type.name}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-button type="Save Details" color="primary" expand="block">Save Details</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

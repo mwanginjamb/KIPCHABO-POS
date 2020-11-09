@@ -120,7 +120,7 @@ export class BluetoothComponent implements OnInit {
 
   generatePostedSalesInvoicePrintable(){
     this.myString =   `
-    Kipchabo Tea Factory Ltd.
+    Kipchabo Tea Factory Ltd - Invoice.
 
     Customer: ${this.Card?.Sell_to_Customer_Name}
 
@@ -132,14 +132,27 @@ export class BluetoothComponent implements OnInit {
 
     `;
 
-    this.Card.SalesInvLines.Posted_Sales_Invoice_Line.forEach(line => {
+    /* this.Card.SalesInvLines.Posted_Sales_Invoice_Line.forEach(line => {
+      this.myString += `
+    ${line.Description}  | ${line.Quantity} | ${line.Unit_Price} | ${line.Line_Amount } \r\n` ;
+    });*/
+
+    // Filter Lines to print
+    const LinestoPrint = this.Card.SalesInvLines.Posted_Sales_Invoice_Line.filter(ln => ln.Line_Amount > 0);
+
+    LinestoPrint.forEach(line => {
       this.myString += `
     ${line.Description}  | ${line.Quantity} | ${line.Unit_Price} | ${line.Line_Amount } \r\n` ;
     });
 
+
+    const VAT = this.Card?.Amount_Including_VAT * 0.16;
+
     this.myString += `
 
      Total Amount: ${this.Card?.Amount_Including_VAT}
+
+     VAT: ${VAT}
      `;
 
   }
@@ -156,16 +169,23 @@ export class BluetoothComponent implements OnInit {
 
     `;
 
-    this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line.forEach(line => {
+    // Filter Lines to Print
+
+    const LinestoPrint = this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line.filter( ln => ln.Amount_To_Receipt > 0);
+
+    LinestoPrint.forEach(line => {
       this.myString += `
+
     ${line.Invoice_No}  | ${line.Amount} | ${line.Amount_To_Receipt}  \r\n` ;
+
     });
 
     const Total = this.paymentService.getTotals(this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line, 'Amount_To_Receipt');
 
     this.myString += `
 
-               Total Amount: ${Total}
+          Total Amount: ${Total}
+
                    `;
   }
 

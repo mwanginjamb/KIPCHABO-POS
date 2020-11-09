@@ -12,7 +12,7 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp-urlconnection:3.10.0"
 }
-
+apply from: "../../node_modules/cordova-plugin-document-scanner/src/android/build.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

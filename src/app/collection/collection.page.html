@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Green Leaf Collection</ion-title>
+
+    <ion-buttons slot="end">      
+      <ion-button slot="icon-only" fill="clear" (click)="presentPopover($event)">
+        <ion-icon  name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>      
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>Farmer</ion-col>
+      <ion-col>Shade Name</ion-col>
+      <ion-col> Net Kg</ion-col>
+      <ion-col> Posting Date</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-virtual-scroll [items]="Items" approxItemHeight="47.2px">
+    <ion-item
+      [routerLink]="['/','collection',item.No]"
+      detail
+      *virtualItem="let item"
+    >
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <h3>{{ item?.Farmer_Name }}</h3>
+            </ion-label>
+          </ion-col>
+
+          <ion-col>
+            <ion-label>
+              <h3>{{ item?.Shade_Name }}</h3>
+            </ion-label>
+          </ion-col>
+
+          <ion-col>
+            <ion-label>
+              <h3>{{ item?.Posting_Date }}</h3>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>

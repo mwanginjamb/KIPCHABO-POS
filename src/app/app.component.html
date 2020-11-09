@@ -1,4 +1,3 @@
-
 <div *ngIf="showSplash" class="splash">
   <div class="sk-cube-grid">
     <div class="sk-cube sk-cube1"></div>
@@ -14,113 +13,120 @@
 </div>
 
 <ion-app>
-
   <ion-menu side="start" menuId="m1">
     <ion-header>
-
       <ion-toolbar>
-        <ion-title>
-          Kipchabo Tea Factory
-        </ion-title>
+        <ion-title> Kamarich Tea Factory </ion-title>
       </ion-toolbar>
+    </ion-header>
 
-      </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['dashboard']">
+            <ion-icon name="home" slot="start"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-      <ion-content>
-        <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['requisitions']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Stock Requisitions</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['dashboard']">
-              <ion-icon name="home" slot="start"></ion-icon>
-              <ion-label >Home</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item
+            lines="none"
+            [routerLink]="['requisitions', 'released-requisitions']"
+          >
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Released Requisitions</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['requisitions']">
-              <ion-icon name="business" slot="start"></ion-icon>
-              <ion-label >Stock Requisitions</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['orders']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Sales Invoice</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['requisitions','released-requisitions']">
-              <ion-icon name="business" slot="start"></ion-icon>
-              <ion-label >Released Requisitions</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['payments']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Payments</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['orders']">
-              <ion-icon name="business" slot="start"></ion-icon>
-              <ion-label >Sales Invoice</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['items']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Items</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['payments']">
-              <ion-icon name="business" slot="start"></ion-icon>
-              <ion-label >Payments</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['farmer']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Farmers</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" [routerLink]="['items']">
-              <ion-icon name="business" slot="start"></ion-icon>
-              <ion-label >Items</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          
+        <ion-menu-toggle>
+          <ion-item lines="none" [routerLink]="['collection']">
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label>Leaf Collection</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="logout()" button>
-              <ion-icon name="exit" slot="start"></ion-icon>
-              <ion-label >Exit</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-         
-          <ion-item-divider>
-            <ion-label>Reports</ion-label>
-          </ion-item-divider>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="logout()" button>
+            <ion-icon name="exit" slot="start"></ion-icon>
+            <ion-label>Exit</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="showDailySales()" button>
-              <ion-icon name="clipboard" slot="start"></ion-icon>
-              <ion-label>Daily Sales</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="showMonthlySales()" button>
-              <ion-icon name="clipboard" slot="start"></ion-icon>
-              <ion-label>Monthly Sales</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-item-divider>
+          <ion-label>Reports</ion-label>
+        </ion-item-divider>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="showDailyReceipts()" button>
-              <ion-icon name="clipboard" slot="start"></ion-icon>
-              <ion-label>Daily Cash Receipts</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="showDailySales()" button>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label>Daily Sales</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="showMonthlySales()" button>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label>Monthly Sales</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="showMonthlyReceipts()" button>
-              <ion-icon name="clipboard" slot="start"></ion-icon>
-              <ion-label>Monthly Cash Receipts</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="showDailyReceipts()" button>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label>Daily Cash Receipts</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item lines="none" (click)="showAvailability()" button>
-              <ion-icon name="clipboard" slot="start"></ion-icon>
-              <ion-label>Stock Availability By Location</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="showMonthlyReceipts()" button>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label>Monthly Cash Receipts</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
 
-        </ion-list>
-      </ion-content>
-
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="showAvailability()" button>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label>Stock Availability By Location</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
   </ion-menu>
 
   <ion-router-outlet main></ion-router-outlet>

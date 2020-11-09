@@ -14,6 +14,25 @@
   </section>
 
   <ion-grid>
+
+
+    <ion-row>
+      <ion-col col-6 col-sm-12 [routerLink]="['../farmer']">
+        <ion-card ion-text-center padding color="warning">
+            <ion-icon name="people"></ion-icon>
+            <h2>Farmers</h2>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-6 col-sm-12 [routerLink]="['../collection']">
+        <ion-card ion-text-center padding color="success">
+          <ion-icon name="leaf"></ion-icon>
+          <h2>Leaf Collection</h2>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+
+
     <ion-row>
       <ion-col col-6 col-sm-12 [routerLink]="['../postedsales']">
         <ion-card ion-text-center padding color="warning">
@@ -44,7 +63,10 @@
             <h2>Requisitions</h2>
         </ion-card>
       </ion-col>
+
     </ion-row>
+
+  
 
     
 <ion-card>
@@ -94,6 +116,9 @@
             <h2>Stock Availability</h2>
         </ion-card>
       </ion-col> 
+
+      <ion-col col-6 col-sm-12></ion-col>
+
     </ion-row>
    
 

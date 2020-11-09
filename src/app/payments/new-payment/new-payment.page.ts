@@ -45,6 +45,9 @@ export class NewPaymentPage implements OnInit {
     this.paymentSub = this.paymentService.newPayment().subscribe( receipt => {
       console.log(typeof receipt);
       this.card = receipt;
+      const curr = new Date();
+      const formattedDate = this.paymentService.formatDate(curr);
+      this.card.Posting_Date = formattedDate;
     });
   }
 
