@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ToastController } from '@ionic/angular';
 import { take } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Farmer } from "../models/farmer.model";
@@ -9,7 +10,7 @@ import { Farmer } from "../models/farmer.model";
 })
 export class FarmerService {
   url = environment.url;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastCtrl: ToastController) {}
 
   get Farmers() {
     return this.http
@@ -53,4 +54,15 @@ export class FarmerService {
     const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
     return  `${recDate.getFullYear()}-${month}-${day}`;
   }
+
+  async showToast(text){
+    return await this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    }).then( toastEl => {
+      toastEl.present();
+    });
+  }
+
 }

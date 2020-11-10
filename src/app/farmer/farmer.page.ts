@@ -30,9 +30,15 @@ export class FarmerPage implements OnInit {
   ngOnInit() {
     this.farmersSub = this.farmerService.Farmers.subscribe(
       (result) => {
-        this.farmers = [...result];
+        this.farmers = Array.isArray(result) ? [...result] : result;
         this.isLoading = false;
         console.log(this.farmers);
+        if (!Array.isArray(this.farmers) || !this.farmers.length) {
+            this.farmerService.showToast('No Farmers Registered Yet.');
+            this.isLoading = false;
+            console.log('State...............');
+        }
+         console.log(this.isLoading);
       },
       (error) => {
         this.isLoading = false;

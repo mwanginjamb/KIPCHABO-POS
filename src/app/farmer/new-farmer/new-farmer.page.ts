@@ -56,13 +56,13 @@ export class NewFarmerPage implements OnInit {
           // Show a Toast Notification
           this.toastCtrl
             .create({
-              message: `${res.No} Farmer Added Successfully.`,
+              message: `${res.Application_No} Farmer Added Successfully.`,
               duration: 2000,
               position: "top",
             })
             .then((toastData) => {
               toastData.present();
-              this.router.navigate(["/", "farmer", res.No]);
+              this.router.navigate(["/", "farmer", res.Application_No]);
             });
         } else {
           this.alertCtrl

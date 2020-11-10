@@ -4,127 +4,99 @@
       <ion-back-button defaultHref="/farmer"></ion-back-button>
     </ion-buttons>
     <ion-title>Farmer Details</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" fill="clear" (click)="presentPopover($event)">
+        <ion-icon  name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>      
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Name </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Name }}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        
+        <ion-col size="6">
+          <ion-item lines="none">
+            <ion-label position="floating"> Name </ion-label>
+            <ion-input [value]=card?.Name readonly></ion-input>
+          </ion-item>
+        </ion-col>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Phone Number </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Phone_No }}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-col size="6">
+          <ion-item lines="none">
+            <ion-label position="floating"> Phone Number </ion-label>
+            <ion-input [value]=card?.Phone_No readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+    
+    
+    
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> Total Acreage </ion-label>
+            <ion-input [value]=card?.Total_acreage></ion-input>
+          </ion-item>
+        </ion-col>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Total Acreage </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Total_acreage?card?.Total_acreage: 'Not Set' }}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> National ID No. </ion-label>
+            <ion-input [value]=card?.National_ID_No readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+    
+     
+    
+      <ion-row>
+       
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> Buying Center. </ion-label>
+            <ion-input [value]=card?.Buying_Centre_Name readonly></ion-input>
+          </ion-item>
+        </ion-col>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> National ID No. </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.National_ID_No}}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> Route Name. </ion-label>
+            <ion-input [value]=card?.Route_Name readonly></ion-input>
+          </ion-item>
+        </ion-col>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Buying Center. </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Buying_Centre_Name}}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Route Name. </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Route_Name}}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> PIN No. </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.PIN_No}}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+      </ion-row>
+    
+      <ion-row>
+      
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> PIN No. </ion-label>
+            <ion-input [value]=card?.PIN_No readonly></ion-input>
+          </ion-item>
+        </ion-col>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-item>
-        <ion-label class="ion-text-wrap"> Land Registration </ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item lines="none">
-        <ion-text>
-          <h4>{{ card?.Land_Rgistration}}</h4>
-        </ion-text>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating"> Land Registration </ion-label>
+            <ion-input [value]=card?.Land_Rgistration readonly></ion-input>
+          </ion-item>
+        </ion-col>
+
+
+      </ion-row>
+    
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>
