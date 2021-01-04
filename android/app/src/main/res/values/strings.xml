@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Kipchabo</string>
-    <string name="title_activity_main">Kipchabo</string>
-    <string name="package_name">ion.Kapchabo.com</string>
-    <string name="custom_url_scheme">ion.Kapchabo.com</string>
+    <string name="app_name">Kipchabo Field Sales</string>
+    <string name="title_activity_main">Kipchabo Field Sales</string>
+    <string name="package_name">io.Kipchabo.pos</string>
+    <string name="custom_url_scheme">io.Kipchabo.pos</string>
 </resources>

@@ -178,60 +178,8 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: "collection",
-    children: [
-      {
-        path: "",
-        loadChildren: () =>
-          import("./collection/collection.module").then(
-            (m) => m.CollectionPageModule
-          ),
-      },
-      {
-        path: ":No",
-        loadChildren: () =>
-          import(
-            "./collection/collection-details/collection-details.module"
-          ).then((m) => m.CollectionDetailsPageModule),
-      },
-      {
-        path: "new-collection",
-        loadChildren: () =>
-          import("./collection/new-collection/new-collection.module").then(
-            (m) => m.NewCollectionPageModule
-          ),
-      },
-    ],
-  },
-  {
-    path: "farmer",
-    children: [
-      {
-        path: "",
-        loadChildren: () =>
-          import("./farmer/farmer.module").then((m) => m.FarmerPageModule),
-      },
-      {
-        path: ":No",
-        loadChildren: () =>
-          import("./farmer/farmer-details/farmer-details.module").then(
-            (m) => m.FarmerDetailsPageModule
-          ),
-      },
-      {
-        path: "new-farmer",
-        loadChildren: () =>
-          import("./farmer/new-farmer/new-farmer.module").then(
-            (m) => m.NewFarmerPageModule
-          ),
-      },
-    ],
-  },
-  {
-    path: 'id-scanner',
-    loadChildren: () => import('./id-scanner/id-scanner.module').then( m => m.IdScannerPageModule)
-  },
+  
+ 
 ];
 
 @NgModule({

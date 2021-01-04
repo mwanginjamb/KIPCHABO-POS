@@ -1,6 +1,6 @@
 {
-  "appId": "com.Kapchabo-pos.iansoft",
-  "appName": "Kipchabo-POS",
+  "appId": "io.Kipchabo.pos",
+  "appName": "Kipchabo Field Sales",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
@@ -12,8 +12,19 @@
   "proxies": [
     {
       "path": "/",
-      "proxyUrl": "http://192.168.1.118/"
+      "proxyUrl": "http://192.168.43.20/"
     }
   ],
-  "cordova": {}
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "10000"
+    }
+  }
 }

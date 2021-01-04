@@ -4,6 +4,8 @@ import { RequisitionService } from './requisition.service';
 import { Subscription } from 'rxjs';
 import { MenuController, PopoverController, AlertController } from '@ionic/angular';
 import { ReqPopoverComponent } from './req-popover/req-popover.component';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-requisitions',
@@ -26,8 +28,9 @@ export class RequisitionsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.isLoading = true;
-      this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
-        this.requisitions = result;
+      this.requisitionSub = this.requisitionService.requisitions
+      .subscribe( result => {
+        this.requisitions  = [...result];
         this.isLoading = false;
         console.log(this.requisitions);
       }, error => {
