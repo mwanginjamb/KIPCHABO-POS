@@ -50,7 +50,8 @@ export class PaymentsPage implements OnInit, OnDestroy {
   FetchPayments() {
     this.paymentsSub = this.PaymentService.Payments.subscribe(result => {
       console.log(result);
-      this.payments = [...result];
+      this.payments = this.sort([...result]);
+      
       this.isLoading = false;
     }, error => {
       console.log(error.error);
@@ -89,6 +90,9 @@ export class PaymentsPage implements OnInit, OnDestroy {
     });
   }
 
+  sort(dataArray: Receipt[]){
+    return dataArray.sort((a,b) => (b.Receipt_No > a.Receipt_No) ? 1: -1);
+  }
 
   ngOnDestroy(){
     if ( this.paymentsSub ){

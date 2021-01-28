@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "dashboard",
+    redirectTo: "auth",
     pathMatch: "full",
   },
   {
@@ -177,6 +177,10 @@ const routes: Routes = [
           ).then((m) => m.MonthlyreportPageModule),
       },
     ],
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
   },
   
  

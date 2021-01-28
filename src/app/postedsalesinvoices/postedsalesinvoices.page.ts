@@ -33,7 +33,7 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
   FetchSales() {
     this.SalesSub = this.salesService.Sales.subscribe(result => {
       console.log(result);
-      this.sales = [...result];
+      this.sales = this.sort([...result]);
       this.isLoading = false;
     }, error => {
       console.log(error.error);
@@ -100,6 +100,10 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
       }
     });
     return sum;
+  }
+
+  sort(dataArray: Postedsalesinvoice[]){
+    return dataArray.sort((a,b) => (b.No > a.No) ? 1: -1);
   }
 
   ngOnDestroy(){

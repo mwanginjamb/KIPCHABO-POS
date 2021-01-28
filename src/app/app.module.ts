@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { CommonModule } from '@angular/common';
-
+import { IonicStorageModule } from '@ionic/storage';
 
 
 
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, CommonModule],
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,

@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { timer } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from './auth/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.initializeApp();
   }
@@ -36,12 +38,17 @@ export class AppComponent {
   }
 
 
-  logout() {
+  exit() {
     console.log('You just logged me out!!');
     // Exit the App
     if (window.confirm(`Do you want to exit the app?`)) {
       navigator['app'].exitApp();
     }
+  }
+
+  async logout() {
+    await this.auth.logout();
+    this.router.navigate(['./auth']);
   }
 
   showDailySales(){

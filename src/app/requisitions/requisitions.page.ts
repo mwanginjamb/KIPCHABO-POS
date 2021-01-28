@@ -30,7 +30,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
       this.isLoading = true;
       this.requisitionSub = this.requisitionService.requisitions
       .subscribe( result => {
-        this.requisitions  = [...result];
+        this.requisitions  = this.sort([...result]);
         this.isLoading = false;
         console.log(this.requisitions);
       }, error => {
@@ -51,7 +51,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   ionViewDidEnter(){
     this.isLoading = true;
     this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
-      this.requisitions = result;
+      this.requisitions = this.sort(result);
       this.isLoading = false;
       console.log(this.requisitions);
     });
@@ -94,6 +94,10 @@ export class RequisitionsPage implements OnInit, OnDestroy {
       pop.present();
     });
    // return await popover.present();
+  }
+
+  sort(dataArray){
+    return dataArray.sort((a,b) => (b.No > a.No)? 1: -1);
   }
 
   ngOnDestroy() {
