@@ -34,15 +34,15 @@
               <ion-row>
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">No.</ion-label>
-                    <ion-text>{{ card?.No }}</ion-text>
+                    <ion-label position="fixed">Req. No</ion-label>
+                    <ion-text>{{ card?.Req_No }}</ion-text>
                   </ion-item>
                 </ion-col>
 
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">Voucher No.</ion-label>
-                    <ion-text>{{ card?.voucher_No }}</ion-text>
+                    <ion-label position="fixed">Store Code.</ion-label>
+                    <ion-text>{{ card?.Store_Code }}</ion-text>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -50,15 +50,15 @@
               <ion-row>
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">Request From.</ion-label>
-                    <ion-text>{{ card?.Transfer_from_Code }}</ion-text>
+                    <ion-label position="fixed">Requisition Date</ion-label>
+                    <ion-text>{{ card?.Requisition_Date }}</ion-text>
                   </ion-item>
                 </ion-col>
 
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">Dimension 1 Code.</ion-label>
-                    <ion-text>{{ card?.Shortcut_Dimension_1_Code }}</ion-text>
+                    <ion-label position="fixed">Store Name</ion-label>
+                    <ion-text>{{ card?.Store_Name }}</ion-text>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -66,51 +66,22 @@
               <ion-row>
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">Receiving Location.</ion-label>
-                    <ion-text>{{ card?.Transfer_to_Code }}</ion-text>
+                    <ion-label position="fixed">Requested On</ion-label>
+                    <ion-text>{{ card?.Requested_On }}</ion-text>
                   </ion-item>
                 </ion-col>
 
                 <ion-col >
                   <ion-item>
-                    <ion-label position="fixed">Dimension 2 Code.</ion-label>
-                    <ion-text>{{ card?.Shortcut_Dimension_2_Code }}</ion-text>
+                    <ion-label position="fixed">Approval Status</ion-label>
+                    <ion-text>{{ card?.Approval_Status }}</ion-text>
                   </ion-item>
                 </ion-col>
               </ion-row>
 
-              <ion-row>
-                <ion-col >
-                  <ion-item>
-                    <ion-label position="fixed">In-Transit Code: </ion-label>
-                    <ion-text>{{ card?.In_Transit_Code }}</ion-text>
-                  </ion-item>
-                </ion-col>
+              
 
-                <ion-col >
-                  <ion-item>
-                    <ion-label position="fixed">Requested By:</ion-label>
-                    <ion-text>{{ card?.Assigned_User_ID }}</ion-text>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col >
-                  <ion-item>
-                    <ion-label position="fixed">Posting Date: </ion-label>
-                    <ion-text>{{ card?.Posting_Date }}</ion-text>
-                  </ion-item>
-                </ion-col>
-
-                <ion-col >
-                  <ion-item>
-                    <ion-label position="fixed">Status:</ion-label>
-                    <ion-text>{{ card?.Status }}</ion-text>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-
+             
             </ion-card-content>
 
           </ion-card> 
@@ -122,7 +93,7 @@
             </ion-card-header>
             <ion-card-content>
               <ion-grid>
-                <ion-row *ngIf="card?.Status === 'Open' ">
+                <ion-row *ngIf="card?.Approval_Status === 'Open' ">
                   <ion-col>
                     <ion-list>
                       <ion-item>
@@ -139,28 +110,22 @@
                   </ion-col>
 
                   
-
-                  
-
                   <ion-col>
                     <ion-label>Unit Pieces</ion-label>
                   </ion-col>
 
                   
-
                   <ion-col>
-                    <ion-label>Qty to Receive</ion-label>
+                    <ion-label>U.O.M</ion-label>
                   </ion-col>
 
-                  <ion-col>
-                    <ion-label>Shipment Date</ion-label>
-                  </ion-col>
+                 
 
                 </ion-row>
               
                  
                
-                <ion-list *ngFor="let item of card?.TransferLines?.Transfer_Order_Line">
+                <ion-list *ngFor="let item of card ?.Point_Of_Sale_Request_Lines ?.Point_Of_Sale_Request_Lines">
                     <ion-row >
                       <ion-col> 
                         <ion-item (click)="onUpdateLine(item?.Line_No)" color="primary">                         
@@ -174,7 +139,7 @@
   
                       <ion-col> 
                         <ion-item>                         
-                            <ion-label>{{item.Pieces}}</ion-label>
+                            <ion-label>{{item.Pieces_To_Request}}</ion-label>
                         </ion-item>
                       </ion-col>
   
@@ -182,15 +147,11 @@
   
                       <ion-col> 
                         <ion-item>                         
-                            <ion-label>{{item.Qty_to_Receive}}</ion-label>
+                            <ion-label>{{item.U_O_M}}</ion-label>
                         </ion-item>
                       </ion-col>
   
-                      <ion-col> 
-                        <ion-item>                         
-                            <ion-label>{{item.Shipment_Date}}</ion-label>
-                        </ion-item>
-                      </ion-col>
+                      
   
                     </ion-row>   
                 </ion-list>

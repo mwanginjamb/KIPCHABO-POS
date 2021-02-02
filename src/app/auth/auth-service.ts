@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from './user';
 import { Storage } from '@ionic/storage';
-import { userInfo } from 'os';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,9 @@ export class AuthService {
   }
 
   async login(user: User) {
-      return await this.storage.set('user', user);
+
+      let userData = JSON.stringify(user);
+      return await this.storage.set('user', userData);
   }
 
   async logout() {
@@ -29,8 +31,22 @@ export class AuthService {
 
   async getUser() {
       
-  let  user: User;
-  user = await this.storage.get('user');
-  return user;
+  let user = await this.storage.get('user');
+  return JSON.parse(user);
+
+  }
+
+  public fetchEmployee(No:string) {
+    return this.http.get(`${this.url}site/employee?No=${No}`);
+  }
+
+  public async setEmployee(Employee) {
+    let employee = JSON.stringify(Employee);
+    return await this.storage.set('Employee', employee);
+  }
+
+  public async getEmployee() {
+    let employee =  await this.storage.get('Employee');
+    return JSON.parse(employee);
   }
 }

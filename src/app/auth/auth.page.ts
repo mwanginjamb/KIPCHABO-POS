@@ -13,12 +13,15 @@ import { User } from './user';
 export class AuthPage implements OnInit {
 
   authSub: Subscription;
+  empSub: Subscription;
   failed = false;
+  user: User;
   
 
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+
   }
 
   
@@ -37,6 +40,8 @@ export class AuthPage implements OnInit {
          
           // redirect to dashboard and store user data in local storage
           this.auth.login(result); 
+          this.user = result;
+          this.Employee();
           return this.router.navigate(['./dashboard']);
         }else{
           this.failed = true;
@@ -45,8 +50,16 @@ export class AuthPage implements OnInit {
       console.log(error.error);
       this.failed = true;
     });
+ 
+  }
 
-    
+  Employee() {
+    console.log(this.user);
+    this.empSub = this.auth.fetchEmployee(this.user.Employee_No).subscribe(res => {
+      this.auth.setEmployee(res);
+    }, error => {
+      console.log(error.error);
+    });
   }
 
 }

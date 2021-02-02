@@ -65,8 +65,8 @@ export class RequisitionsPage implements OnInit, OnDestroy {
     // Begin search, only if searchTerm is provided
     if (this.searchTerm.trim().length && this.searchTerm !== '') {
       this.requisitions = searchItems.filter((req) => {
-        if ( req.No && req.No.length > 1 ){
-          return ( req.No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
+        if ( req.Req_No && req.Req_No.length > 1 ){
+          return ( req.Req_No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
         }
      });
       return;
@@ -97,7 +97,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   }
 
   sort(dataArray){
-    return dataArray.sort((a,b) => (b.No > a.No)? 1: -1);
+    return dataArray.sort((a,b) => (b.Req_No > a.Req_No)? 1: -1);
   }
 
   ngOnDestroy() {

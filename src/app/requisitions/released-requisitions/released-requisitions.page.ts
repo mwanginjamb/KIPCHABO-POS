@@ -30,8 +30,8 @@ export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
     // Begin search, only if searchTerm is provided
     if (this.searchTerm.trim().length && this.searchTerm !== '') {
       this.requisitions = searchItems.filter((req) => {
-        if ( req.No && req.No.length > 1 ){
-          return ( req.No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
+        if ( req.Req_No && req.Req_No.length > 1 ){
+          return ( req.Req_No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
         }
      });
       return;

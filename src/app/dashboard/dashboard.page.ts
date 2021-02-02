@@ -9,11 +9,21 @@ import { AuthService } from '../auth/auth-service';
 })
 export class DashboardPage implements OnInit {
 
+  username: string = 'John Doe';
+
   constructor(private router: Router, private auth: AuthService) { }
 
   async ngOnInit() {
     let user =  await this.auth.getUser();
-    console.table(user);
+    let employee = await this.auth.getEmployee();
+     // console.log('User Data...');
+      //console.log(typeof employee);
+     // console.table(employee);
+
+     if(typeof employee === 'object' && employee.First_Name && employee.Last_Name) {
+        this.username = `${employee.First_Name} ${employee.Last_Name}`;
+     }
+   
   }
 
   showDaily(){

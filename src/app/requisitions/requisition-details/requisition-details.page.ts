@@ -44,7 +44,7 @@ model = {};
 
     this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
       this.card = [...cardInfo][0];
-      // console.log(this.card.TransferLines?.Transfer_Order_Line);
+       console.log(this.card);
     });
   }
 

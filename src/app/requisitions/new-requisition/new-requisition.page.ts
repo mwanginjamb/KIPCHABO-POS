@@ -44,7 +44,7 @@ export class NewRequisitionPage implements OnInit {
   Requisition() {
     this.requisitionSub = this.requisitionService.createRequisition().subscribe(result => {
       Object.assign(this.requisition, result);
-      this.requisition.In_Transit_Code = 'IN-TRANSIT';
+      //this.requisition.In_Transit_Code = 'IN-TRANSIT';
     });
   }
 
@@ -53,12 +53,12 @@ export class NewRequisitionPage implements OnInit {
       if ( typeof res !== 'string' ) {
         // Show a Toast Notification
         this.toastCtrl.create({
-          message: `${res.No} Requisition Added Successfully.`,
+          message: `${res.Req_No} Requisition Added Successfully.`,
           duration: 2000,
           position: 'top'
         }).then((toastData) => {
           toastData.present();
-          this.router.navigate(['/', 'requisitions', res.No]);
+          this.router.navigate(['/', 'requisitions', res.Req_No]);
         });
       } else {
         this.alertCtrl.create({
