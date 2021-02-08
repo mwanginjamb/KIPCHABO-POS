@@ -15,7 +15,7 @@
           <ion-card>
               <ion-card-header>
                 <ion-card-title>
-                  Requisition Form
+                  Stock Requisition Form
                 </ion-card-title>
               </ion-card-header>
 
@@ -24,15 +24,21 @@
                 <ion-row>
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">No.</ion-label>
-                      <ion-input type="text" [(ngModel)]="requisition.No" name="No"></ion-input>
+                      <ion-label position="floating">Req No.</ion-label>
+                      <ion-input type="text" [(ngModel)]="requisition.Req_No" name="Req_No"></ion-input>
                     </ion-item>
                   </ion-col>
-
+                </ion-row>
+                
+                <ion-row>
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">Voucher No.</ion-label>
-                      <ion-input type="text" [(ngModel)]="requisition.voucher_No" name="voucher_No"></ion-input>
+                      <ion-label position="floating">Store Code.</ion-label>
+                      
+                      <ion-select [(ngModel)]="requisition.Store_Code" name="Transfer_from_Code" placeholder="Select ...">
+                        <ion-select-option *ngFor="let loc of locations" [value]="loc.Code">{{loc.Name}}</ion-select-option>
+                      </ion-select>
+
                     </ion-item>
                   </ion-col>
                 </ion-row>
@@ -40,21 +46,17 @@
                 <ion-row>
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">Request From.</ion-label>
-                
-                      <ion-select [(ngModel)]="requisition.Transfer_from_Code" name="Transfer_from_Code" placeholder="Select ...">
-                        <ion-select-option *ngFor="let loc of locations" [value]="loc.Code">{{loc.Name}}</ion-select-option>
-                      </ion-select>
+                      <ion-label position="floating">Requisition Date</ion-label>
+                      <ion-input type="text" [(ngModel)]="requisition.Requisition_Date" name="Requisition_Date"></ion-input>
+                      
                     </ion-item>
                   </ion-col>
 
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">Dimension 1 Code.</ion-label>
-                                         
-                      <ion-select [(ngModel)]="requisition.Shortcut_Dimension_1_Code" name="Shortcut_Dimension_1_Code" placeholder="Select ...">
-                        <ion-select-option *ngFor="let dim of departments" [value]="dim.Code">{{dim.Name}}</ion-select-option>
-                      </ion-select>
+                      <ion-label position="floating">Store Name</ion-label>
+                      <ion-input type="text" [(ngModel)]="requisition.Store_Name" name="Store_Name"></ion-input>                  
+                     
                     
                     </ion-item>
                   </ion-col>
@@ -63,59 +65,27 @@
                 <ion-row>
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">Receiving Location.</ion-label>
-                      <ion-select [(ngModel)]="requisition.Transfer_to_Code" name="Transfer_to_Code" placeholder="Select ...">
-                        <ion-select-option *ngFor="let loc of locations" [value]="loc.Code">{{loc.Name}}</ion-select-option>
-                      </ion-select>
+                      <ion-label position="floating">Requested On</ion-label>
+                      <ion-input type="text" [(ngModel)]="requisition.Requested_On" name="Requested_On"></ion-input>
                     </ion-item>
                   </ion-col>
 
                   <ion-col >
                     <ion-item>
-                      <ion-label position="floating">Dimension 2 Code.</ion-label>
-                      <ion-select [(ngModel)]="requisition.Shortcut_Dimension_2_Code" name="Shortcut_Dimension_2_Code" placeholder="Select ...">
-                        <ion-select-option *ngFor="let loc of projects" [value]="loc.Code">{{loc.Name}}</ion-select-option>
-                      </ion-select>
+                      <ion-label position="floating">Approval Status</ion-label>
+                      <ion-input type="text" [(ngModel)]="requisition.Approval_Status" name="Approval_Status"></ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>
 
-                <ion-row>
-                  <ion-col >
-                    <ion-item>
-                      <ion-label position="floating">In-Transit Code: </ion-label>
-                      <ion-input type="text" [(ngModel)]="requisition.In_Transit_Code" name="In_Transit_Code"></ion-input>
-                    </ion-item>
-                  </ion-col>
+                
 
-                  <ion-col >
-                    <ion-item>
-                      <ion-label position="floating">Requested By:</ion-label>
-                      <ion-input type="text" [(ngModel)]="requisition.Assigned_User_ID" name="Assigned_User_ID"></ion-input>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>
-
-                <ion-row>
-                  <ion-col >
-                    <ion-item>
-                      <ion-label position="floating">Posting Date: </ion-label>
-                      <ion-datetime type="date" [(ngModel)]="requisition.Posting_Date" name="Posting_Date"></ion-datetime>
-                    </ion-item>
-                  </ion-col>
-
-                  <ion-col >
-                    <ion-item>
-                      <ion-label position="floating">Status:</ion-label>
-                      <ion-input type="text" [(ngModel)]="requisition.Status" name="Status"></ion-input>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>
+                
 
                 <ion-row>
                   <ion-col>
-                    <ion-label position="floating">Key</ion-label>
-                    <ion-input type="text" [(ngModel)]="requisition.Key" name="Key"></ion-input>
+                    
+                    <ion-input type="hidden" [(ngModel)]="requisition.Key" name="Key"></ion-input>
                   </ion-col>
                 </ion-row>
 

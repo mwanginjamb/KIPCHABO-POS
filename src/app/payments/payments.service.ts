@@ -63,10 +63,10 @@ url = environment.url;
   getTotals(elements, subjectColumn){
     let sum = 0;
     elements.forEach(obj => {
-      console.log(obj);
+      // console.log(obj);
       for (const property in obj){
          if ( property === subjectColumn && !isNaN(+obj[property]) ){
-          console.log(+obj[property]);
+          // console.log(+obj[property]);
           sum += +obj[property];
         }
       }

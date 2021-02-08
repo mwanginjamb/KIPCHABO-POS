@@ -16,37 +16,46 @@ export class AuthService {
 
   authenticate(username: string, password: string) {
     const auth = {Password: password, Username: username};
-    return this.http.post<User>(`${this.url}site/auth`,JSON.stringify(auth));
+    return this.http.post<User>(`${this.url}site/auth`, JSON.stringify(auth));
   }
 
   async login(user: User) {
 
-      let userData = JSON.stringify(user);
+      const userData = JSON.stringify(user);
       return await this.storage.set('user', userData);
   }
 
   async logout() {
-      return await this.storage.remove('user');
+       await this.storage.remove('user');
+       await this.storage.remove('Employee');
+       await this.authenticated(false);
   }
 
   async getUser() {
-      
-  let user = await this.storage.get('user');
+  const user = await this.storage.get('user');
   return JSON.parse(user);
 
   }
 
-  public fetchEmployee(No:string) {
+  public fetchEmployee(No: string) {
     return this.http.get(`${this.url}site/employee?No=${No}`);
   }
 
   public async setEmployee(Employee) {
-    let employee = JSON.stringify(Employee);
+    const employee = JSON.stringify(Employee);
     return await this.storage.set('Employee', employee);
   }
 
   public async getEmployee() {
-    let employee =  await this.storage.get('Employee');
+    const employee =  await this.storage.get('Employee');
     return JSON.parse(employee);
+  }
+
+  public async authenticated(status: boolean) {
+    return await this.storage.set('Authenticated', status);
+  }
+
+  async isAuthenticated() {
+    return await this.storage.get('Authenticated');
   }
 }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ card?.No }} Requisition Card</ion-title>
+    <ion-title>{{ card?.Req_No }} Requisition Card</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -93,7 +93,7 @@
             </ion-card-header>
             <ion-card-content>
               <ion-grid>
-                <ion-row *ngIf="card?.Approval_Status === 'Open' ">
+                <ion-row *ngIf="card?.Approval_Status === 'New' ">
                   <ion-col>
                     <ion-list>
                       <ion-item>
