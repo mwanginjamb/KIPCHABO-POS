@@ -20,6 +20,7 @@ const routes: Routes = [
     path: 'released-requisitions',
     loadChildren: () => import('./released-requisitions/released-requisitions.module').then( m => m.ReleasedRequisitionsPageModule)
   },
+  
 ];
 
 @NgModule({

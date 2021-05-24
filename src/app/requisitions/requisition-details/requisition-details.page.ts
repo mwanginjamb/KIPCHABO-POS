@@ -44,7 +44,7 @@ model = {};
 
     this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
       this.card = [...cardInfo][0];
-       console.log(this.card);
+      console.log(this.card);
     });
   }
 

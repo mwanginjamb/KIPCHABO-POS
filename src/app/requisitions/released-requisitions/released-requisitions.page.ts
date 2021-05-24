@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { RequisitionService } from '../requisition.service';
-import { Requisition } from '../requisition.model';
+import { Stockissue } from 'src/app/models/stockissue.model';
+import { StockdetailService } from 'src/app/stock-details/stockdetail.service';
 
 @Component({
   selector: 'app-released-requisitions',
@@ -11,13 +12,13 @@ import { Requisition } from '../requisition.model';
 export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
 
   requisitionSub: Subscription;
-  requisitions: Array<Requisition>;
+  requisitions: Array<Stockissue>;
   searchTerm: string = null;
 
-  constructor( private requisitionService: RequisitionService ) { }
+  constructor( private stockService: StockdetailService ) { }
 
   ngOnInit() {
-    this.requisitionSub = this.requisitionService.releasedrequisitions.subscribe( result => {
+    this.requisitionSub = this.stockService.releasedrequisitions.subscribe( result => {
       this.requisitions = result;
     });
   }
@@ -30,8 +31,8 @@ export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
     // Begin search, only if searchTerm is provided
     if (this.searchTerm.trim().length && this.searchTerm !== '') {
       this.requisitions = searchItems.filter((req) => {
-        if ( req.Req_No && req.Req_No.length > 1 ){
-          return ( req.Req_No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
+        if ( req.Stock_Issue_No && req.Stock_Issue_No.length > 1 ){
+          return ( req.Stock_Issue_No.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
         }
      });
       return;
@@ -41,7 +42,7 @@ export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
   }
 
   initializeItems() {
-    this.requisitionSub = this.requisitionService.releasedrequisitions.subscribe( result => {
+    this.requisitionSub = this.stockService.releasedrequisitions.subscribe( result => {
       this.requisitions = result;
     });
   }

@@ -171,16 +171,16 @@ export class BluetoothComponent implements OnInit {
 
     // Filter Lines to Print
 
-    const LinestoPrint = this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line.filter( ln => ln.Amount_To_Receipt > 0);
+    const LinestoPrint = this.receiptCard.POS_Receipt_Lines.POS_Receipt_Lines.filter( ln => ln.Total_Amount > 0);
 
     LinestoPrint.forEach(line => {
       this.myString += `
 
-    ${line.Invoice_No}  | ${line.Amount} | ${line.Amount_To_Receipt}  \r\n` ;
+    ${line.Description}  | ${line.Price} | ${line.Total_Amount}  \r\n` ;
 
     });
 
-    const Total = this.paymentService.getTotals(this.receiptCard.Cash_Receipt_Line.Cash_Receipt_Line, 'Amount_To_Receipt');
+    const Total = this.paymentService.getTotals(this.receiptCard.POS_Receipt_Lines.POS_Receipt_Lines, 'Amount_To_Receipt');
 
     this.myString += `
 

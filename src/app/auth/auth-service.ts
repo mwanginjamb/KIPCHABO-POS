@@ -16,7 +16,7 @@ export class AuthService {
 
   authenticate(username: string, password: string) {
     const auth = {Password: password, Username: username};
-    return this.http.post<User>(`${this.url}site/auth`, JSON.stringify(auth));
+    return this.http.post<User>(`${this.url}/site/auth`, JSON.stringify(auth));
   }
 
   async login(user: User) {
@@ -29,6 +29,7 @@ export class AuthService {
        await this.storage.remove('user');
        await this.storage.remove('Employee');
        await this.authenticated(false);
+       
   }
 
   async getUser() {

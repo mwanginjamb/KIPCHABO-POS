@@ -1,43 +1,37 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Requisition } from './requisition.model';
-import { take } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Unit } from '../models/unit.model';
-import { Requisitionline } from '../models/requisitionline.model';
-import { Location } from '../models/location.model';
 import { Stockissue } from '../models/stockissue.model';
-
+import { Unit } from '../models/unit.model';
+import { take } from 'rxjs/operators';
+import { Stockissueline } from '../models/stockissueline.model';
+import { StockDetailsPage } from './stock-details.page';
 @Injectable({
   providedIn: 'root'
 })
-export class RequisitionService {
+export class StockdetailService {
   url = environment.url;
-  constructor(private http: HttpClient) { }
-
-  get requisitions() {
-    return this.http.get< Requisition[] >(`${this.url}site/requisitions`).pipe(take(1));
-  }
+  constructor( private http: HttpClient) { }
 
   get releasedrequisitions() {
     return this.http.get< Stockissue[] >(`${this.url}site/releasedrequisitions`).pipe(take(1));
   }
 
-  // Retrieve Requisition Card / Details
+  // Retrieve Stock Issue Card / Details
   requisitioncard(id: string) {
-    return this.http.get<[]>(`${this.url}site/requisitioncard/?id=${id}`);
+    return this.http.get<Stockissue>(`${this.url}site/stockissue/?id=${id}`);
   }
 
   // Create New Requisition
 
   createRequisition() {
-    return this.http.get< Requisition >(`${this.url}site/create-requisition`);
+    return this.http.get< Stockissue >(`${this.url}site/create-requisition`);
   }
 
   // get Units of Measure
 
   getunits(itemNo: string) {
-    return this.http.get< Unit[] >(`${this.url}site/unitmeasure?itemNo=${itemNo}`).pipe(take(1));
+    return this.http.get< Unit >(`${this.url}site/unitmeasure?itemNo=${itemNo}`).pipe(take(1));
   }
 
   // Get Locations List
@@ -63,25 +57,25 @@ export class RequisitionService {
 
   // Post Lines Data
 
-  postLine(line: Requisitionline) {
+  postLine(line: Stockissueline) {
     return this.http.post(`${this.url}site/addline`, JSON.stringify(line) );
   }
 
   // Update Line
 
-  updateRequisitionLine(line: Requisitionline) {
-    return this.http.post< Requisitionline >(`${this.url}site/updaterequisitionline`, JSON.stringify(line) );
+  updateRequisitionLine(line: Stockissueline) {
+    return this.http.post< Stockissueline >(`${this.url}site/updateissueline`, JSON.stringify(line) );
   }
 
   // Fetch Line to Update
-  getLine(docId: string, LineNo: number){
-    return this.http.get< Requisitionline >(`${this.url}site/getline?Req_No=${docId}&Line_No=${LineNo}`);
+  getLine(Item_No: string, Stock_Issue_No: string){
+    return this.http.get< Stockissueline >(`${this.url}site/getissueline?Item_No=${Item_No}&Stock_Issue_No=${Stock_Issue_No}`);
   }
 
   // Post Requisition Header
 
-  postRequisition(requisition: Requisition) {
-    return this.http.post< Requisition >(`${this.url}site/update-requisition`, JSON.stringify(requisition) );
+  postRequisition(requisition: Stockissue) {
+    return this.http.post< Stockissue >(`${this.url}site/update-requisition`, JSON.stringify(requisition) );
   }
 
   // Format date utility
@@ -92,5 +86,4 @@ export class RequisitionService {
     const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
     return  `${recDate.getFullYear()}-${month}-${day}`;
   }
-
 }

@@ -17,7 +17,7 @@ url = environment.url;
   constructor( private http: HttpClient, private orderService: OrderService, private toastCtrl: ToastController) { }
 
   get Payments() {
-    return this.http.get< Receipt[] >(`${this.url}site/get?service=Payments`).pipe(take(1));
+    return this.http.get< Receipt[] >(`${this.url}site/get?service=POSReceiptList`).pipe(take(1));
   }
 
   getPayment(id: string){
@@ -37,7 +37,7 @@ url = environment.url;
   }
 
   updateReceipt(receipt: Receipt){
-    receipt.Posting_Date = this.orderService.formatDate(receipt.Posting_Date);
+    // receipt.Posting_Date = this.orderService.formatDate(receipt.Posting_Date);
     return this.http.post<Receipt>(`${this.url}site/updatecashreceipt`, JSON.stringify(receipt));
   }
 

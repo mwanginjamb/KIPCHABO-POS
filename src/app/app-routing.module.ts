@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./auth/auth.guard";
+import { StockDetailsPageModule } from "./stock-details/stock-details.module";
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./dashboard/dashboard.module").then((m) => m.DashboardPageModule),
     canLoad: [AuthGuard]
+  },
+  {
+    path: "stockdetail",
+    loadChildren: () => 
+    import("./stock-details/stock-details.module").then((m) => m.StockDetailsPageModule),
   },
   {
     path: "orders",
@@ -50,7 +56,6 @@ const routes: Routes = [
         path: "",
         loadChildren: () =>
           import("./items/items.module").then((m) => m.ItemsPageModule),
-        canLoad: [AuthGuard]
       },
       {
         path: ":id",
@@ -184,6 +189,10 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+  },
+  {
+    path: 'stock-details',
+    loadChildren: () => import('./stock-details/stock-details.module').then( m => m.StockDetailsPageModule)
   },
   
  

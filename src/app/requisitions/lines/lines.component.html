@@ -26,17 +26,17 @@
 
         <ion-item>
           <ion-label position="floating">Unit of Measure</ion-label>
-          <ion-select [(ngModel)] = "line.Unit" [selectedText]="line.Unit" placeholder="Select Unit">
+          <ion-select [(ngModel)] = "line.U_O_M" [selectedText]="line.U_O_M" placeholder="Select Unit">
             <ion-select-option *ngFor="let unit of units" [value]="unit.Code" >{{ unit.Code }}</ion-select-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Pieces</ion-label>
-          <ion-input [(ngModel)]="line.Pieces" type="number"></ion-input>
+          <ion-label position="floating">Requested Qty.</ion-label>
+          <ion-input [(ngModel)]="line.Pieces_To_Request" type="number"></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="line.Line_No">
+        <!--<ion-item *ngIf="line.Line_No">
           <ion-label  position="floating">Quantity Received</ion-label>
           <ion-input [(ngModel)]="line.Quantity_Received" type="number"></ion-input>
         </ion-item>
@@ -45,6 +45,7 @@
           <ion-label position="floating">Receipt Date</ion-label>
           <ion-datetime [(ngModel)]="line.Receipt_Date" type="number" displayFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
+      -->
 
         
 

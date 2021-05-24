@@ -55,8 +55,7 @@ export class LinesComponent implements OnInit, OnDestroy {
   getUnit($event) {
     this.unitSub = this.requisitionService.getunits(this.line.Item_No).subscribe( units => {
      this.units = units;
-     this.line.Document_No = this.docId;
-     this.line.Planning_Flexibility = Planning_Flexibility.a;
+     this.line.Req_No = this.docId;
      // console.log(this.docId);
  });
 }
@@ -99,15 +98,16 @@ addLine() {
 updateLine() {
 
 // Format Date to YYYY-MM-DD
-const recDate = new Date(this.line.Receipt_Date);
-const month = (recDate.getMonth() + 1) > 9 ? recDate.getMonth() + 1 : `0` + (recDate.getMonth() + 1);
-const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
-this.line.Receipt_Date =  `${recDate.getFullYear()}-${month}-${day}`;
-
+// const recDate = new Date(this.line.Receipt_Date);
+// const month = (recDate.getMonth() + 1) > 9 ? recDate.getMonth() + 1 : `0` + (recDate.getMonth() + 1);
+// const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
+// this.line.Receipt_Date =  `${recDate.getFullYear()}-${month}-${day}`;
+// console.table(this.line); return;
 
 this.requisitionService.updateRequisitionLine(this.line).subscribe( line => {
     if ( typeof line !== 'string'){
-        console.log(line);
+        console.log(`Updated Line.......`);
+        console.table(line);
         this.toastCtrl.create({
           message: `${line.Description} Requisition Line Updated Successfully.`,
           duration: 3000,

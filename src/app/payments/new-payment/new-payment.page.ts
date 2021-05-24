@@ -47,7 +47,7 @@ export class NewPaymentPage implements OnInit {
       this.card = receipt;
       const curr = new Date();
       const formattedDate = this.paymentService.formatDate(curr);
-      this.card.Posting_Date = formattedDate;
+      // this.card.Posting_Date = formattedDate;
     });
   }
 
