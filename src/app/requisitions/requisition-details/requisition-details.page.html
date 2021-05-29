@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="warning">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="requisitions"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ card?.Req_No }} Requisition Card</ion-title>
   </ion-toolbar>
@@ -97,7 +97,7 @@
                   <ion-col>
                     <ion-list>
                       <ion-item>
-                        <ion-button type="button" outline color="primary" (click)="onAddLine()" >New</ion-button>
+                        <ion-button type="button" outline color="primary" (click)="onAddLine(card?.Req_No)">New</ion-button>
                       </ion-item>
                     </ion-list>
                     
@@ -128,7 +128,7 @@
                 <ion-list *ngFor="let item of card ?.Point_Of_Sale_Request_Lines ?.Point_Of_Sale_Request_Lines">
                     <ion-row >
                       <ion-col> 
-                        <ion-item (click)="onUpdateLine(item?.Line_No)" color="primary">                         
+                        <ion-item (click)="onUpdateLine(item?.Key)" color="primary">
                             <ion-label>{{item.Description}}</ion-label>
                         </ion-item>
                       </ion-col>

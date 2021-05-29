@@ -19,7 +19,7 @@ export class NewRequisitionPage implements OnInit {
   locationSub: Subscription;
   dimensionSub: Subscription;
   requisitionPostSub: Subscription;
-  locations: Location;
+  locations: Location[];
   dimensions: any;
   departments: any;
   projects: any;

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewPaymentPageRoutingModule } from './new-payment-routing.module';
 
 import { NewPaymentPage } from './new-payment.page';
+import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { NewPaymentPage } from './new-payment.page';
     IonicModule,
     NewPaymentPageRoutingModule
   ],
-  declarations: [NewPaymentPage]
+  entryComponents:[ NewCashLineComponent ],
+  declarations: [NewPaymentPage, NewCashLineComponent]
 })
 export class NewPaymentPageModule {}

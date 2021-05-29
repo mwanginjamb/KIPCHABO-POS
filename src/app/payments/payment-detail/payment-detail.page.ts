@@ -4,8 +4,9 @@ import { Receipt } from 'src/app/models/receipt.model';
 import { Invoice } from 'src/app/models/invoice.model';
 import { PaymentsService } from '../payments.service';
 import { ActivatedRoute } from '@angular/router';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, ModalController } from '@ionic/angular';
 import { ReceiptPopoverComponent } from '../receipt-popover/receipt-popover.component';
+import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 
 @Component({
   selector: 'app-payment-detail',
@@ -24,7 +25,8 @@ export class PaymentDetailPage implements OnInit {
     private paymentService: PaymentsService,
     private activatedRoute: ActivatedRoute,
     private popoverCtrl: PopoverController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
     ) { }
 
   ngOnInit( ) {
@@ -40,6 +42,15 @@ export class PaymentDetailPage implements OnInit {
     this.cardSub = this.paymentService.getPayment(this.No).subscribe( result => {
       this.card = result;
       console.log(this.card);
+    });
+  }
+
+  refresh(event){
+    this.cardSub = this.paymentService.getPayment(this.No).subscribe( result => {
+      this.card = result;
+      if (event){
+        event.target.complete();
+      }
     });
   }
 
@@ -95,6 +106,30 @@ export class PaymentDetailPage implements OnInit {
     }).then(pop => {
       pop.present();
     });
+  }
+
+  onAddLine(POS_Receipt_No: string)
+  {
+    this,this.modalCtrl.create(
+      {
+        component: NewCashLineComponent,
+        componentProps: { receiptNo: POS_Receipt_No }
+      }
+    )
+    .then( modalEl => {
+      modalEl.present();
+    });
+  }
+
+  onUpdateLine(Key: string) {
+    console.log(Key);
+    this.modalCtrl.create({
+      component: NewCashLineComponent,
+      componentProps: { Key }
+    })
+    .then( modalEl => {
+      modalEl.present();
+    } );
   }
 
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ItemService } from '../../items/item.service';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { RequisitionService } from '../requisition.service';
 import { Unit } from 'src/app/models/unit.model';
 import { Requisitionline } from 'src/app/models/requisitionline.model';
-import { ModalController, NavController, ToastController, AlertController } from '@ionic/angular';
+import { ModalController, NavController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 
@@ -14,6 +14,8 @@ export enum Planning_Flexibility {
   b = 'None'
 }
 
+
+
 @Component({
   selector: 'app-lines',
   templateUrl: './lines.component.html',
@@ -21,8 +23,9 @@ export enum Planning_Flexibility {
 })
 export class LinesComponent implements OnInit, OnDestroy {
 
+  loading: HTMLIonLoadingElement;
   @Input() docId: string;
-  @Input() LineNo: number;
+  @Input() Key: string;
 
   items = [];
   itemSub: Subscription;
@@ -38,16 +41,24 @@ export class LinesComponent implements OnInit, OnDestroy {
       private navCtrl: NavController,
       private toastCtrl: ToastController,
       private alertCtrl: AlertController,
+      private loadingCtrl: LoadingController,
       private router: Router,
        ) { }
 
   ngOnInit() {
 
-    this.itemSub = this.itemService.items.subscribe( items => {
+    this.presentLoading('Loading Items...');
+    this.itemSub = this.itemService.items
+    .pipe(
+      finalize( async() => {
+        await this.loading.dismiss();
+      })
+    )
+    .subscribe( items => {
       this.items = items;
     });
     // If a Line_No is provided, then we are updating
-    if ( this.LineNo ){
+    if ( this.Key ){
       this.FetchLinetoUpdate();
     }
   }
@@ -146,7 +157,7 @@ this.requisitionService.updateRequisitionLine(this.line).subscribe( line => {
 }
 
 FetchLinetoUpdate(){
-  this.updateLineSub = this.requisitionService.getLine(this.docId, this.LineNo)
+  this.updateLineSub = this.requisitionService.getLine(this.Key)
   .subscribe(res => {
    Object.assign(this.line, res);
   }, error => {
@@ -168,6 +179,15 @@ onCancel() {
   this.modalCtrl.dismiss();
 }
 
+async presentLoading(message?: string) {
+  this.loading = await this.loadingCtrl.create({
+    spinner: 'dots',
+    animated: true,
+    message: (message)? message:'Loading..'
+  });
+
+  await this.loading.present();
+}
 
 
 ngOnDestroy() {

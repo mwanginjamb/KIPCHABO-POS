@@ -34,7 +34,8 @@
     <ion-col >
       <ion-item>
         <ion-label position="floating">Customer.</ion-label>                
-        <ion-select [(ngModel)]="card.Customer_No" name="Customer_No" (ionChange)="updateReceipt(card)" [selectedText]="card.Customer_Name" placeholder="Select ...">
+        <ion-select [(ngModel)]="card.Customer_No" name="Customer_No" [selectedText]="card.Customer_Name"
+          placeholder="Select ...">
           <ion-select-option *ngFor="let cust of customers" [value]="cust.No">{{cust.Name}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -54,6 +55,8 @@
     
   </ion-row>
 
- 
+  
+
+
 
 </ion-content>

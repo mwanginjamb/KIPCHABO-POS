@@ -3,9 +3,10 @@ import { PaymentsService } from '../payments.service';
 import { Subscription } from 'rxjs';
 import { Receipt } from 'src/app/models/receipt.model';
 import { Router } from '@angular/router';
-import { ToastController, AlertController, PopoverController } from '@ionic/angular';
+import { ToastController, AlertController, PopoverController, ModalController } from '@ionic/angular';
 import { PopoverComponent } from 'src/app/orders/popover/popover.component';
 import { OrderService } from 'src/app/orders/order.service';
+import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 
 @Component({
   selector: 'app-new-payment',
@@ -32,6 +33,7 @@ export class NewPaymentPage implements OnInit {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private popover: PopoverController,
+    private modalCtrl: ModalController
     ) { }
 
   ngOnInit() {
@@ -90,6 +92,19 @@ export class NewPaymentPage implements OnInit {
           alertEl.present();
         });
       });
+  }
+
+  onAddLine(POS_Receipt_No: string)
+  {
+    this,this.modalCtrl.create(
+      {
+        component: NewCashLineComponent,
+        componentProps: { receiptNo: POS_Receipt_No }
+      }
+    )
+    .then( modalEl => {
+      modalEl.present();
+    });
   }
 
   FetchCustomers() {

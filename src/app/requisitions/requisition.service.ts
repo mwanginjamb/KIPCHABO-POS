@@ -43,7 +43,7 @@ export class RequisitionService {
   // Get Locations List
 
   getLocations() {
-    return this.http.get< Location >(`${this.url}site/locationlist`).pipe(take(1));
+    return this.http.get< Location[] >(`${this.url}site/locationlist`).pipe(take(1));
   }
 
   // Get any items from generic service getter function
@@ -64,7 +64,7 @@ export class RequisitionService {
   // Post Lines Data
 
   postLine(line: Requisitionline) {
-    return this.http.post(`${this.url}site/addline`, JSON.stringify(line) );
+    return this.http.post(`${this.url}site/requisition-lines`, JSON.stringify(line) );
   }
 
   // Update Line
@@ -74,8 +74,8 @@ export class RequisitionService {
   }
 
   // Fetch Line to Update
-  getLine(docId: string, LineNo: number){
-    return this.http.get< Requisitionline >(`${this.url}site/getline?Req_No=${docId}&Line_No=${LineNo}`);
+  getLine(Key: string){
+    return this.http.get< Requisitionline >(`${this.url}site/requisition-lines?Key=${Key}`);
   }
 
   // Post Requisition Header

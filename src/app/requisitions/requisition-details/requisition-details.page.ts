@@ -57,21 +57,22 @@ model = {};
   }
 
   // Show Line modal form
-  onAddLine() {
+  onAddLine(Req_No: string) {
      this.modalCtrl.create(
        {
          component: LinesComponent,
-         componentProps: { docId: this.id }
+         componentProps: { docId: Req_No }
        }
      ).then( modalEl => {
        modalEl.present();
      });
   }
 
-  onUpdateLine(LineNo: number) {
+  onUpdateLine(Key: string) {
+    
     this.modalCtrl.create({
       component: LinesComponent,
-      componentProps: { docId: this.id, LineNo }
+      componentProps: { Key }
     })
     .then( modalEl => {
       modalEl.present();

@@ -15,6 +15,12 @@
 
 <ion-content *ngIf="card?.POS_Receipt_No">
 
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullMin="100" pullMax="200">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to Refresh" refreshingSpinner="crescent"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid>
     <ion-row>
       <ion-col >
@@ -85,6 +91,16 @@
             <ion-card-content>
               <ion-grid>
                 
+                              
+                <ion-row>
+                  <ion-col>
+                    <ion-list>
+                      <ion-item>
+                        <ion-button type="button" outline color="primary" (click)="onAddLine(card?.POS_Receipt_No)">New</ion-button>
+                      </ion-item>
+                    </ion-list>
+                  </ion-col>
+                </ion-row>
 
                 <ion-row scrollX="true">
                   <ion-col>
@@ -109,13 +125,13 @@
 
                 </ion-row>
               
-                 
+                
                
                 <ion-list *ngFor="let line of card?.POS_Receipt_Lines?.POS_Receipt_Lines">
                     <ion-row >
                         
                       <ion-col> 
-                        <ion-item>                         
+                        <ion-item (click)="onUpdateLine(line.Key)" color="primary">
                             <ion-label>{{line.Description}}</ion-label>
                         </ion-item>
                       </ion-col>

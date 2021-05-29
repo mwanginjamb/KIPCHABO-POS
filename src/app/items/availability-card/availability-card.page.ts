@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import { Itemledgerentry } from 'src/app/models/itemledgerentry.model';
 import { Item } from '../item.model';
 import { Location } from 'src/app/models/location.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-availability-card',
@@ -24,16 +25,19 @@ export class AvailabilityCardPage implements OnInit, OnDestroy {
   locations: any;
   searchLocation: string;
   ItemNo: string;
+  loading: HTMLIonLoadingElement;
 
   constructor(
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
   ) {
     this.TotalRemainingQuantity = 0;
   }
 
   ngOnInit() {
+    
     this.ItemNo = this.activatedRoute.snapshot.paramMap.get('No');
 
     // Get Item Balance Card
@@ -61,15 +65,29 @@ export class AvailabilityCardPage implements OnInit, OnDestroy {
     });
 
     // Get Item Description
-    this.cardSub = this.itemService.itemcard(this.ItemNo).subscribe(result => {
+    this.cardSub = this.itemService.itemcard(this.ItemNo)
+    .pipe(
+      finalize( async () => {
+        await this.loading.dismiss()
+      })
+    )
+    .subscribe(result => {
+      
        this.ItemCard = [... result][0];
     });
 
     // Get Locations
 
-    this.locationSub = this.itemService.getLocations().subscribe(locs => {
+    this.locationSub = this.itemService.getLocations()
+    .pipe( 
+      finalize( async () => {
+        await this.loading.dismiss();
+      })
+    )
+    .subscribe(locs => {
       this.locations = locs;
     });
+    
 
   }
 
@@ -98,6 +116,16 @@ export class AvailabilityCardPage implements OnInit, OnDestroy {
     });
     }
 
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingCtrl.create({
+      spinner: 'dots',
+      animated: true,
+      message: 'Loading..'
+    });
+
+    await this.loading.present();
   }
 
   ngOnDestroy(){

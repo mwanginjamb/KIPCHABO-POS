@@ -194,6 +194,10 @@ const routes: Routes = [
     path: 'stock-details',
     loadChildren: () => import('./stock-details/stock-details.module').then( m => m.StockDetailsPageModule)
   },
+  {
+    path: 'credit',
+    loadChildren: () => import('./credit/credit.module').then( m => m.CreditPageModule)
+  },
   
  
 ];
