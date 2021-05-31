@@ -4,9 +4,9 @@ export class Stockissueline {
         public Key?: string,
         public Item_No?: string,
         public Description?: string,
-        public Requested_Pieces?: string,
-        public Issued_Pieces?: string,
-        public Pieces_Received?: string,
+        public Requested_Pieces?: number,
+        public Issued_Pieces?: number,
+        public Pieces_Received?: number,
         public Stock_Issue_No?: string,
 
     ) {}

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Requisition Line</ion-title>
+    <ion-title>Stock Issue Line</ion-title>
 
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
@@ -24,19 +24,19 @@
           <ion-input [(ngModel)]="line.Description" type="text" readonly></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="line.Requested_Pieces">
+        <ion-item>
           <ion-label  position="floating">Qty. Requested</ion-label>
-          <ion-input [(ngModel)]="line.Requested_Pieces" type="number" readonly readonly></ion-input>
+          <ion-input [(ngModel)]="line.Requested_Pieces" type="number" readonly></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="line.Issued_Pieces">
+        <ion-item>
           <ion-label  position="floating">Qty. Issues</ion-label>
           <ion-input [(ngModel)]="line.Issued_Pieces" type="number" readonly></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="line.Pieces_Received">
-          <ion-label position="floating">Receipt Date</ion-label>
-          <ion-datetime [(ngModel)]="line.Pieces_Received" type="number" displayFormat="YYYY-MM-DD"></ion-datetime>
+        <ion-item>
+          <ion-label position="floating">Pieces Received</ion-label>
+          <ion-input [(ngModel)]="line.Pieces_Received" type="number"></ion-input>
         </ion-item>
       
 

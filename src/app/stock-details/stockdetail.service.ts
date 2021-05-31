@@ -68,8 +68,8 @@ export class StockdetailService {
   }
 
   // Fetch Line to Update
-  getLine(Item_No: string, Stock_Issue_No: string){
-    return this.http.get< Stockissueline >(`${this.url}site/getissueline?Item_No=${Item_No}&Stock_Issue_No=${Stock_Issue_No}`);
+  getLine(Key: string){
+    return this.http.get< Stockissueline >(`${this.url}site/stock-issue-line?Key=${Key}`);
   }
 
   // Post Requisition Header

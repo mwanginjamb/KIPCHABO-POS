@@ -11,8 +11,8 @@ import { StockdetailService } from '../stockdetail.service';
 })
 export class LinesComponent implements OnInit {
 
-  @Input() Item_No: string;
-  @Input() Stock_Issue_No: string;
+  @Input() Key: string;
+
 
   updateLineSub: Subscription;
 
@@ -25,18 +25,15 @@ export class LinesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.Item_No);
-    console.log(this.Stock_Issue_No);
+    console.log(this.Key);
+
+    if(this.Key) {
+      this.FetchLinetoUpdate();
+    }
+    
   }
 
   updateLine() {
-
-    // Format Date to YYYY-MM-DD
-    // const recDate = new Date(this.line.Receipt_Date);
-    // const month = (recDate.getMonth() + 1) > 9 ? recDate.getMonth() + 1 : `0` + (recDate.getMonth() + 1);
-    // const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
-    // this.line.Receipt_Date =  `${recDate.getFullYear()}-${month}-${day}`;
-    // console.table(this.line); return;
 
     this.stockService.updateRequisitionLine(this.line).subscribe( line => {
         if ( typeof line !== 'string'){
@@ -79,7 +76,7 @@ export class LinesComponent implements OnInit {
     }
 
     FetchLinetoUpdate(){
-      this.updateLineSub = this.stockService.getLine(this.Item_No, this.Stock_Issue_No)
+      this.updateLineSub = this.stockService.getLine(this.Key)
       .subscribe(res => {
        Object.assign(this.line, res);
       }, error => {
