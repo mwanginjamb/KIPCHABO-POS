@@ -13,7 +13,19 @@ export class DashboardPage implements OnInit {
 
   constructor(private router: Router, private auth: AuthService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+   this.fetchUsername();
+  }
+
+  ionViewWillEnter() {
+    this.fetchUsername();
+  }
+
+  ionViewDidEnter() {
+    this.fetchUsername();
+  }
+
+  async fetchUsername() {
     const employee = await this.auth.getEmployee();
     if (typeof employee === 'object' && employee.First_Name && employee.Last_Name) {
         this.username = `${employee.First_Name} ${employee.Last_Name}`;
@@ -38,6 +50,11 @@ export class DashboardPage implements OnInit {
 
   showAvailability(){
     return this.router.navigate(['./items/availability']);
+  }
+
+  async logout() {
+    await this.auth.logout();
+    this.router.navigate(['./auth']);
   }
 
 }

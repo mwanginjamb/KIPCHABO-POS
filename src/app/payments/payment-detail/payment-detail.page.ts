@@ -4,7 +4,7 @@ import { Receipt } from 'src/app/models/receipt.model';
 import { Invoice } from 'src/app/models/invoice.model';
 import { PaymentsService } from '../payments.service';
 import { ActivatedRoute } from '@angular/router';
-import { PopoverController, AlertController, ModalController } from '@ionic/angular';
+import { PopoverController, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ReceiptPopoverComponent } from '../receipt-popover/receipt-popover.component';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 
@@ -20,6 +20,7 @@ export class PaymentDetailPage implements OnInit {
   card: Receipt;
   banks: [];
   bankSub: Subscription;
+  updateSub: Subscription;
 
   constructor(
     private paymentService: PaymentsService,
@@ -27,6 +28,7 @@ export class PaymentDetailPage implements OnInit {
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
+    private toastCtrl: ToastController
     ) { }
 
   ngOnInit( ) {
@@ -130,6 +132,41 @@ export class PaymentDetailPage implements OnInit {
     .then( modalEl => {
       modalEl.present();
     } );
+  }
+
+  updateReceipt($event){
+    console.log(this.card);
+    this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
+      console.log(res);
+      if (typeof res === 'object') {
+          Object.assign(this.card, res);
+          this.toastCtrl.create({
+            message: `Receipt Updated Successfully.`,
+            duration: 2000,
+            position: 'top'
+          }).then((toastData) => {
+            toastData.present();
+          });
+      }else {
+        this.alertCtrl.create({
+          header: 'New Payment Error!',
+          message: 'ERP Error : ' + res ,
+          buttons: [{ text: 'Okay' }]
+        })
+        .then(alertEl => {
+          alertEl.present();
+        });
+      }
+    }, error => {
+      this.alertCtrl.create({
+        header: 'New Payment Error!',
+        message: 'Connection problem: ' + error.error.message ,
+        buttons: [{ text: 'Okay' }]
+      })
+      .then(alertEl => {
+        alertEl.present();
+      });
+    });
   }
 
 }

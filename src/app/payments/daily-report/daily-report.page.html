@@ -14,7 +14,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Start Date</ion-label>
-          <ion-datetime type="date" required (ionBlur)="FilterReceiptsbyDate($event)"></ion-datetime>
+          <ion-datetime type="date" required (ionChange)="FilterReceiptsbyDate($event)"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -36,8 +36,6 @@
       <ion-col col-auto col-sm>Receipt No.</ion-col>
       <ion-col col-auto col-sm>Customer Name</ion-col>
       <ion-col col-auto col-sm>Amount </ion-col>
-      <ion-col col-auto col-sm>Balance</ion-col>
-      <ion-col col-auto col-sm>Posting Date</ion-col>
     </ion-row>
   </ion-grid>
 
@@ -68,19 +66,7 @@
               <h3>{{ receipt?.Total_Amount }}</h3>
             </ion-label>
           </ion-col>
-  
-          <ion-col col-12 col-sm>
-            <ion-label>
-              <h3>{{ receipt?.Total_Balance }}</h3>
-            </ion-label>
-          </ion-col>
-
-          <ion-col col-12 col-sm>
-            <ion-label>
-              <h3>{{ receipt?.Posting_Date}}</h3>
-            </ion-label>
-          </ion-col>
-  
+      
         </ion-row>
       </ion-grid>
             

@@ -74,7 +74,7 @@ export class LinesComponent implements OnInit, OnDestroy {
 addLine() {
   this.requisitionService.postLine(this.line).subscribe( line => {
     console.log(line);
-    if ( line ) {
+    if ( typeof line == 'object' ) {
       this.modalCtrl.dismiss();
       // Show a Toast Notification
       this.toastCtrl.create({
@@ -87,7 +87,7 @@ addLine() {
     } else {
       this.alertCtrl.create({
         header: 'Operation Error',
-        message: 'Message : ' + line,
+        message: 'Error : ' + line,
         buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
       }).then( alertEl => {
         alertEl.present();

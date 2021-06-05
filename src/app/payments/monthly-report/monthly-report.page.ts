@@ -27,6 +27,7 @@ export class MonthlyReportPage implements OnInit, OnDestroy {
     const endDate = this.paymentService.formatDate(this.FilterRange.endDate);
     if (Date.parse(startDate) &&  Date.parse(endDate)){
       this.receiptSub = this.paymentService.FilterReceiptsbyRange(startDate, endDate).subscribe( res => {
+      // alert(res);
         if (typeof res === 'string'){
           this.paymentService.showToast(res);
           this.receipts = [];

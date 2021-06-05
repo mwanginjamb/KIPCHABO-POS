@@ -3,6 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import { RequisitionService } from '../requisition.service';
 import { Stockissue } from 'src/app/models/stockissue.model';
 import { StockdetailService } from 'src/app/stock-details/stockdetail.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-released-requisitions',
@@ -15,7 +16,9 @@ export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
   requisitions: Array<Stockissue>;
   searchTerm: string = null;
 
-  constructor( private stockService: StockdetailService ) { }
+  constructor( 
+    private stockService: StockdetailService,
+    private alertCtrl: AlertController ) { }
 
   ngOnInit() {
     this.requisitionSub = this.stockService.releasedrequisitions.subscribe( result => {
@@ -46,6 +49,8 @@ export class ReleasedRequisitionsPage implements OnInit, OnDestroy {
       this.requisitions = result;
     });
   }
+
+  
 
   ngOnDestroy() {
     if ( this.requisitionSub ) {

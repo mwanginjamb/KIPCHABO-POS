@@ -15,6 +15,12 @@
     </ion-refresher-content>
   </ion-refresher>
 
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="warning" (click)="post(card.Stock_Issue_No)">
+    <ion-icon name="send"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
   <ion-grid>
     <ion-row>
       <ion-col >
@@ -47,7 +53,9 @@
                <ion-col >
                  <ion-item>
                    <ion-label position="fixed">Receipt Date</ion-label>
-                   <ion-text>{{ card?.Receipt_Date }}</ion-text>
+                  <!-- <ion-text>{{ card?.Receipt_Date }}</ion-text>-->
+                  <ion-datetime type="date" [(ngModel)]="card.Receipt_Date" (ionChange)="onUpdateCard($event)" name="Receipt_Date">
+                  </ion-datetime>
                  </ion-item>
                </ion-col>
 

@@ -22,7 +22,8 @@
     <ion-col >
       <ion-item>
         <ion-label position="floating">Bank Account</ion-label>
-        <ion-select [(ngModel)]="card.Bank_Account_No" [selectedText]="card.Bank_Account_Name" (ionChange)="updateReceipt(card)" placeholder="Receiving Bank A/C">
+        <ion-select [(ngModel)]="card.Bank_Account_No" [selectedText]="card.Bank_Account_Name"
+          (ionChange)="updateReceipt($event)" placeholder="Receiving Bank A/C">
           <ion-select-option *ngFor="let bank of banks" [value]="bank.No">{{bank.Name}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -41,6 +42,16 @@
       </ion-item>
     </ion-col>
 
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Type of Sale</ion-label>
+        <ion-select [(ngModel)]="card.Type_Of_Sale" (ionChange)="updateReceipt(card)" name="Type_Of_Sale"
+          [selectedText]="card.Type_Of_Sale" placeholder="Select ...">
+          <ion-select-option *ngFor="let st of saleType" [value]="st.Code">{{st.Code}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
   </ion-row>
 
 
@@ -52,11 +63,26 @@
       </ion-item>
     </ion-col>
 
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Reference No</ion-label>
+        <ion-input [(ngModel)]="card.Reference_No" (ionBlur)="updateReceipt(card)"></ion-input>
+      </ion-item>
+    </ion-col>
+
     
   </ion-row>
 
   
-
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-button type="button" outline color="primary" (click)="toView()">Add Receipt Lines</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
 
 </ion-content>

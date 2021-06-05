@@ -3,6 +3,7 @@ export class Receipt {
         public Key?: string,
         public POS_Receipt_No?: string,
         public Receipt_Date?: string,
+        public Type_Of_Sale?: string,
         public Customer_No?: string,
         public Customer_Name?: string,
         public Bank_Account_No?: string,

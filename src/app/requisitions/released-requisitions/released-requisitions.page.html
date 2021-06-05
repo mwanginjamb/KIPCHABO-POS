@@ -3,11 +3,13 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Released Requisitions</ion-title>
+    <ion-title>Shipped Requisitions</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+
   <ion-searchbar [(ngModel)]="searchTerm" debounce="2000" (ionChange)="search($event)" placeholder="Search Requisition" ></ion-searchbar>
 
   <ion-grid>

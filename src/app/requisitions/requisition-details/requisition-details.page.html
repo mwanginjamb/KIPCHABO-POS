@@ -9,6 +9,12 @@
 
 <ion-content>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="warning" (click)="post(card.Req_No)">
+      <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullMin="100" pullMax="200">
       <ion-refresher-content
         pullingIcon="arrow-down-outline"

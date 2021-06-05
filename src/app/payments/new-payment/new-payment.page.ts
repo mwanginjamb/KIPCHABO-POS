@@ -23,6 +23,11 @@ export class NewPaymentPage implements OnInit {
   customers: any;
   updateSub: Subscription;
 
+  saleType = [
+    {'type': 'Cash', 'Code': 'Cash'},
+    { 'type': 'Credit', 'Code': 'Credit'}
+  ];
+
   card: Receipt = new Receipt();
 
   constructor(
@@ -118,8 +123,10 @@ export class NewPaymentPage implements OnInit {
     await this.popover.dismiss();
   }
 
-  updateReceipt(card){
-    this.updateSub = this.paymentService.updateReceipt(card).subscribe( res => {
+  updateReceipt($event){
+    console.log(this.card);
+    this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
+      console.log(res);
       if (typeof res === 'object') {
           Object.assign(this.card, res);
           this.toastCtrl.create({
@@ -132,7 +139,7 @@ export class NewPaymentPage implements OnInit {
       }
     }, error => {
       this.alertCtrl.create({
-        header: 'Service Error!',
+        header: 'New Payment Error!',
         message: 'Connection problem: ' + error ,
         buttons: [{ text: 'Okay' }]
       })
@@ -140,6 +147,10 @@ export class NewPaymentPage implements OnInit {
         alertEl.present();
       });
     });
+  }
+
+  toView() {
+    return this.router.navigate(['/','payments', this.card.POS_Receipt_No]);
   }
 
 }

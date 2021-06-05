@@ -6,12 +6,15 @@ import { Unit } from '../models/unit.model';
 import { take } from 'rxjs/operators';
 import { Stockissueline } from '../models/stockissueline.model';
 import { StockDetailsPage } from './stock-details.page';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class StockdetailService {
   url = environment.url;
-  constructor( private http: HttpClient) { }
+  constructor( 
+    private http: HttpClient,
+    private toastCtrl: ToastController) { }
 
   get releasedrequisitions() {
     return this.http.get< Stockissue[] >(`${this.url}site/releasedrequisitions`).pipe(take(1));
@@ -26,6 +29,12 @@ export class StockdetailService {
 
   createRequisition() {
     return this.http.get< Stockissue >(`${this.url}site/create-requisition`);
+  }
+
+  //Update Stock Issue
+
+  updateStockIssue(Card: Stockissue) {
+    return this.http.post< Stockissue >(`${this.url}site/stock-issue-card`, JSON.stringify(Card) );
   }
 
   // get Units of Measure
@@ -67,6 +76,8 @@ export class StockdetailService {
     return this.http.post< Stockissueline >(`${this.url}site/updateissueline`, JSON.stringify(line) );
   }
 
+
+
   // Fetch Line to Update
   getLine(Key: string){
     return this.http.get< Stockissueline >(`${this.url}site/stock-issue-line?Key=${Key}`);
@@ -85,5 +96,23 @@ export class StockdetailService {
     const month = (recDate.getMonth() + 1) > 9 ? recDate.getMonth() + 1 : `0` + (recDate.getMonth() + 1);
     const day = ( recDate.getDate() ) > 9 ? recDate.getDate() : `0` + recDate.getDate();
     return  `${recDate.getFullYear()}-${month}-${day}`;
+  }
+
+  acknowledgeStockIssue(No){
+    return this.http.get(`${this.url}site/acknowledge-stock-issue?No=${No}`);
+  }
+
+  postDocument(No){
+    return this.http.get(`${this.url}site/acknowledge-stock-issue?No=${No}`);
+  }
+
+  async showToast(text){
+    return await this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    }).then( toastEl => {
+      toastEl.present();
+    });
   }
 }

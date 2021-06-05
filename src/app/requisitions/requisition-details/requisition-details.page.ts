@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequisitionService } from '../requisition.service';
 import { ActivatedRoute } from '@angular/router';
 import { Requisition } from '../../requisitions/requisition.model';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { LinesComponent } from '../lines/lines.component';
 import { ItemService } from 'src/app/items/item.service';
 import { Subscription } from 'rxjs';
 import { Requisitionline } from 'src/app/models/requisitionline.model';
+import { StockdetailService } from 'src/app/stock-details/stockdetail.service';
 
 
 
@@ -35,7 +36,9 @@ model = {};
     private requisitionService: RequisitionService,
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private modalCtrl: ModalController ) {
+    private modalCtrl: ModalController,
+    private stockService: StockdetailService,
+    private alertCtrl: AlertController ) {
   }
 
   ngOnInit() {
@@ -100,6 +103,26 @@ model = {};
       if (event){
         event.target.complete();
       }
+    });
+  }
+
+  post(ReceiptNo){
+    console.log(ReceiptNo);
+    this.stockService.postDocument(ReceiptNo).subscribe(res => {
+      if (typeof res === 'string'){ // a string response represents a Nav Error, so we display it.
+        this.alertCtrl.create({
+          header: 'Service Warning!',
+          message: res,
+          buttons: [{ text: 'Okay' }]
+        }).then( alertEl => {
+          alertEl.present();
+        });
+      }else{
+        this.stockService.showToast(`Document Posted Successfully.`);
+      }
+
+    }, error => {
+      alert(error);
     });
   }
 

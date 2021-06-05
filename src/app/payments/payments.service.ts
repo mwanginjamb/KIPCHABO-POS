@@ -22,7 +22,7 @@ url = environment.url;
   }
 
   updateReceipt(receipt: Receipt) {
-    return this.http.post< Cashreceiptline >(`${this.url}site/cash-sale-line`, JSON.stringify(receipt) );
+    return this.http.post< Receipt >(`${this.url}site/cash-sale`, JSON.stringify(receipt) );
   }
 
   get Payments() {

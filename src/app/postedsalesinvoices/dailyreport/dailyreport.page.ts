@@ -28,6 +28,7 @@ export class DailyreportPage implements OnInit, OnDestroy {
       this.salesSub = this.salesService.FilterSales(startDate).subscribe( res => {
 
         if (typeof res === 'string'){
+          // alert(res);
           this.salesService.showToast(res);
           this.sales = [];
           this.Total = 0;
@@ -52,7 +53,7 @@ export class DailyreportPage implements OnInit, OnDestroy {
     elements.forEach(obj => {
       // console.log(obj);
       for (const property in obj){
-         if ( property === 'Amount_Including_VAT' && !isNaN(+obj[property]) ){
+         if ( property === 'Amount' && !isNaN(+obj[property]) ){
           console.log(+obj[property]);
           sum += +obj[property];
         }

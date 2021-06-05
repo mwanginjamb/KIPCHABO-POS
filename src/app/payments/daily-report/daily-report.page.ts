@@ -25,6 +25,7 @@ export class DailyReportPage implements OnInit, OnDestroy {
     const startDate = this.paymentService.formatDate($event.target.value);
     if (Date.parse(startDate) ){
       this.receiptSub = this.paymentService.FilterReceipts(startDate).subscribe( res => {
+        // alert(res);
         if (typeof res === 'string'){
           this.paymentService.showToast(res);
           this.receipts = [];

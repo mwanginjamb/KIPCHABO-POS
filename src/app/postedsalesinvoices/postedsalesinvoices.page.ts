@@ -52,8 +52,8 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
     // Begin search only if searchTerm is provided
     if (this.searchTerm.trim().length && this.searchTerm !== '') {
       this.sales = searchItems.filter((sales) => {
-        if ( sales.Sell_to_Customer_Name && sales.Sell_to_Customer_Name.length > 1 ){
-          return ( sales.Sell_to_Customer_Name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
+        if ( sales.Customer_Name && sales.Customer_Name.length > 1 ){
+          return ( sales.Customer_Name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 );
         }
      });
       return;

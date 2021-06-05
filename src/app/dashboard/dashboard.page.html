@@ -1,6 +1,14 @@
 <ion-header>
-  <ion-toolbar class="ion-text-center" color="primary">
-    <ion-title>Dashboard</ion-title>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" fill="clear" (click)="logout()">
+        <ion-icon name="exit-outline" title="Logout"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -37,23 +45,23 @@
       <ion-col col-6 col-sm-12 [routerLink]="['../postedsales']">
         <ion-card ion-text-center padding color="warning">
             <ion-icon name="cart"></ion-icon>
-            <h2>Sales</h2>
+            <h2>Posted Sales</h2>
         </ion-card>
       </ion-col>
 
       <ion-col col-6 col-sm-12 [routerLink]="['../payments']">
         <ion-card ion-text-center padding color="warning">
             <ion-icon name="card"></ion-icon>
-            <h2>Cash Sales</h2>
+            <h2>Sales</h2>
         </ion-card>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col col-6 col-sm-12 [routerLink]="['../items']">
+      <ion-col col-6 col-sm-12 [routerLink]="['../requisitions/released-requisitions']">
         <ion-card ion-text-center padding color="warning">
             <ion-icon name="pricetag"></ion-icon>
-            <h2>Items</h2>
+            <h2>Shipped Requisitions</h2>
         </ion-card>
       </ion-col>
 

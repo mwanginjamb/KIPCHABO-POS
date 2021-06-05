@@ -122,7 +122,7 @@ export class BluetoothComponent implements OnInit {
     this.myString =   `
     Kipchabo Tea Factory Ltd - Invoice.
 
-    Customer: ${this.Card?.Sell_to_Customer_Name}
+    Customer: ${this.Card?.Customer_Name}
 
     Sale Date: ${this.Card.Posting_Date}
 
@@ -146,11 +146,11 @@ export class BluetoothComponent implements OnInit {
     });
 
 
-    const VAT = this.Card?.Amount_Including_VAT * 0.16;
+    const VAT = this.Card?.Amount * 0.16;
 
     this.myString += `
 
-     Total Amount: ${this.Card?.Amount_Including_VAT}
+     Total Amount: ${this.Card?.Amount}
 
      VAT: ${VAT}
      `;
