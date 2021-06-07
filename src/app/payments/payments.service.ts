@@ -25,8 +25,8 @@ url = environment.url;
     return this.http.post< Receipt >(`${this.url}site/cash-sale`, JSON.stringify(receipt) );
   }
 
-  get Payments() {
-    return this.http.get< Receipt[] >(`${this.url}site/get?service=POSReceiptList`).pipe(take(1));
+  getPayments(userID: string) {
+    return this.http.get< Receipt[] >(`${this.url}site/get?service=POSReceiptList&userid=${userID}`).pipe(take(1));
   }
 
   getPayment(id: string){
@@ -105,12 +105,12 @@ url = environment.url;
     return this.orderService.formatDate(date);
   }
 
-  FilterReceipts(startDate){
-    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}`).pipe(take(1));
+  FilterReceipts(startDate, userID){
+    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}&userid=${userID}`).pipe(take(1));
   }
 
-  FilterReceiptsbyRange(startDate, endDate){
-    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}&enddate=${endDate}`).pipe(take(1));
+  FilterReceiptsbyRange(startDate, endDate, userID){
+    return this.http.get< Receipt[] >(`${this.url}site/filterpayments?startdate=${startDate}&enddate=${endDate}&userid=${userID}`).pipe(take(1));
   }
 
 }

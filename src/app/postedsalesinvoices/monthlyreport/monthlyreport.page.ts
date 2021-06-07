@@ -3,6 +3,7 @@ import { Postedsalesinvoice } from 'src/app/models/postedsalesinvoice.model';
 import { Subscription } from 'rxjs';
 import { SalesService } from '../sales.service';
 import { PopoverController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-monthlyreport',
@@ -17,18 +18,35 @@ export class MonthlyreportPage implements OnInit, OnDestroy {
   sales: Postedsalesinvoice[];
   Total = 0;
   success = false;
+  user: any;
 
-  constructor( private salesService: SalesService, private popOver: PopoverController) { }
+  constructor(
+     private salesService: SalesService, 
+     private popOver: PopoverController,
+     private authService: AuthService
+     ) { }
 
   ngOnInit() {
     this.popOver.dismiss();
+  }
+
+  ionViewWillEnter() {
+    this.setUser();
+  }
+  
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
   }
 
   FilterSalebyRange(){
     const startDate = this.salesService.formatDate(this.FilterRange.startDate);
     const endDate = this.salesService.formatDate(this.FilterRange.endDate);
     if (Date.parse(startDate) &&  Date.parse(endDate)){
-      this.SalesSub = this.salesService.FilterSalesbyRange(startDate, endDate).subscribe( res => {
+      this.SalesSub = this.salesService.FilterSalesbyRange(startDate, endDate, this.user?.User_ID).subscribe( res => {
         if (typeof res === 'string'){
           this.salesService.showToast(res);
           this.sales = [];

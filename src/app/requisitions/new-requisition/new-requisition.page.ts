@@ -35,9 +35,9 @@ export class NewRequisitionPage implements OnInit {
     this.popoverCtrl.dismiss();
     this.Requisition();
     this.fetchLocations();
-    this.fetchDimensions();
-    this.fetchDepartments();
-    this.fetchProjects();
+    //this.fetchDimensions();
+    //this.fetchDepartments();
+    //this.fetchProjects();
 
   }
 

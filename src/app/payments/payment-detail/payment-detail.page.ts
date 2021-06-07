@@ -3,10 +3,11 @@ import { Subscription } from 'rxjs';
 import { Receipt } from 'src/app/models/receipt.model';
 import { Invoice } from 'src/app/models/invoice.model';
 import { PaymentsService } from '../payments.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ReceiptPopoverComponent } from '../receipt-popover/receipt-popover.component';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-payment-detail',
@@ -21,6 +22,7 @@ export class PaymentDetailPage implements OnInit {
   banks: [];
   bankSub: Subscription;
   updateSub: Subscription;
+  user: any;
 
   constructor(
     private paymentService: PaymentsService,
@@ -28,7 +30,9 @@ export class PaymentDetailPage implements OnInit {
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private authService: AuthService,
+    private router: Router
     ) { }
 
   ngOnInit( ) {
@@ -39,6 +43,17 @@ export class PaymentDetailPage implements OnInit {
     this.FetchBanks();
   }
 
+  ionViewWillEnter() {
+    this.setUser();
+  }
+
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+  }
 
   FetchCard(){
     this.cardSub = this.paymentService.getPayment(this.No).subscribe( result => {
@@ -85,6 +100,9 @@ export class PaymentDetailPage implements OnInit {
         });
       }else{
         this.paymentService.showToast(`Document Posted Successfully.`);
+        setTimeout(() => {
+          this.router.navigate(['../payments'])
+        },3000);
       }
 
     }, error => {
@@ -135,7 +153,9 @@ export class PaymentDetailPage implements OnInit {
   }
 
   updateReceipt($event){
-    console.log(this.card);
+    
+    this.card.Created_By = this.user?.User_ID;
+    // console.table(this.card); return;
     this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
       console.log(res);
       if (typeof res === 'object') {

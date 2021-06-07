@@ -15,8 +15,8 @@ export class RequisitionService {
   url = environment.url;
   constructor(private http: HttpClient) { }
 
-  get requisitions() {
-    return this.http.get< Requisition[] >(`${this.url}site/requisitions`).pipe(take(1));
+  getRequisitions(userID) {
+    return this.http.get< Requisition[] >(`${this.url}site/requisitions?userid=${userID}`).pipe(take(1));
   }
 
   get releasedrequisitions() {

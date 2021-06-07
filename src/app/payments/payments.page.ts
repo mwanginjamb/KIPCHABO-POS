@@ -7,6 +7,7 @@ import { PaymentsService } from './payments.service';
 import { Receipt } from '../models/receipt.model';
 import { PrintService } from './print.service';
 import { BluetoothComponent } from './bluetooth/bluetooth.component';
+import { AuthService } from '../auth/auth-service';
 
 @Component({
   selector: 'app-payments',
@@ -19,6 +20,8 @@ export class PaymentsPage implements OnInit, OnDestroy {
   payments: Receipt[];
   isLoading = true;
   searchTerm: string = null;
+  user: any;
+  userID: string;
 
 
   constructor(
@@ -27,16 +30,35 @@ export class PaymentsPage implements OnInit, OnDestroy {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private PaymentService: PaymentsService,
-    public printService: PrintService
+    public printService: PrintService,
+    public authService: AuthService
     ) { }
 
   ngOnInit() {
+    
+    this.setUser();
+
+  }
+
+  ionViewWillEnter() {
+    this.setUser();
+    console.log('Will Enter');
+    this.FetchPayments();
+  }
+  
+  ionViewDidEnter() {
+    this.setUser();
+    console.table(this.user);
+    console.log('Did Enter');
     this.FetchPayments();
   }
 
-  ionViewDidEnter(){
-      // this.showBluetoothDevices();
+  async setUser() {
+    this.user = await this.authService.getUser();
+    this.userID = this.user?.User_ID;
   }
+
+  
 
   async presentPopover(event) {
     return await this.popoverCtrl.create({
@@ -48,7 +70,8 @@ export class PaymentsPage implements OnInit, OnDestroy {
   }
 
   FetchPayments() {
-    this.paymentsSub = this.PaymentService.Payments.subscribe(result => {
+    
+    this.paymentsSub = this.PaymentService.getPayments(this.userID).subscribe(result => {
       console.log(result);
       this.payments = this.sort([...result]);
       this.isLoading = false;

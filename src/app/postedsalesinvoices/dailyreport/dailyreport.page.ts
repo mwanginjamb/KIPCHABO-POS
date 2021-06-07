@@ -3,6 +3,7 @@ import { Postedsalesinvoice } from 'src/app/models/postedsalesinvoice.model';
 import { SalesService } from '../sales.service';
 import { Subscription } from 'rxjs';
 import { PopoverController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-dailyreport',
@@ -15,17 +16,33 @@ export class DailyreportPage implements OnInit, OnDestroy {
   Total = 0;
   salesSub: Subscription;
   success = false;
+  user: any;
 
-  constructor(private salesService: SalesService, private popOver: PopoverController) { }
+  constructor(
+    private salesService: SalesService,
+    private popOver: PopoverController,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.popOver.dismiss();
   }
 
+  ionViewWillEnter() {
+    this.setUser();
+  }
+  
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+  }
+
   FilterSalebyDate($event){
     const startDate = this.salesService.formatDate($event.target.value);
     if (Date.parse(startDate) ){
-      this.salesSub = this.salesService.FilterSales(startDate).subscribe( res => {
+      this.salesSub = this.salesService.FilterSales(startDate, this.user?.User_ID).subscribe( res => {
 
         if (typeof res === 'string'){
           // alert(res);

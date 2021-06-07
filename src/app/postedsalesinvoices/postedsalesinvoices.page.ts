@@ -62,31 +62,9 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
     }
   }
 
-  FilterSalebyDate($event){
-    const startDate = this.salesService.formatDate($event.target.value);
-    if (Date.parse(startDate) ){
-      this.salesService.FilterSales(startDate).subscribe( res => {
-        this.sales = res;
-        this.Total = this.getTotals(this.sales);
-      });
+  
 
-    }else{
-      return 'No Date Supplied';
-    }
-  }
-
-  FilterSalebyRange(){
-    const startDate = this.salesService.formatDate(this.FilterRange.startDate);
-    const endDate = this.salesService.formatDate(this.FilterRange.endDate);
-    if (Date.parse(startDate) &&  Date.parse(endDate)){
-      this.salesService.FilterSalesbyRange(startDate, endDate).subscribe( res => {
-        this.sales = res;
-        this.Total = this.getTotals(this.sales);
-      });
-    }else{
-      return 'No Date Supplied';
-    }
-  }
+  
 
   getTotals(elements){
     let sum = 0;

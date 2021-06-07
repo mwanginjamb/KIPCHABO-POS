@@ -7,6 +7,7 @@ import { ToastController, AlertController, PopoverController, ModalController } 
 import { PopoverComponent } from 'src/app/orders/popover/popover.component';
 import { OrderService } from 'src/app/orders/order.service';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-new-payment',
@@ -29,11 +30,12 @@ export class NewPaymentPage implements OnInit {
   ];
 
   card: Receipt = new Receipt();
+  user: any;
 
   constructor(
 
     private paymentService: PaymentsService,
-    private orderService: OrderService,
+    private authService: AuthService,
     private router: Router,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
@@ -46,6 +48,19 @@ export class NewPaymentPage implements OnInit {
     this.FetchBanks();
     this.FetchCustomers();
     this.newPayment();
+    this.setUser();
+  }
+
+  ionViewWillEnter() {
+    this.setUser();
+  }
+
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
   }
 
   newPayment(){
@@ -124,7 +139,8 @@ export class NewPaymentPage implements OnInit {
   }
 
   updateReceipt($event){
-    console.log(this.card);
+    this.card.Created_By = this.user?.User_ID;
+    console.table(this.card);
     this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
       console.log(res);
       if (typeof res === 'object') {

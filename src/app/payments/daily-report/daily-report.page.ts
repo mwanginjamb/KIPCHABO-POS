@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth-service';
 import { Receipt } from 'src/app/models/receipt.model';
 import { PaymentsService } from '../payments.service';
 
@@ -15,16 +16,33 @@ export class DailyReportPage implements OnInit, OnDestroy {
   success = false;
   Total = 0;
   receipts: Receipt[];
+  user: any;
 
-  constructor( private paymentService: PaymentsService) { }
+  constructor( 
+    private paymentService: PaymentsService,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    this.setUser();
+  }
+  
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+  }
+
+
   FilterReceiptsbyDate($event){
     const startDate = this.paymentService.formatDate($event.target.value);
     if (Date.parse(startDate) ){
-      this.receiptSub = this.paymentService.FilterReceipts(startDate).subscribe( res => {
+      this.receiptSub = this.paymentService.FilterReceipts(startDate, this.user?.User_ID).subscribe( res => {
         // alert(res);
         if (typeof res === 'string'){
           this.paymentService.showToast(res);

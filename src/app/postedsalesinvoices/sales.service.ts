@@ -27,12 +27,12 @@ export class SalesService {
     return this.orderService.formatDate(date);
   }
 
-  FilterSales(startDate){
-    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}`).pipe(take(1));
+  FilterSales(startDate, userID){
+    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}&userid=${userID}`).pipe(take(1));
   }
 
-  FilterSalesbyRange(startDate, endDate){
-    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}&enddate=${endDate}`).pipe(take(1));
+  FilterSalesbyRange(startDate, endDate, userID){
+    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/filtersales?startdate=${startDate}&enddate=${endDate}&userid=${userID}`).pipe(take(1));
   }
 
   async showToast(text){

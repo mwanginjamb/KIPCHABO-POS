@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { MenuController, PopoverController, AlertController } from '@ionic/angular';
 import { ReqPopoverComponent } from './req-popover/req-popover.component';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../auth/auth-service';
 
 
 @Component({
@@ -15,11 +16,15 @@ import { map } from 'rxjs/operators';
 export class RequisitionsPage implements OnInit, OnDestroy {
 
   isLoading = false;
+  user: any;
+  userID: string;
+
   constructor(
     private requisitionService: RequisitionService,
     private menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public authService: AuthService
     ) { }
 
   requisitions: Array<Requisition>;
@@ -27,8 +32,32 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   searchTerm: string = null;
 
   ngOnInit() {
-      this.isLoading = true;
-      this.requisitionSub = this.requisitionService.requisitions
+      this.isLoading = true; 
+      this.setUser();   
+  }
+
+  ionViewWillEnter() {
+    this.setUser();
+    console.log('Will Enter');
+    this.FetchRequisitions();
+  }
+  
+  ionViewDidEnter() {
+    this.setUser();
+    console.table(this.user);
+    console.log('Did Enter');
+    this.FetchRequisitions();
+
+    
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+    this.userID = this.user?.User_ID;
+  }
+
+  FetchRequisitions() {
+    this.requisitionSub = this.requisitionService.getRequisitions(this.userID)
       .subscribe( result => {
         this.requisitions  = this.sort([...result]);
         this.isLoading = false;
@@ -48,14 +77,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   }
 
 
-  ionViewDidEnter(){
-    this.isLoading = true;
-    this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
-      this.requisitions = this.sort(result);
-      this.isLoading = false;
-      console.log(this.requisitions);
-    });
-  }
+  
 
   search($event) {
 
@@ -76,7 +98,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   }
 
   initializeItems() {
-    this.requisitionSub = this.requisitionService.requisitions.subscribe( result => {
+    this.requisitionSub = this.requisitionService.getRequisitions(this.userID).subscribe( result => {
       this.requisitions = result;
       // console.log(this.requisitions);
     });

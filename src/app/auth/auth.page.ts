@@ -53,6 +53,7 @@ export class AuthPage implements OnInit {
     )
     .subscribe( async (result) => {
         if (result.Key) {
+          await this.loading.dismiss();
           // redirect to dashboard and store user data in local storage
           this.auth.login(result);
           this.user = result;
