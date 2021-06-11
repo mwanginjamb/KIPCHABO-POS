@@ -30,8 +30,9 @@ export class RequisitionService {
 
   // Create New Requisition
 
-  createRequisition() {
-    return this.http.get< Requisition >(`${this.url}site/create-requisition`);
+  createRequisition(userID: string) {
+    console.log('creator is:'+userID);
+    return this.http.get< Requisition >(`${this.url}site/create-requisition?userid=${ userID }`);
   }
 
   // get Units of Measure

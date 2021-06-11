@@ -20,7 +20,7 @@ export class SalesService {
   }
 
   getSale(id: string){
-    return this.http.get< Postedsalesinvoice >(`${this.url}site/sale/?id=${id}`).pipe(take(1));
+    return this.http.get< Postedsalesinvoice >(`${this.url}site/sale/?Key=${id}`).pipe(take(1));
   }
 
   formatDate(date){

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SalesService } from './sales.service';
 import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonItemSliding } from '@ionic/angular';
 
 @Component({
   selector: 'app-postedsalesinvoices',
@@ -27,6 +27,14 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
+    this.FetchSales();
+  }
+
+  ionViewWillLoad() {
+    this.FetchSales();
+  }
+
+  ionViewDidEnter() {
     this.FetchSales();
   }
 
@@ -82,6 +90,11 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
 
   sort(dataArray: Postedsalesinvoice[]){
     return dataArray.sort((a,b) => (b.No > a.No) ? 1: -1);
+  }
+
+  onReturn(No: string, sliding: IonItemSliding ){
+    sliding.close();
+    //Create return request
   }
 
   ngOnDestroy(){

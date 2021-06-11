@@ -6,6 +6,8 @@ import { RequisitionService } from '../requisition.service';
 import { Subscription } from 'rxjs';
 import { Location } from 'src/app/models/location.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth-service';
+
 
 @Component({
   selector: 'app-new-requisition',
@@ -23,26 +25,44 @@ export class NewRequisitionPage implements OnInit {
   dimensions: any;
   departments: any;
   projects: any;
+  user: any;
+  userID: string;
 
   constructor( 
     private popoverCtrl: PopoverController,
     private requisitionService: RequisitionService,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.popoverCtrl.dismiss();
-    this.Requisition();
     this.fetchLocations();
-    //this.fetchDimensions();
-    //this.fetchDepartments();
-    //this.fetchProjects();
+    this.setUser();
 
   }
 
+
+  ionViewWillEnter() {
+    this.setUser();
+    this.userID = this.user.User_ID;
+   
+  }
+
+  ionViewDidEnter() {
+    this.setUser();
+    this.userID = this.user.User_ID;
+    this.Requisition();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+  }
+
   Requisition() {
-    this.requisitionSub = this.requisitionService.createRequisition().subscribe(result => {
+    this.requisitionSub = this.requisitionService.createRequisition(this.userID).subscribe(result => {
       Object.assign(this.requisition, result);
       //this.requisition.In_Transit_Code = 'IN-TRANSIT';
     });

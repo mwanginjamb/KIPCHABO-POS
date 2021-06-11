@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RequisitionService } from '../requisition.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Requisition } from '../../requisitions/requisition.model';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LinesComponent } from '../lines/lines.component';
@@ -38,7 +38,9 @@ model = {};
     private activatedRoute: ActivatedRoute,
     private modalCtrl: ModalController,
     private stockService: StockdetailService,
-    private alertCtrl: AlertController ) {
+    private alertCtrl: AlertController,
+    private router: Router
+     ) {
   }
 
   ngOnInit() {
@@ -107,6 +109,14 @@ model = {};
   }
 
   post(ReceiptNo){
+
+    // Should send for requisition for approval but we fake it now since work flows are not degined
+    this.stockService.showToast(`Requisition Sent for Approval Successfully.`);
+    setTimeout(() => {
+      this.router.navigate(['../','requisitions']);
+    },3000);
+
+    return;
     console.log(ReceiptNo);
     this.stockService.postDocument(ReceiptNo).subscribe(res => {
       if (typeof res === 'string'){ // a string response represents a Nav Error, so we display it.

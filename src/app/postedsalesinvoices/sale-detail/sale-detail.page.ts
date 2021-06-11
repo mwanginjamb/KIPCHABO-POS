@@ -32,6 +32,14 @@ export class SaleDetailPage implements OnInit, OnDestroy {
     this.FetchCard();
   }
 
+  ionViewWillLoad() {
+    this.FetchCard();
+  }
+
+  ionViewDidLoad() {
+    this.FetchCard();
+  }
+
   FetchCard(){
     this.cardSub = this.salesService.getSale(this.No).subscribe(result => {
       this.card = result;

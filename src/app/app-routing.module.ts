@@ -198,6 +198,10 @@ const routes: Routes = [
     path: 'credit',
     loadChildren: () => import('./credit/credit.module').then( m => m.CreditPageModule)
   },
+  {
+    path: 'return',
+    loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+  },
   
  
 ];
