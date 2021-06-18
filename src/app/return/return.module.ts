@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ReturnPageRoutingModule } from './return-routing.module';
 
 import { ReturnPage } from './return.page';
+import { ReturnLineComponent } from './return-line/return-line.component';
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { ReturnPage } from './return.page';
     IonicModule,
     ReturnPageRoutingModule
   ],
-  declarations: [ReturnPage]
+  entryComponents:[ ReturnLineComponent ],
+  declarations: [ReturnPage, ReturnLineComponent]
 })
 export class ReturnPageModule {}

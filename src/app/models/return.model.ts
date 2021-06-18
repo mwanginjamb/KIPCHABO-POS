@@ -8,7 +8,7 @@ export class Return {
         public Applies_to_Invoice_No?: string,
         public Created_By?: string,
         public Created_On?: string,
-        public POS_Return_Lines?: { POS_Return_Lines_List : [
+        public POS_Return_Lines?: { POS_Return_Lines : [
 
             {
                 Key?: string,

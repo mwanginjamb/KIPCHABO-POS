@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'return-line',
     loadChildren: () => import('./return-line/return-line.module').then( m => m.ReturnLinePageModule)
+  },
+  {
+    path: 'return-list',
+    loadChildren: () => import('./return-list/return-list.module').then( m => m.ReturnListPageModule)
   }
 ];
 

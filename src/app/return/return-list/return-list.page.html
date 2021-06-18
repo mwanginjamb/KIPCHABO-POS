@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Returns List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+
+  <ion-searchbar [(ngModel)]="searchTerm" debounce="2000" (ionChange)="search($event)" placeholder="Search Returns">
+  </ion-searchbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">No.</ion-col>
+      <ion-col size="4">Return Date</ion-col>
+      <ion-col size="4">Customer</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-virtual-scroll [items]="list" approxItemHeight="47.2px">
+
+    <ion-item [routerLink]="['/','return','card',ret.Key]" detail *virtualItem="let ret">
+
+      <ion-grid>
+        <ion-row>
+
+          <ion-col size="4">
+            <ion-label>
+              <h3>{{ ret.No }}</h3>
+            </ion-label>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-label>
+              <h3>{{ ret.Return_Date }}</h3>
+            </ion-label>
+          </ion-col>
+
+
+
+          <ion-col size="4">
+            <ion-label>
+              <h3>{{ ret.Customer_Name}}</h3>
+            </ion-label>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+    </ion-item>
+
+  </ion-virtual-scroll>
+
+
+</ion-content>

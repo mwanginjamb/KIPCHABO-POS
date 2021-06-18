@@ -7,9 +7,9 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 export class UtilityService {
 
   constructor(
-    private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
     ) { }
 
   formatDate(datestring: string) {

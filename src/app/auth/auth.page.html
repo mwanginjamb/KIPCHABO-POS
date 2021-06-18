@@ -7,60 +7,61 @@
 <ion-content padding>
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="6" offset-md="3">
 
-        <ion-list>
-          <ion-item>
-            <ion-label position="floating">Username</ion-label>
-            <ion-input 
-            ngModel name="username"
-            minlength="3"
-            required
-            #usernameCtrl="ngModel"
-            ></ion-input>
-            
-          </ion-item>
-          <ion-item lines="none" *ngIf="!usernameCtrl.valid && usernameCtrl.touched">
-            <ion-label >ERP username is required. </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Password</ion-label>
-            <ion-input
-             ngModel
-             name="password" 
-             required 
-             type="password"
-             #passwordCtrl="ngModel"
-             ></ion-input>
-          </ion-item> 
-          <ion-item lines="none" *ngIf="!passwordCtrl.valid && passwordCtrl.touched">
-            <ion-label>Enter a valid password. </ion-label>
-          </ion-item>
-        </ion-list>
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Username</ion-label>
+                <ion-input
+                ngModel name="username"
+                minlength="3"
+                required
+                #usernameCtrl="ngModel"
+                ></ion-input>
 
-      </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-button 
-        color="primary" 
-        type="submit"  
-        expand="block"
-        [disabled]="!f.valid"
-        >Login</ion-button>
-      </ion-col>
-    </ion-row>
+              </ion-item>
+              <ion-item lines="none" *ngIf="!usernameCtrl.valid && usernameCtrl.touched">
+                <ion-label >ERP username is required. </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input
+                 ngModel
+                 name="password"
+                 required
+                 type="password"
+                 #passwordCtrl="ngModel"
+                 ></ion-input>
+              </ion-item>
+              <ion-item lines="none" *ngIf="!passwordCtrl.valid && passwordCtrl.touched">
+                <ion-label>Enter a valid password. </ion-label>
+              </ion-item>
+            </ion-list>
 
-    <ion-row *ngIf="failed">
-      <ion-col size-md="6" offset-md="3">
-        <ion-text class="text-center text-error" >You entered a wrong Username / Password. </ion-text>
-     </ion-col>
-    </ion-row>
+          </ion-col>
+        </ion-row>
 
-  </ion-grid>
+        <ion-row>
+          <ion-col size-md="6" offset-md="3">
+            <ion-button
+            color="primary"
+            type="submit"
+            expand="block"
+            [disabled]="!f.valid"
+            >Login</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="failed">
+          <ion-col size-md="6" offset-md="3">
+            <ion-text class="text-center text-error" >You entered a wrong Username / Password. </ion-text>
+         </ion-col>
+        </ion-row>
+
+      </ion-grid>
 
   </form>
   

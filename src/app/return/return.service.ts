@@ -23,7 +23,7 @@ export class ReturnService {
 
   // Can create or Update
   ReturnTransaction(returnData: Return) {
-    return this.http.post<Return>(`${this.url}site/return`, JSON.stringify(returnData));
+    return this.http.post<Return>(`${this.url}site/return`, JSON.stringify(returnData)).pipe(take(1));
   }
 
   // Read a single Return
@@ -41,9 +41,16 @@ export class ReturnService {
 
   // Add Update Return Line
 
-  ReturnLine(lineData: Returnline) {
+  returnLine(lineData: Returnline) {
     return this.http.post<Returnline>(`${this.url}site/return-line`, JSON.stringify(lineData));
   }
+
+  // Fetch return Line By Key
+
+  fetchLine(Key: string) {
+    return this.http.get<Returnline>(`${this.url}site/fetch-return-line?Key=${Key}`);
+  }
+
 
 
 }

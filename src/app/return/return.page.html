@@ -1,9 +1,171 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
+  
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="return"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>Return Document</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullMin="100" pullMax="200">
+    <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to Refresh" refreshingSpinner="crescent"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <form #Req="ngForm" (ngSubmit)="onReturnUpdate()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                Sale Return Form
+              </ion-card-title>
+            </ion-card-header>
+  
+            <ion-card-content>
+  
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="floating">No.</ion-label>
+                    <ion-input type="text" [(ngModel)]="card.No" name="No" readonly></ion-input>
+                    <ion-input type="hidden" [(ngModel)]="card.Key" name="Key" readonly></ion-input>
+                  </ion-item>
+                </ion-col>
+  
+  
+                <ion-col>
+                  <ion-label position="floating">Return Date</ion-label>
+                  <ion-datetime type="date" [(ngModel)]="card.Return_Date" name="Return_Date"
+                    (ionChange)="onReturnUpdate()"></ion-datetime>
+                </ion-col>
+  
+              </ion-row>
+  
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="floating">Customer.</ion-label>
+                    <ion-select [(ngModel)]="card.Customer_No" name="Customer_No" [selectedText]="card.Customer_Name"
+                      placeholder="Select ..." (ionChange)="onReturnUpdate()">
+                      <ion-select-option *ngFor="let cust of customers" [value]="cust.No">{{cust.Name}}
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+  
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="floating">Invoice No:</ion-label>
+  
+                    <ion-input type="text" readonly="true" [(ngModel)]="card.Applies_to_Invoice_No"
+                      name="Applies_to_Invoice_No"></ion-input>
+  
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+  
+  
+  
+  
+              <!-- <ion-row>
+                            <ion-col size-sm="6" offset-sm="3">
+                              <ion-button type="submit" color="primary" expand="block">Save Details</ion-button>
+                            </ion-col>
+                          </ion-row>-->
+  
+            </ion-card-content>
+  
+          </ion-card>
+  
+          <!--Start Lines Card-->
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Return Lines</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-list>
+                      <ion-item>
+                        <ion-button type="button" outline color="primary" (click)="onAddLine(card?.No)">New</ion-button>
+                      </ion-item>
+                    </ion-list>
+  
+                  </ion-col>
+                </ion-row>
+  
+                <ion-row scrollX="true">
+                  <ion-col>
+                    <ion-label>Description</ion-label>
+                  </ion-col>
+  
+  
+                  <ion-col>
+                    <ion-label>Unit Pieces</ion-label>
+                  </ion-col>
+  
+  
+                  <ion-col>
+                    <ion-label>Store</ion-label>
+                  </ion-col>
+  
+  
+  
+                </ion-row>
+  
+  
+  
+                <ion-list *ngFor="let item of card ?.POS_Return_Lines ?.POS_Return_Lines">
+                  <ion-row>
+                    <ion-col>
+                      <ion-item (click)="onUpdateLine(item?.Key)" color="primary">
+                        <ion-label>{{item.Description}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+  
+  
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>{{item.Quantity}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+  
+  
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>{{item.Store_Code}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+  
+  
+  
+  
+  
+  
+  
+                  </ion-row>
+                </ion-list>
+  
+  
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          <!--End Lines Card-->
+  
+  
+  
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
 </ion-content>

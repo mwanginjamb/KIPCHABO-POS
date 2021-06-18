@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { SalesService } from './sales.service';
 import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
 import { AlertController, IonItemSliding } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-postedsalesinvoices',
@@ -23,14 +24,15 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
 
   constructor(
     private salesService: SalesService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private router: Router
     ) { }
 
   ngOnInit() {
     this.FetchSales();
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     this.FetchSales();
   }
 
@@ -92,9 +94,10 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
     return dataArray.sort((a,b) => (b.No > a.No) ? 1: -1);
   }
 
-  onReturn(No: string, sliding: IonItemSliding ){
+  onReturn(Key: string, sliding: IonItemSliding ){
     sliding.close();
-    //Create return request
+    //Create return request, send postedsales invoice key for retrieval of the rcord
+    this.router.navigate(['../return/create/',Key]);
   }
 
   ngOnDestroy(){

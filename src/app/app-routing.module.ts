@@ -200,7 +200,21 @@ const routes: Routes = [
   },
   {
     path: 'return',
-    loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+    children: [
+      {
+        path: "",
+        loadChildren: () => import('./return/return-list/return-list.module').then(m => m.ReturnListPageModule)
+      },
+      {
+        path: "create/:id",
+        loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+      },
+      {
+        path: "card/:Key",
+        loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+      }
+    ]
+    // loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
   },
   
  

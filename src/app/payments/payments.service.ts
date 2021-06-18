@@ -62,6 +62,10 @@ url = environment.url;
     return this.http.get(`${this.url}site/receipting-customers`).pipe(take(1));
   }
 
+  Customer(searchName: string) {
+    return this.http.get(`${this.url}site/receipting-customers?searchName=${searchName}`).pipe(take(1));
+  }
+
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){
     const payload = {Customer_No: CustomerNo, Line_No: Line, Receipt_No: ReceiptNo };
     return this.http.post(`${this.url}site/updatecashreceiptline`, JSON.stringify(payload));
