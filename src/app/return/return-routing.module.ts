@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'return-list',
     loadChildren: () => import('./return-list/return-list.module').then( m => m.ReturnListPageModule)
+  },
+  {
+    path: 'return-card',
+    loadChildren: () => import('./return-card/return-card.module').then( m => m.ReturnCardPageModule)
   }
 ];
 

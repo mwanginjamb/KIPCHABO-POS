@@ -211,10 +211,24 @@ const routes: Routes = [
       },
       {
         path: "card/:Key",
-        loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+        loadChildren: () => import('./return/return-card/return-card.module').then( m => m.ReturnCardPageModule)
       }
     ]
     // loadChildren: () => import('./return/return.module').then( m => m.ReturnPageModule)
+  },
+  {
+    path: 'customers',
+    children: [
+      {
+        path: "",
+        loadChildren: () => import('./customers/customers.module').then( m => m.CustomersPageModule)
+      },
+      {
+        path:":id",
+        loadChildren: () => import('./customers/customer-detail/customer-detail.module').then( m => m.CustomerDetailPageModule)
+      }
+    ]
+    
   },
   
  

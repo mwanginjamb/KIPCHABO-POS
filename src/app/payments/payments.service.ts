@@ -62,8 +62,19 @@ url = environment.url;
     return this.http.get(`${this.url}site/receipting-customers`).pipe(take(1));
   }
 
+  /* 
+   * Get Customer By Search Name
+   */
   Customer(searchName: string) {
     return this.http.get(`${this.url}site/receipting-customers?searchName=${searchName}`).pipe(take(1));
+  }
+
+  /* 
+   * Get Customer By Sales Person Code
+   */
+
+  CustomerBySalesPerson(salesPersonCode: string) {
+    return this.http.get(`${this.url}site/receipting-customers?Salesperson_Code=${salesPersonCode}`).pipe(take(1));
   }
 
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){

@@ -8,6 +8,8 @@ import { PopoverComponent } from 'src/app/orders/popover/popover.component';
 import { OrderService } from 'src/app/orders/order.service';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 import { AuthService } from 'src/app/auth/auth-service';
+import { UtilityService } from 'src/app/utility.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-payment',
@@ -40,7 +42,8 @@ export class NewPaymentPage implements OnInit {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private popover: PopoverController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private utilitySvc: UtilityService
     ) { }
 
   ngOnInit() {
@@ -128,7 +131,14 @@ export class NewPaymentPage implements OnInit {
   }
 
   FetchCustomers() {
-    this.customerListSub = this.paymentService.Customers.subscribe( cust => {
+    this.utilitySvc.presentLoading('Loading Customers ....');
+    this.customerListSub = this.paymentService.Customers
+    .pipe(
+      finalize( async () => {
+        this.utilitySvc.loadingCtrl.dismiss();
+      })
+    )
+    .subscribe( cust => {
       console.log(cust);
       this.customers = cust;
     });
