@@ -33,6 +33,7 @@ export class NewPaymentPage implements OnInit {
 
   card: Receipt = new Receipt();
   user: any;
+  Store_Code: string;
 
   constructor(
 
@@ -64,6 +65,7 @@ export class NewPaymentPage implements OnInit {
 
   async setUser() {
     this.user = await this.authService.getUser();
+    this.Store_Code = this.user.Store_Code;
   }
 
   newPayment(){

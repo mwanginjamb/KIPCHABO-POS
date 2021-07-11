@@ -7,6 +7,8 @@ import { Location } from 'src/app/models/location.model'
 import { finalize } from 'rxjs/operators';
 import { ItemService } from 'src/app/items/item.service';
 import { Cashreceiptline } from 'src/app/models/cashreceiptline.model';
+import { AuthService } from 'src/app/auth/auth-service';
+
 
 @Component({
   selector: 'app-new-cash-line',
@@ -25,6 +27,8 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
   updateLineSub: Subscription;
   loading: HTMLIonLoadingElement;
   line: Cashreceiptline = new Cashreceiptline();
+  user: any;
+  Store_Code: string;
 
   constructor(
     private paymentService: PaymentsService,
@@ -33,7 +37,8 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private authService: AuthService,
 
   ) { }
 
@@ -41,6 +46,11 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
     this.presentLoading();
     this.fetchItems();
     this.fetchLocations();
+    this.setUser();
+
+    this.line.Store_Code = this.Store_Code;
+
+    
 
     if ( this.Key ){ //Update
       this.FetchLinetoUpdate();
@@ -48,6 +58,21 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
       this.line.POS_Receipt_No = this.receiptNo;
       
     }
+  }
+
+  ionViewWillEnter() {
+    this.setUser();
+  }
+
+  ionViewDidEnter() {
+    this.setUser();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+    this.Store_Code = this.user.Store_Code;
+    this.line.Store_Code = this.Store_Code;
+   
   }
 
   fetchLocations() {
@@ -59,6 +84,7 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
     )
     .subscribe( res => {
       this.locations = res;
+      // console.table(res);
     });
   }
 
@@ -76,10 +102,13 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
 
   InitLine()
   {
+    this.setUser();
+    console.log(`Store Code : ${this.Store_Code}`);
     this.paymentService.postLine(this.line).subscribe( line => {
       
       if ( line ) {
         this.line = line;
+        this.line.Store_Code = this.Store_Code;
       } else {
         this.alertCtrl.create({
           header: 'Operation Error',

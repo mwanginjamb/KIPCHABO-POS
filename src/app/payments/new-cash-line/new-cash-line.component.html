@@ -26,9 +26,10 @@
 
         <ion-item>
           <ion-label position="floating">Store</ion-label>
-          <ion-select [(ngModel)]="line.Store_Code" [selectedText]="line.Store_Name" placeholder="Select Store">
+          <ion-input [(ngModel)]="line.Store_Code" type="text" readonly></ion-input>
+          <!--<ion-select [(ngModel)]="line.Store_Code" [selectedText]="line.Store_Name" placeholder="Select Store">
             <ion-select-option *ngFor="let store of locations" [value]="store.Code">{{ store.Name }}</ion-select-option>
-          </ion-select>
+          </ion-select>-->
         </ion-item>
 
         <ion-item>
@@ -36,10 +37,10 @@
           <ion-input [(ngModel)]="line.Qty" type="number"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <!---<ion-item>
           <ion-label position="floating"> Price</ion-label>
           <ion-input [(ngModel)]="line.Price" type="number"></ion-input>
-        </ion-item>
+        </ion-item>-->
 
 
 

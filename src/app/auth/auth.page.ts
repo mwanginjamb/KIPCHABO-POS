@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -23,6 +23,11 @@ export class AuthPage implements OnInit {
   user: User;
   loading: HTMLIonLoadingElement;
 
+  @ViewChild('f') loginForm: NgForm;
+
+  
+  
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -31,8 +36,14 @@ export class AuthPage implements OnInit {
     ) { }
 
   ngOnInit() {
-
+   
   }
+
+  ionViewDidEnter() {
+    this.loginForm.reset();
+  }
+
+ 
 
   async onSubmit(form: NgForm) {
 

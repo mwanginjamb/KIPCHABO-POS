@@ -7,6 +7,7 @@ import { PopoverComponent } from '../orders/popover/popover.component';
 import { OrderService } from '../orders/order.service';
 import { ToastController } from '@ionic/angular';
 import { Cashreceiptline } from '../models/cashreceiptline.model';
+import { Customer } from '../models/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -74,7 +75,7 @@ url = environment.url;
    */
 
   CustomerBySalesPerson(salesPersonCode: string) {
-    return this.http.get(`${this.url}site/receipting-customers?Salesperson_Code=${salesPersonCode}`).pipe(take(1));
+    return this.http.get<Customer []>(`${this.url}site/receipting-customers?Salesperson_Code=${salesPersonCode}`).pipe(take(1));
   }
 
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){
