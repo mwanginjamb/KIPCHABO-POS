@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../auth/auth-service';
+import { Customer } from '../models/customer.model';
 import { PaymentsService } from '../payments/payments.service';
 import { UtilityService } from '../utility.service';
 
@@ -13,7 +14,7 @@ import { UtilityService } from '../utility.service';
 export class CustomersPage implements OnInit, OnDestroy {
 
   customerListSub: Subscription;
-  customers: any = null;
+  customers: Customer[] = null;
   user: any;
   userID: string;
   searchTerm: string = null;

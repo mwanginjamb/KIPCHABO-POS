@@ -6,6 +6,7 @@ export class Customer {
         public Salesperson_Code?: string,
         public Country_Region_Code?: string,
         public Phone_No?: string,
+        public Location_Market?: string,
         public Customer_Posting_Group?: string,
         public Gen_Bus_Posting_Group?: string,
         public VAT_Bus_Posting_Group?: string,
