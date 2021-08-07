@@ -9,6 +9,6 @@ export class Cashreceiptline {
         public Price?: number,
         public Total_Amount?: number,
         public POS_Receipt_No?: string,
-        
+        public Stock_Balance?: number,
     ) {}
 }

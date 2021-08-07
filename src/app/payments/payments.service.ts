@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { Receipt } from '../models/receipt.model';
 import { PopoverComponent } from '../orders/popover/popover.component';
 import { OrderService } from '../orders/order.service';
 import { ToastController } from '@ionic/angular';
 import { Cashreceiptline } from '../models/cashreceiptline.model';
 import { Customer } from '../models/customer.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentsService {
 
-url = environment.url;
+  url = environment.url;
+  private _refresh$ = new Subject<void>();
 
   constructor( private http: HttpClient, private orderService: OrderService, private toastCtrl: ToastController) { }
 
-  newPayment( ) {
-      return this.http.post< Receipt >(`${this.url}site/cash-sale`, {} ); 
+
+  // Define a synthetic getter for the subject
+
+  get refresh$() {
+    return this._refresh$;
+  }
+
+  newPayment(receipt: Receipt ) {
+      return this.http.post< Receipt >(`${this.url}site/cash-sale`, JSON.stringify(receipt) ); 
   }
 
   updateReceipt(receipt: Receipt) {
@@ -50,13 +59,23 @@ url = environment.url;
   // Post Lines Data
 
   postLine(line: Cashreceiptline) {
-    return this.http.post< Cashreceiptline >(`${this.url}site/cash-sale-line`, JSON.stringify(line) );
+    return this.http.post< Cashreceiptline >(`${this.url}site/cash-sale-line`, JSON.stringify(line) )
+    .pipe(
+      tap( () => {
+        this._refresh$.next();
+      } )
+    );
   }
 
   // Update Line
 
   updateLine(line: Cashreceiptline) {
-    return this.http.post< Cashreceiptline >(`${this.url}site/cash-sale-line`, JSON.stringify(line) );
+    return this.http.post< Cashreceiptline >(`${this.url}site/cash-sale-line`, JSON.stringify(line) )
+    .pipe(
+      tap( () => {
+        this._refresh$.next();
+      } )
+    );
   }
 
   get Customers() {

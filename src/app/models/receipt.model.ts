@@ -12,6 +12,7 @@ export class Receipt {
         public Reference_No?: string,
         public Total_Amount?: string,
         public Created_By?: string,
+        public Balance_Amount?: number,
         public POS_Receipt_Lines?: { POS_Receipt_Lines: [{
 
             Key?,

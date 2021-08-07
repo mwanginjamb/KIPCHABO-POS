@@ -33,10 +33,10 @@
   <ion-grid fixed *ngIf="success">
 
     <ion-row>
-      <ion-col col-12 col-sm>No.</ion-col>
-      <ion-col col-12 col-sm>Customer No.</ion-col>
-      <ion-col col-12 col-sm>Customer Name</ion-col>
+      <!--<ion-col col-12 col-sm>No.</ion-col>
+                                                      <ion-col col-12 col-sm>Customer No.</ion-col>-->
       <ion-col col-12 col-sm>Posting Date</ion-col>
+      <ion-col col-12 col-sm>Customer Name</ion-col>
       <ion-col col-12 col-sm>Amount</ion-col>
     </ion-row>
   </ion-grid>
@@ -44,14 +44,14 @@
   <ion-virtual-scroll [items]="sales" approxItemHeight="47.2px" *ngIf="success">
                
     <ion-item 
-      [routerLink] = "['/','postedsales',sale.No]"
+      [routerLink] = "['/','postedsales',sale.Key]"
      detail
      *virtualItem="let sale" > 
   
      <ion-grid >
         <ion-row>
   
-          <ion-col col-12 col-sm>
+        <!-- <ion-col col-12 col-sm>
             <ion-label>
               <h3>{{ sale?.No }}</h3>
             </ion-label>
@@ -61,23 +61,23 @@
             <ion-label>
               <h3>{{ sale?.Customer_No }}</h3>
             </ion-label>
+          </ion-col>-->
+          <ion-col col-4 col-sm>
+            <ion-label>
+              <h3>{{ sale?.Posting_Date}}</h3>
+            </ion-label>
           </ion-col>
   
-          <ion-col col-12 col-sm>
+          <ion-col col-4 col-sm>
             <ion-label>
               <h3>{{ sale?.Customer_Name }}</h3>
             </ion-label>
           </ion-col>
   
-          <ion-col col-12 col-sm>
-            <ion-label>
-              <h3>{{ sale?.Posting_Date}}</h3>
-            </ion-label>
-          </ion-col>
 
-          <ion-col col-12 col-sm>
+          <ion-col col-4 col-sm>
             <ion-label>
-              <h3>{{ sale?.Amount}}</h3>
+              <h3>{{ sale?.Amount | currency:'Ksh.' }}</h3>
             </ion-label>
           </ion-col>
   

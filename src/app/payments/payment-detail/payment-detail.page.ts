@@ -37,10 +37,12 @@ export class PaymentDetailPage implements OnInit {
 
   ngOnInit( ) {
     this.No = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('RECEIPT NO');
-    console.log(this.No);
     this.FetchCard();
     this.FetchBanks();
+
+    this.paymentService.refresh$.subscribe( () => {
+      this.FetchCard();
+    } );
   }
 
   ionViewWillEnter() {
@@ -58,7 +60,6 @@ export class PaymentDetailPage implements OnInit {
   FetchCard(){
     this.cardSub = this.paymentService.getPayment(this.No).subscribe( result => {
       this.card = result;
-      console.log(this.card);
     });
   }
 
@@ -88,7 +89,7 @@ export class PaymentDetailPage implements OnInit {
   }
 
   post(ReceiptNo){
-    console.log(ReceiptNo);
+    
     this.paymentService.postReceipt(ReceiptNo).subscribe(res => {
       if (typeof res === 'string'){ // a string response represents a Nav Error, so we display it.
         this.alertCtrl.create({
@@ -130,7 +131,7 @@ export class PaymentDetailPage implements OnInit {
 
   onAddLine(POS_Receipt_No: string)
   {
-    this,this.modalCtrl.create(
+    this.modalCtrl.create(
       {
         component: NewCashLineComponent,
         componentProps: { receiptNo: POS_Receipt_No }

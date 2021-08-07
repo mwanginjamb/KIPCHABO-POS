@@ -130,12 +130,16 @@
                     <ion-label>Qty</ion-label>
                   </ion-col>
 
-                  <ion-col>
+                  <!--<ion-col>
                     <ion-label>Price</ion-label>
-                  </ion-col>
+                  </ion-col>-->
 
                   <ion-col>
                     <ion-label>Total</ion-label>
+                  </ion-col>
+                  
+                  <ion-col>
+                    <ion-label>Stock</ion-label>
                   </ion-col>
 
                  
@@ -161,17 +165,22 @@
                         </ion-item>
                       </ion-col>
   
-                      <ion-col> 
+                    <!-- <ion-col> 
                         <ion-item>                         
                             <ion-label>{{line.Price | currency: 'Ksh. '}}</ion-label>
                         </ion-item>
-                      </ion-col>
-
-                      <ion-col> 
-                        <ion-item>                         
-                          <ion-label>{{line.Total_Amount | currency: 'Ksh. '}}</ion-label>
+                        </ion-col>-->
+                        
+                        <ion-col>
+                          <ion-item>
+                            <ion-label>{{line.Total_Amount | currency: 'Ksh. '}}</ion-label>
                         </ion-item>
-                      </ion-col>                     
+                      </ion-col>
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>{{line.Stock_Balance}}</ion-label>
+                        </ion-item>
+                      </ion-col>
   
                     </ion-row>   
                 </ion-list>

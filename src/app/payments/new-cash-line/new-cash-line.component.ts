@@ -166,12 +166,9 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
     });
   }
   
-  updateLine() {
-  
+  updateLine() { 
   this.paymentService.updateLine(this.line).subscribe( line => {
-      if ( typeof line !== 'string'){
-          console.log(`Updated Line.......`);
-          console.table(line);
+      if ( typeof line !== 'string'){   
           this.toastCtrl.create({
             message: `${line.Description} Line Updated Successfully.`,
             duration: 3000,
@@ -179,10 +176,7 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
           }).then((toastData) => {
             toastData.present();
           });
-  
-          this.modalCtrl.dismiss();
-          // this.router.navigate(['/requisitions/' + line.Document_No]);
-  
+          this.modalCtrl.dismiss();   
       }else {
          // Alert the error
          this.alertCtrl.create(

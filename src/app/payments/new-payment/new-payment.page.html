@@ -20,13 +20,12 @@
     </ion-col>
 
     <ion-col >
-      <ion-item>
-        <ion-label position="floating">Bank Account</ion-label>
-        <ion-select [(ngModel)]="card.Bank_Account_No" [selectedText]="card.Bank_Account_Name"
-          (ionChange)="updateReceipt($event)" placeholder="Receiving Bank A/C">
-          <ion-select-option *ngFor="let bank of banks" [value]="bank.No">{{bank.Name}}</ion-select-option>
-        </ion-select>
-      </ion-item>
+      
+        <ion-item>
+          <ion-label position="floating">Balance Amount</ion-label>
+          <ion-input [(ngModel)]="card.Balance_Amount" readonly></ion-input>
+          </ion-item>
+      
     </ion-col>
   </ion-row>
 
@@ -35,7 +34,8 @@
     <ion-col >
       <ion-item>
         <ion-label position="floating">Customer.</ion-label>                
-        <ion-select [(ngModel)]="card.Customer_No" name="Customer_No" [selectedText]="card.Customer_Name"
+        <ion-select [(ngModel)]="card.Customer_No" (ionChange)="updateReceipt(card)" name="Customer_No"
+          [selectedText]="card.Customer_Name"
           placeholder="Select ...">
           <ion-select-option *ngFor="let cust of customers" [value]="cust.No">{{cust.Name}}</ion-select-option>
         </ion-select>
@@ -52,6 +52,7 @@
       </ion-item>
     </ion-col>
 
+    
   </ion-row>
 
 

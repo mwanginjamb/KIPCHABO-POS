@@ -69,7 +69,8 @@ export class NewPaymentPage implements OnInit {
   }
 
   newPayment(){
-    this.paymentSub = this.paymentService.newPayment().subscribe( receipt => {
+    this.card.Created_By = this.user?.User_ID;
+    this.paymentSub = this.paymentService.newPayment(this.card).subscribe( receipt => {
       console.log(typeof receipt);
       this.card = receipt;
       const curr = new Date();
@@ -154,7 +155,12 @@ export class NewPaymentPage implements OnInit {
     this.card.Created_By = this.user?.User_ID;
     console.table(this.card);
     this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
-      console.log(res);
+      // console.log(res);
+      if(typeof res === 'string')
+      {
+        this.utilitySvc.showAlert(res);
+        return false;
+      }
       if (typeof res === 'object') {
           Object.assign(this.card, res);
           this.toastCtrl.create({
