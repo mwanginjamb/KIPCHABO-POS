@@ -4,7 +4,7 @@ import { RequisitionService } from './requisition.service';
 import { Subscription } from 'rxjs';
 import { MenuController, PopoverController, AlertController } from '@ionic/angular';
 import { ReqPopoverComponent } from './req-popover/req-popover.component';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth-service';
 
 
@@ -33,7 +33,8 @@ export class RequisitionsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.isLoading = true; 
-      this.setUser();   
+      this.setUser();  
+      this.FetchRequisitions(); 
   }
 
   ionViewWillEnter() {
@@ -46,7 +47,7 @@ export class RequisitionsPage implements OnInit, OnDestroy {
     this.setUser();
     console.table(this.user);
     console.log('Did Enter');
-    this.FetchRequisitions();
+    
 
     
   }
@@ -58,10 +59,13 @@ export class RequisitionsPage implements OnInit, OnDestroy {
 
   FetchRequisitions() {
     this.requisitionSub = this.requisitionService.getRequisitions(this.userID)
+      .pipe(
+        finalize( () => {
+          this.isLoading = false;
+        } )
+      )
       .subscribe( result => {
         this.requisitions  = this.sort([...result]);
-        this.isLoading = false;
-        console.log(this.requisitions);
       }, error => {
         this.isLoading = false;
         console.log(error.error);

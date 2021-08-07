@@ -10,7 +10,7 @@
 <ion-content>
 
   <div *ngIf="isLoading" class="ion-text-center">
-    <ion-spinner  name="crescent"></ion-spinner>
+    <ion-spinner name="lines-small"></ion-spinner>
   </div>
 
   <ion-searchbar [(ngModel)]="searchTerm" debounce="2000" (ionChange)="searchSale($event)"></ion-searchbar>

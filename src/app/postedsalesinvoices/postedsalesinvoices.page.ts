@@ -4,6 +4,7 @@ import { SalesService } from './sales.service';
 import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
 import { AlertController, IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-postedsalesinvoices',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
   FilterRange = { startDate: new Date(), endDate : new Date() };
-  isLoading = false;
+  isLoading = true;
   SalesSub: Subscription;
   sales: Postedsalesinvoice[];
   searchTerm: string = null;
@@ -33,18 +34,22 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
-    this.FetchSales();
+    // this.FetchSales();
   }
 
   ionViewDidEnter() {
-    this.FetchSales();
+    // this.FetchSales();
   }
 
   FetchSales() {
-    this.SalesSub = this.salesService.Sales.subscribe(result => {
-      console.log(result);
-      this.sales = this.sort([...result]);
-      this.isLoading = false;
+    this.SalesSub = this.salesService.Sales
+    .pipe(
+      finalize( () => {
+        this.isLoading = false;
+      })
+    )
+    .subscribe(result => {
+      this.sales = this.sort([...result]);  
     }, error => {
       console.log(error.error);
       this.alertCtrl.create({

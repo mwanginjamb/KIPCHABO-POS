@@ -46,7 +46,18 @@ model = {};
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     // get card details
+    this.fetchCard();
 
+    //Auto refresh upon line activitie
+
+    this.requisitionService.refresh$.subscribe( () => {
+      this.fetchCard();
+    } );
+
+   
+  }
+
+  private fetchCard() {
     this.cardSub = this.requisitionService.requisitioncard(this.id).subscribe( cardInfo => {
       this.card = [...cardInfo][0];
       console.log(this.card);

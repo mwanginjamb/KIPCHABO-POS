@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Requisition } from './requisition.model';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Unit } from '../models/unit.model';
 import { Requisitionline } from '../models/requisitionline.model';
 import { Location } from '../models/location.model';
 import { Stockissue } from '../models/stockissue.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequisitionService {
   url = environment.url;
+  private _refresh$ = new Subject<void>();
+
+
   constructor(private http: HttpClient) { }
+
+  // Synthetic Getter for our refresh observerble
+
+  get refresh$() {
+    return this._refresh$;
+  }
 
   getRequisitions(userID) {
     return this.http.get< Requisition[] >(`${this.url}site/requisitions?userid=${userID}`).pipe(take(1));
@@ -65,13 +75,23 @@ export class RequisitionService {
   // Post Lines Data
 
   postLine(line: Requisitionline) {
-    return this.http.post(`${this.url}site/requisition-lines`, JSON.stringify(line) );
+    return this.http.post(`${this.url}site/requisition-lines`, JSON.stringify(line) )
+    .pipe(
+      tap( () => {
+        this._refresh$.next();
+      } )
+    );
   }
 
   // Update Line
 
   updateRequisitionLine(line: Requisitionline) {
-    return this.http.post< Requisitionline >(`${this.url}site/updaterequisitionline`, JSON.stringify(line) );
+    return this.http.post< Requisitionline >(`${this.url}site/updaterequisitionline`, JSON.stringify(line) )
+    .pipe(
+      tap( () => {
+        this._refresh$.next();
+      } )
+    );
   }
 
   // Fetch Line to Update
