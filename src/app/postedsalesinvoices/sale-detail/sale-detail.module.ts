@@ -8,7 +8,7 @@ import { SaleDetailPageRoutingModule } from './sale-detail-routing.module';
 
 import { SaleDetailPage } from './sale-detail.page';
 import { SalesPopoverComponent } from '../sales-popover/sales-popover.component';
-import { BluetoothComponent } from 'src/app/payments/bluetooth/bluetooth.component';
+
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { BluetoothComponent } from 'src/app/payments/bluetooth/bluetooth.compone
     IonicModule,
     SaleDetailPageRoutingModule
   ],
-  entryComponents: [ SalesPopoverComponent, BluetoothComponent ],
-  declarations: [SaleDetailPage, SalesPopoverComponent, BluetoothComponent]
+  entryComponents: [ SalesPopoverComponent ],
+  declarations: [SaleDetailPage, SalesPopoverComponent]
 })
 export class SaleDetailPageModule {}

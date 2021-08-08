@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { CommonModule } from '@angular/common';
 import { IonicStorageModule } from '@ionic/storage';
+import { Printer } from '@ionic-native/printer/ngx';
 
 
 
@@ -24,6 +25,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     BluetoothSerial,
+    Printer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

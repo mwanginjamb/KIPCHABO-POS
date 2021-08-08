@@ -5,7 +5,7 @@ import { SalesService } from '../sales.service';
 import { ActivatedRoute } from '@angular/router';
 import { PopoverController, ModalController } from '@ionic/angular';
 import { SalesPopoverComponent } from '../sales-popover/sales-popover.component';
-import { BluetoothComponent } from 'src/app/payments/bluetooth/bluetooth.component';
+
 
 @Component({
   selector: 'app-sale-detail',
