@@ -230,6 +230,10 @@ const routes: Routes = [
     ]
     
   },
+  {
+    path: 'cash-deposit',
+    loadChildren: () => import('./cash-deposit/cash-deposit.module').then( m => m.CashDepositPageModule)
+  },
   
  
 ];

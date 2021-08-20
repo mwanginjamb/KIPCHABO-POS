@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreditPageRoutingModule } from './credit-routing.module';
 
 import { CreditPage } from './credit.page';
+import { CreditPopoverComponent } from './credit-popover/credit-popover.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { CreditPage } from './credit.page';
     IonicModule,
     CreditPageRoutingModule
   ],
+  entryComponents: [ CreditPopoverComponent],
   declarations: [CreditPage]
 })
 export class CreditPageModule {}

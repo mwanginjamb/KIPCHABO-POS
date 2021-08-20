@@ -71,7 +71,8 @@
     "plugins": {
       "cordova-plugin-advanced-http": {},
       "cordova-plugin-bluetooth-serial": {},
-      "cordova-plugin-document-scanner": {}
+      "cordova-plugin-document-scanner": {},
+      "cordova-plugin-printer": {}
     }
   }
 }

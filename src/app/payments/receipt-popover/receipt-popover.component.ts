@@ -19,7 +19,7 @@ export class ReceiptPopoverComponent implements OnInit {
 
   myString: string;
 
-  constructor( private modalCtrl: ModalController, private router: Router, private printer: Printer, private utilitySvc: UtilityService, private paymentService: PaymentsService) { }
+  constructor( private modalCtrl: ModalController, private router: Router, public printer: Printer, private utilitySvc: UtilityService, private paymentService: PaymentsService) { }
 
   ngOnInit() {
     this.generateReceiptPrintable();
