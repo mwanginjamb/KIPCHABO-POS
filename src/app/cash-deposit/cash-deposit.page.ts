@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../auth/auth-service';
@@ -23,13 +23,15 @@ export class CashDepositPage implements OnInit {
   userID: string;
   cashDeposit: Cashdeposit = new Cashdeposit();
   cashDepositSub: Subscription;
+
   
 
   constructor(
     public authService: AuthService,
     public depositSvc: CashDepositService,
     public utilitySvc: UtilityService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private popoverCtrl: PopoverController
   ) { }
 
   async ionViewWillEnter() {
@@ -42,11 +44,12 @@ export class CashDepositPage implements OnInit {
 
   async ngOnInit() {
     await this.setUser();
-    console.log(this.userID);
+    await this.popoverCtrl.dismiss();
     if(this.userID)
     {
       this.FetchDeposits();
     }
+
     
   }
 
