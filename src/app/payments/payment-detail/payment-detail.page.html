@@ -74,11 +74,11 @@
                    <ion-label position="floating">Total Amount:</ion-label>
                   <ion-input [(ngModel)]="card.Total_Amount" readonly></ion-input>
                   </ion-item>
-                  </ion-col>
-                  </ion-row>
+                </ion-col>
+                </ion-row>
                   
                   
-                  <ion-row>
+            <ion-row>
                     <ion-col>
                       <ion-item>
                         <ion-label position="floating">Type of Sale </ion-label>
@@ -89,11 +89,29 @@
                     <ion-col>
                       <ion-item>
                         <ion-label position="floating">Reference No</ion-label>
-                        <ion-input [(ngModel)]="card.Reference_No" (ionBlur)="updateReceipt(card)"></ion-input>
-                      </ion-item>
-                    </ion-col>
+                        <ion-input [(ngModel)]="card.Reference_No"></ion-input>
+                        </ion-item>
+                        </ion-col>
+                        
+                        </ion-row>
+                        
+                        <ion-row>
+                          <ion-col>
+                            <ion-item>
+                              <ion-label position="floating">VAT AMT. </ion-label>
+                              <ion-input [(ngModel)]="card.$VAT_Amount"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        
+                          <ion-col>
+                            <ion-item>
+                              <ion-label position="floating">AMT. Inc. VAT</ion-label>
+                              <ion-input [(ngModel)]="card.$Amount_Inc_VAT"></ion-input>
+                            </ion-item>
+                          </ion-col>
 
             </ion-row>
+
 
             
 

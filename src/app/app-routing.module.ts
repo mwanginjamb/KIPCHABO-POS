@@ -232,7 +232,18 @@ const routes: Routes = [
   },
   {
     path: 'cash-deposit',
-    loadChildren: () => import('./cash-deposit/cash-deposit.module').then( m => m.CashDepositPageModule)
+    children: [
+      {
+        path: "",
+        loadChildren: () => import('./cash-deposit/cash-deposit.module').then( m => m.CashDepositPageModule)
+      },
+      {
+        path:":Key",
+        loadChildren: () => import('./cash-deposit/cash-deposit-detail/cash-deposit-detail.module').then( m => m.CashDepositDetailPageModule)
+      }
+
+    ]
+    
   },
   
  

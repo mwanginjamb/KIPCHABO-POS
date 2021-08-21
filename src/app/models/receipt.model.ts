@@ -13,6 +13,8 @@ export class Receipt {
         public Total_Amount?: number,
         public Created_By?: string,
         public Balance_Amount?: number,
+        public $VAT_Amount?: number,
+        public $Amount_Inc_VAT?: number,
         public POS_Receipt_Lines?: { POS_Receipt_Lines: [{
 
             Key?,

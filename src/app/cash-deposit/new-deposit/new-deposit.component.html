@@ -1,15 +1,17 @@
 <ion-header>
-  <ion-toolbar color="warning">
-  
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="cashdeposit"></ion-back-button>
+  <ion-toolbar>
+    <ion-title>New Cash Deposit</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
-  
-    <ion-title>Cash Deposit Card</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="cashDeposit?.Key">
+<ion-content *ngIf="cashDeposit.Key">
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -32,14 +34,14 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">No.</ion-label>
-                  <ion-input [(ngModel)]="cashDeposit.No" readonly></ion-input>
+                  <ion-input [(ngModel)]="cashDeposit.No"></ion-input>
                 </ion-item>
               </ion-col>
 
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">Reference</ion-label>
-                  <ion-input [(ngModel)]="cashDeposit.Reference" readonly></ion-input>
+                  <ion-input [(ngModel)]="cashDeposit.Reference" (ionBlur)="onUpdateDocument()"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -51,7 +53,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">Posting Date: </ion-label>
-                  <ion-input [(ngModel)]="cashDeposit.Posting_Date" readonly></ion-input>
+                  <ion-input [(ngModel)]="cashDeposit.Posting_Date"></ion-input>
                 </ion-item>
               </ion-col>
 
@@ -68,7 +70,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">Created By</ion-label>
-                  <ion-input [(ngModel)]="cashDeposit.Created_By" readonly></ion-input>
+                  <ion-input [(ngModel)]="cashDeposit.Created_By"></ion-input>
                 </ion-item>
               </ion-col>
 
@@ -116,7 +118,7 @@
                 <ion-row>
 
                   <ion-col>
-                    <ion-item>
+                    <ion-item [(ngModel)]="line.Key">
                       <ion-label>{{ln.Customer}}</ion-label>
                     </ion-item>
                   </ion-col>
@@ -129,7 +131,7 @@
 
                   <ion-col>
                     <ion-item>
-                      <input type="checkbox" [value]="ln.Select" />
+                      <input type="checkbox" [value]="ln.Select" [(ngModel)]="line.Select" (click)="onUpdateLine()" />
                     </ion-item>
                   </ion-col>
 
@@ -144,6 +146,6 @@
         <!--End Lines Card-->
 
       </ion-col>
-      </ion-row>
-      </ion-grid>
+    </ion-row>
+  </ion-grid>
 </ion-content>

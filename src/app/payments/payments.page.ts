@@ -26,7 +26,6 @@ export class PaymentsPage implements OnInit, OnDestroy {
 
   constructor(
     private popoverCtrl: PopoverController,
-    private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private PaymentService: PaymentsService,
