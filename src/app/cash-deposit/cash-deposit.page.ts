@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../auth/auth-service';
 import { Cashdeposit } from '../models/cashdeposit.model';
+import { Cashdepositheader } from '../models/cashdepositheader.model';
 import { UtilityService } from '../utility.service';
 import { CashDepositService } from './cash-deposit.service';
 import { NewDepositComponent } from './new-deposit/new-deposit.component';
@@ -22,7 +23,10 @@ export class CashDepositPage implements OnInit {
   user: any;
   userID: string;
   cashDeposit: Cashdeposit = new Cashdeposit();
+  cashDepositHeader = new Cashdepositheader();
   cashDepositSub: Subscription;
+  documentNo$ = new Subject<string>();
+  cardSub: Subscription;
 
   
 
@@ -34,25 +38,29 @@ export class CashDepositPage implements OnInit {
     private popoverCtrl: PopoverController
   ) { }
 
-  async ionViewWillEnter() {
-     await this.setUser();
+  ngOnInit() {
+    this.setUser();
+    this.popoverCtrl.dismiss();
   }
 
-  async ionViewDidEnter() {
-     await this.setUser();
+  private getDocumentNo$() {
+    return this.documentNo$;
   }
 
-  async ngOnInit() {
-    await this.setUser();
-    await this.popoverCtrl.dismiss();
-    if(this.userID)
-    {
+
+  ionViewWillEnter() {
+    this.setUser();
+    console.log('Will Enter');
+    this.FetchDeposits;
+  }
+  ionViewDidEnter() {
+      this.setUser();
+      console.table(this.user);
+      console.log('Did Enter');
       this.FetchDeposits();
-    }
-
-    
   }
 
+  
   async setUser() {
     this.user = await this.authService.getUser();
     this.userID = this.user?.User_ID;
@@ -60,8 +68,8 @@ export class CashDepositPage implements OnInit {
   }
 
   FetchDeposits() {
-  
-    if( this.userID ) {
+
+    
       this.depositSub = this.depositSvc.getCashdeposits(this.userID)
       .pipe(
         finalize( () => {
@@ -70,14 +78,24 @@ export class CashDepositPage implements OnInit {
       )
       .subscribe(result => {
       
-        this.depositsList = this.sort([...result]);
-        
-      }, error => {
+        this.depositsList = this.sort([...result]); 
+      }
+      , error => {
         console.log(error.error);
         this.utilitySvc.showAlert(error.error.message);
       });
-    }
     
+    
+  }
+
+  FetchCard(No: string) {
+     this.cardSub = this.depositSvc.getCardByNo(No)
+      .subscribe(result => {
+        console.log(`Getting payload.....................`);
+        console.table(result);
+        this.cashDeposit = result;
+        this.documentNo$.next(result.Key);
+      });
   }
 
   sort(dataArray: Cashdeposit[]){
@@ -85,30 +103,53 @@ export class CashDepositPage implements OnInit {
   }
 
   initialRequest() {
-      this.cashDeposit.Created_By = this.userID;
-      this.cashDepositSub = this.depositSvc.newDeposit(this.cashDeposit)
+    
+    if(this.userID.length)
+    {
+      // this.cashDepositHeader.Created_By = this.userID;
+      this.cashDepositSub = this.depositSvc.newDeposit(this.userID)
       .subscribe(res => {
-        this.cashDeposit = res;
+        console.log(`Initialize Cash Deposit`);
+        // FETCH THE DAMN cashCard
+        this.FetchCard(res);
+        
+      }, error => {
+        this.utilitySvc.showAlert(error);
       });
+    }
+
+  
+      
   }
 
   onAddDeposit() {
     // Pull up the modal and populate the CashDeposit MODEL with initial ERP data
-    
-    this.initialRequest(); // Call ERP endpoint for creating a new CD Document
-
-    if(this.cashDeposit.Key) {
-      // console.log(`Credit Depo Param to component`);
-      // console.table(this.cashDeposit);
+    this.initialRequest();
+    this.getDocumentNo$().subscribe(res => {
+      if(res)
+      {
+        console.log('Payload');
+        console.log(this.cashDeposit);
+        this.modalCtrl.create({
+          component: NewDepositComponent,
+          componentProps: { cashDepo: this.cashDeposit }
+        })
+        .then( modalEl => {
+          modalEl.present();
+        });
+      }
+     
+      return;
+    });
       
-      this.modalCtrl.create({
-        component: NewDepositComponent,
-        componentProps: { cashDepo: this.cashDeposit }
-      })
-      .then( modalEl => {
-        modalEl.present();
-      });
-    }
+      
+       
+    
+   
+
+    
+      
+    
     
   }
 

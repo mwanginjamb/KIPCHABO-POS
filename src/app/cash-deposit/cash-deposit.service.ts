@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Cashdeposit } from '../models/cashdeposit.model';
+import { Cashdepositheader } from '../models/cashdepositheader.model';
 import { Cashdepositline } from '../models/cashdepositline.model';
 
 @Injectable({
@@ -29,8 +30,9 @@ export class CashDepositService {
     return this.http.get<Cashdeposit[]>(`${this.url}site/get?service=CashDepositList&userid=${userID}`).pipe(take(1));
   }
 
-  newDeposit(deposit: Cashdeposit ) {
-    return this.http.post< Cashdeposit >(`${this.url}site/cashdeposit`, JSON.stringify(deposit) ); 
+  newDeposit(userID: string ) {
+   // console.table(deposit); return;
+    return this.http.get< string >(`${this.url}site/create-cash-deposit?UserID=${userID}`); 
   }
 
   updateDeposit(deposit: Cashdeposit) {
@@ -42,6 +44,12 @@ export class CashDepositService {
   getCard(Key: string){
     return this.http.get(`${this.url}site/view-cashdeposit/?Key=${Key}`).pipe(take(1));
   }
+
+  getCardByNo(No: string){
+    return this.http.get< Cashdeposit >(`${this.url}site/cash-deposit-card/?No=${No}`).pipe(take(1));
+  }
+
+
 
   /**Process Lines */
 
