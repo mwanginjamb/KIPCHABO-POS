@@ -41,12 +41,11 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">Reference</ion-label>
-                  <ion-input [(ngModel)]="cashDeposit.Reference" (ionBlur)="onUpdateDocument()"></ion-input>
+                  <ion-input [(ngModel)]="cashDeposit.Reference" (ionBlur)="onUpdateDocument()" placeholder="Add Transaction Reference">
+                  </ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
-
-
 
 
             <ion-row>
@@ -118,7 +117,7 @@
                 <ion-row>
 
                   <ion-col>
-                    <ion-item [(ngModel)]="line.Key">
+                    <ion-item>
                       <ion-label>{{ln.Customer_Name }}</ion-label>
                     </ion-item>
                   </ion-col>
@@ -131,7 +130,7 @@
 
                   <ion-col>
                     <ion-item>
-                      <input type="checkbox" [value]="ln.Select" [(ngModel)]="line.Select" (click)="onUpdateLine()" />
+                      <input type="checkbox" [value]="ln.Select" (click)="onUpdateLine(ln.Key)" />
                     </ion-item>
                   </ion-col>
 

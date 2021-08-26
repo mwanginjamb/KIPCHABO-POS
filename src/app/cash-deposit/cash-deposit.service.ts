@@ -13,7 +13,8 @@ import { Cashdepositline } from '../models/cashdepositline.model';
 export class CashDepositService {
 
   url = environment.url;
-  private _cashRefresh$ = new Subject<void>();
+  private _cashRefresh$ = new Subject<{}>();
+  private _lineRefresh$ = new Subject<{}>();
 
   constructor( private http: HttpClient) { }
 
@@ -22,6 +23,12 @@ export class CashDepositService {
   get cashrefresh$() {
     return this._cashRefresh$;
   }
+
+  get lineRefresh$() {
+    return this._lineRefresh$;
+  }
+
+
 
 
   // Retrieve all records in list
@@ -35,7 +42,7 @@ export class CashDepositService {
     return this.http.get< string >(`${this.url}site/create-cash-deposit?UserID=${userID}`); 
   }
 
-  updateDeposit(deposit: Cashdeposit) {
+  updateDeposit(deposit: Cashdepositheader) {
     return this.http.post< Cashdeposit >(`${this.url}site/cashdeposit`, JSON.stringify(deposit) );
   }
 
@@ -62,10 +69,10 @@ export class CashDepositService {
   // Post Lines Data
 
   postLine(line: Cashdepositline) {
-    return this.http.post< Cashdepositline >(`${this.url}site/cashdepositline`, JSON.stringify(line) )
+    return this.http.post< Cashdepositline >(`${this.url}site/cashdeposit-line`, JSON.stringify(line) )
     .pipe(
       tap( () => {
-        this._cashRefresh$.next();
+        this._lineRefresh$.next(line);
       } )
     );
   }
@@ -73,10 +80,10 @@ export class CashDepositService {
   // Update Line
 
   updateLine(line: Cashdepositline) {
-    return this.http.post< Cashdepositline >(`${this.url}site/cashdepositline`, JSON.stringify(line) )
+    return this.http.post< Cashdepositline >(`${this.url}site/cashdeposit-line`, JSON.stringify(line) )
     .pipe(
       tap( () => {
-        this._cashRefresh$.next();
+        this._lineRefresh$.next(line);
       } )
     );
   }

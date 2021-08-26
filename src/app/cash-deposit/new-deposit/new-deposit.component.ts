@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Cashdeposit } from 'src/app/models/cashdeposit.model';
 import { Cashdepositline } from 'src/app/models/cashdepositline.model';
 import { UtilityService } from 'src/app/utility.service';
@@ -17,7 +17,8 @@ export class NewDepositComponent implements OnInit {
   updateSub: Subscription;
   cashDeposit = new Cashdeposit();
   updateLineSub: Subscription;
-  line = new Cashdepositline();
+  line: Cashdepositline = new Cashdepositline();
+  lineSub: Subscription;
 
   constructor(
     private depositSvc: CashDepositService,
@@ -29,6 +30,14 @@ export class NewDepositComponent implements OnInit {
     // console.log(`Cash Deposit State passed to component:`);
     // console.table(this.cashDepo);
     Object.assign(this.cashDeposit, this.cashDepo);
+
+    // check if lines have changed and update card accordingly
+
+    this.depositSvc.lineRefresh$.subscribe(res => {
+      console.log(`Updated Line.......`);
+      console.log(res);
+    });
+
   }
 
   onUpdateDocument() {
@@ -48,8 +57,18 @@ export class NewDepositComponent implements OnInit {
     });
   }
 
-  onUpdateLine() {
-    this.updateLineSub = this.depositSvc.updateLine(this.line)
+  onUpdateLine(Key: string) {
+    this.lineSub = this.depositSvc.getLine(Key).subscribe(line => {
+      if(line) {
+        this.line = line;
+        this.line.Select = !line?.Select;
+        this.updateLine(line);
+      }
+    });
+  }
+
+  updateLine(line: Cashdepositline) {
+    this.updateLineSub = this.depositSvc.updateLine(line)
     .subscribe(res => {
       if(typeof res === 'string')
       {

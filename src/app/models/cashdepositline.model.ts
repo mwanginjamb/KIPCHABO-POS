@@ -3,7 +3,7 @@ export class Cashdepositline {
         public Key?: string,
         public Customer_Name?: string,
         public Amount?: string,
-        public Select?: string,
+        public Select?: boolean,
         public No?: string,
     ) {}
 }

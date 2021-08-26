@@ -117,9 +117,6 @@ export class CashDepositPage implements OnInit {
         this.utilitySvc.showAlert(error);
       });
     }
-
-  
-      
   }
 
   onAddDeposit() {
@@ -128,8 +125,6 @@ export class CashDepositPage implements OnInit {
     this.getDocumentNo$().subscribe(res => {
       if(res)
       {
-        console.log('Payload');
-        console.log(this.cashDeposit);
         this.modalCtrl.create({
           component: NewDepositComponent,
           componentProps: { cashDepo: this.cashDeposit }
@@ -139,18 +134,8 @@ export class CashDepositPage implements OnInit {
         });
       }
      
-      return;
     });
-      
-      
-       
-    
-   
 
-    
-      
-    
-    
   }
 
   searchPayment($event){
