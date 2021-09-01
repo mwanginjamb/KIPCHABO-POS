@@ -56,6 +56,11 @@ export class CashDepositService {
     return this.http.get< Cashdeposit >(`${this.url}site/cash-deposit-card/?No=${No}`).pipe(take(1));
   }
 
+  postDocument(No: string) {
+    // post-cashdeposit
+    return this.http.get(`${this.url}site/post-cashdeposit/?No=${No}`).pipe(take(1));
+  }
+
 
 
   /**Process Lines */

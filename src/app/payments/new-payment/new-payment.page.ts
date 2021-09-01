@@ -158,7 +158,8 @@ export class NewPaymentPage implements OnInit {
       // console.log(res);
       if(typeof res === 'string')
       {
-        this.utilitySvc.showAlert(res);
+       // this.utilitySvc.showAlert(res);
+       console.log(`Francis Suppressed above alert....`);
         return false;
       }
       if (typeof res === 'object') {

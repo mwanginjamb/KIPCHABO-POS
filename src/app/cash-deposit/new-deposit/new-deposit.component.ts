@@ -19,6 +19,7 @@ export class NewDepositComponent implements OnInit {
   updateLineSub: Subscription;
   line: Cashdepositline = new Cashdepositline();
   lineSub: Subscription;
+  postSub: Subscription;
 
   constructor(
     private depositSvc: CashDepositService,
@@ -53,7 +54,7 @@ export class NewDepositComponent implements OnInit {
         this.utilitySvc.showToast('Cash Deposit Card Updated Successfully.');
       }
     },error => {
-      this.utilitySvc.showAlert(error);
+      this.utilitySvc.showAlert(error.error.message);
     });
   }
 
@@ -86,6 +87,21 @@ export class NewDepositComponent implements OnInit {
 
   onCancel() {
     this.modalCtrl.dismiss();
+  }
+
+  post(No: string) {
+    this.postSub =  this.depositSvc.postDocument(No).subscribe(res => {
+      console.log(`Posting Results`);
+      console.log(res);
+      if(typeof res === 'string') {
+        this.utilitySvc.showAlert(res);
+        
+      }else{
+        this.utilitySvc.showToast(`Document Posted Successfully.`);
+      }
+    }, error => {
+      this.utilitySvc.showAlert(error);
+    });
   }
 
 }
