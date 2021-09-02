@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaymentsService } from '../payments.service';
 import { Subscription } from 'rxjs';
 import { Receipt } from 'src/app/models/receipt.model';
 import { Router } from '@angular/router';
 import { ToastController, AlertController, PopoverController, ModalController } from '@ionic/angular';
-import { PopoverComponent } from 'src/app/orders/popover/popover.component';
-import { OrderService } from 'src/app/orders/order.service';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 import { AuthService } from 'src/app/auth/auth-service';
 import { UtilityService } from 'src/app/utility.service';
@@ -16,7 +14,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './new-payment.page.html',
   styleUrls: ['./new-payment.page.scss'],
 })
-export class NewPaymentPage implements OnInit {
+export class NewPaymentPage implements OnInit, OnDestroy {
 
   paymentSub: Subscription;
   bankSub: Subscription;
@@ -25,7 +23,10 @@ export class NewPaymentPage implements OnInit {
   suggestLinesSub: Subscription;
   customers: any;
   updateSub: Subscription;
+  priceGroupsSub: Subscription;
+  priceGroups: any;
 
+  
   saleType = [
     {'type': 'Cash', 'Code': 'Cash'},
     { 'type': 'Credit', 'Code': 'Credit'}
@@ -33,6 +34,7 @@ export class NewPaymentPage implements OnInit {
 
   card: Receipt = new Receipt();
   user: any;
+  userID: string;
   Store_Code: string;
 
   constructor(
@@ -48,11 +50,11 @@ export class NewPaymentPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.setUser();
     this.DismissPopover();
     this.FetchBanks();
-    this.FetchCustomers();
-    this.newPayment();
-    this.setUser();
+    this.FetchPriceGroups();
+    this.newPayment(); 
   }
 
   ionViewWillEnter() {
@@ -60,24 +62,59 @@ export class NewPaymentPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.setUser();
+    if(this.userID) {
+      this.FetchCustomers();
+    }
   }
 
   async setUser() {
     this.user = await this.authService.getUser();
     this.Store_Code = this.user.Store_Code;
+    this.userID = this.user?.User_ID;
+    console.log(this.userID);
   }
 
   newPayment(){
     this.card.Created_By = this.user?.User_ID;
     this.paymentSub = this.paymentService.newPayment(this.card).subscribe( receipt => {
-      console.log(typeof receipt);
       this.card = receipt;
       const curr = new Date();
       const formattedDate = this.paymentService.formatDate(curr);
       // this.card.Posting_Date = formattedDate;
     });
   }
+
+  updateReceipt($event){
+    this.card.Created_By = this.user?.User_ID;
+    this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
+    
+      if(typeof res === 'string')
+      {
+        this.utilitySvc.showAlert(res);
+        return false;
+      }
+      if (typeof res === 'object') {
+          Object.assign(this.card, res);
+          this.toastCtrl.create({
+            message: `Receipt Updated Successfully.`,
+            duration: 2000,
+            position: 'top'
+          }).then((toastData) => {
+            toastData.present();
+          });
+      }
+    }, error => {
+      this.alertCtrl.create({
+        header: 'New Payment Error!',
+        message: 'Connection problem: ' + error ,
+        buttons: [{ text: 'Okay' }]
+      })
+      .then(alertEl => {
+        alertEl.present();
+      });
+    });
+  }
+
 
   FetchBanks(){
     this.bankSub = this.paymentService.Banks.subscribe( result => {
@@ -134,58 +171,53 @@ export class NewPaymentPage implements OnInit {
   }
 
   FetchCustomers() {
-    this.utilitySvc.presentLoading('Loading Customers ....');
-    this.customerListSub = this.paymentService.Customers
-    .pipe(
-      finalize( async () => {
-        this.utilitySvc.loadingCtrl.dismiss();
-      })
-    )
-    .subscribe( cust => {
-      console.log(cust);
-      this.customers = cust;
-    });
+    
+      console.log(`User Found....`);
+      console.table(this.user);
+      this.utilitySvc.presentLoading('Loading Customers ....');
+      this.customerListSub = this.paymentService.CustomerBySalesPerson(this?.userID)
+      .pipe(
+        finalize( async () => {
+          this.utilitySvc.loadingCtrl.dismiss();
+        })
+      )
+      .subscribe( cust => {
+        this.customers = cust;
+      });
+    
+   
+  }
+
+  FetchPriceGroups() {
+    this.priceGroupsSub = this.paymentService.CustomerPriceGroups().subscribe(grps => {
+        this.priceGroups = grps;
+    })
   }
 
   async DismissPopover(){
     await this.popover.dismiss();
   }
 
-  updateReceipt($event){
-    this.card.Created_By = this.user?.User_ID;
-    console.table(this.card);
-    this.updateSub = this.paymentService.updateReceipt(this.card).subscribe( res => {
-      // console.log(res);
-      if(typeof res === 'string')
-      {
-       // this.utilitySvc.showAlert(res);
-       console.log(`Francis Suppressed above alert....`);
-        return false;
-      }
-      if (typeof res === 'object') {
-          Object.assign(this.card, res);
-          this.toastCtrl.create({
-            message: `Receipt Updated Successfully.`,
-            duration: 2000,
-            position: 'top'
-          }).then((toastData) => {
-            toastData.present();
-          });
-      }
-    }, error => {
-      this.alertCtrl.create({
-        header: 'New Payment Error!',
-        message: 'Connection problem: ' + error ,
-        buttons: [{ text: 'Okay' }]
-      })
-      .then(alertEl => {
-        alertEl.present();
-      });
-    });
-  }
-
+  
   toView() {
     return this.router.navigate(['/','payments', this.card.POS_Receipt_No]);
+  }
+
+  ngOnDestroy() {
+    if(this.paymentSub) {
+      this.paymentSub.unsubscribe();
+    } else if(this.bankSub) {
+      this.bankSub.unsubscribe();
+    } else if( this.customerListSub )
+    {
+      this.customerListSub.unsubscribe();
+    } else if( this.suggestLinesSub ) {
+      this.suggestLinesSub.unsubscribe();
+    } else if( this.updateSub ) {
+        this.updateSub.unsubscribe();
+    } else if( this.priceGroupsSub ) {
+        this.priceGroupsSub.unsubscribe();
+    }
   }
 
 }

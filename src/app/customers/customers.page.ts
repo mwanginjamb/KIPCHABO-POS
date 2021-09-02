@@ -32,12 +32,10 @@ export class CustomersPage implements OnInit, OnDestroy {
 
   ionViewWillEnter() {
     this.setUser();
-    console.log(this.user);
   }
 
   ionViewDidEnter() {
     this.FetchCustomers();
-    // console.table(this.user);
   }
 
   FetchCustomers() {

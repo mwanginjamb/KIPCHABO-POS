@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Receipt } from 'src/app/models/receipt.model';
-import { Invoice } from 'src/app/models/invoice.model';
 import { PaymentsService } from '../payments.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ReceiptPopoverComponent } from '../receipt-popover/receipt-popover.component';
 import { NewCashLineComponent } from '../new-cash-line/new-cash-line.component';
 import { AuthService } from 'src/app/auth/auth-service';
+import { UtilityService } from 'src/app/utility.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-payment-detail',
@@ -32,7 +33,8 @@ export class PaymentDetailPage implements OnInit {
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private utilitySvc: UtilityService
     ) { }
 
   ngOnInit( ) {
@@ -89,8 +91,14 @@ export class PaymentDetailPage implements OnInit {
   }
 
   post(ReceiptNo){
-    
-    this.paymentService.postReceipt(ReceiptNo).subscribe(res => {
+    this.utilitySvc.presentLoading('Posting transaction .....');
+    this.paymentService.postReceipt(ReceiptNo)
+    .pipe(
+      finalize( async() => {
+        this.utilitySvc.loadingCtrl.dismiss();
+      })
+    )
+    .subscribe(res => {
       if (typeof res === 'string'){ // a string response represents a Nav Error, so we display it.
         this.alertCtrl.create({
           header: 'Service Warning!',

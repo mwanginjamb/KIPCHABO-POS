@@ -77,6 +77,28 @@
   
   <ion-row>
     <ion-col>
+      <ion-item>
+        <ion-label position="floating">Key </ion-label>
+        <ion-input type="text" name="Key" [(ngModel)]="card.Key" readonly></ion-input>
+      </ion-item>
+    </ion-col>
+  
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Price Group</ion-label>
+  
+        <ion-select [(ngModel)]="card.Price_Group" (ionChange)="updateReceipt(card)" name="Price_Group"
+          [selectedText]="card.Price_Group" placeholder="Select ...">
+          <ion-select-option *ngFor="let pg of priceGroups" [value]="pg.Code">{{pg.Description}}</ion-select-option>
+        </ion-select>
+  
+      </ion-item>
+    </ion-col>
+  
+  
+  </ion-row>
+  <ion-row>
+    <ion-col>
       <ion-list>
         <ion-item>
           <ion-button type="button" outline color="primary" (click)="toView()">Add Receipt Lines</ion-button>

@@ -97,6 +97,12 @@ export class PaymentsService {
     return this.http.get<Customer []>(`${this.url}site/receipting-customers?Salesperson_Code=${salesPersonCode}`).pipe(take(1));
   }
 
+  // Get CustomerPriceGroups
+
+  CustomerPriceGroups() {
+    return this.http.get(`${this.url}site/get?service=CustomerPriceGroups`).pipe(take(1));
+  }
+
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){
     const payload = {Customer_No: CustomerNo, Line_No: Line, Receipt_No: ReceiptNo };
     return this.http.post(`${this.url}site/updatecashreceiptline`, JSON.stringify(payload));

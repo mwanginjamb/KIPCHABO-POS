@@ -34,22 +34,18 @@ export class RequisitionsPage implements OnInit, OnDestroy {
   ngOnInit() {
       this.isLoading = true; 
       this.setUser();  
-      this.FetchRequisitions(); 
+     
   }
 
   ionViewWillEnter() {
     this.setUser();
     console.log('Will Enter');
-    this.FetchRequisitions();
+    
   }
   
   ionViewDidEnter() {
     this.setUser();
-    console.table(this.user);
-    console.log('Did Enter');
-    
-
-    
+    this.FetchRequisitions();
   }
 
   async setUser() {

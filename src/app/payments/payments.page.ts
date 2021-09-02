@@ -41,8 +41,6 @@ export class PaymentsPage implements OnInit, OnDestroy {
 
   ionViewWillEnter() {
     this.setUser();
-    console.log('Will Enter');
-    this.FetchPayments();
   }
   
   ionViewDidEnter() {

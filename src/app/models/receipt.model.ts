@@ -10,6 +10,7 @@ export class Receipt {
         public Bank_Account_Name?: string,
         public Global_Dimension_1_Code?: string,
         public Reference_No?: string,
+        public Price_Group?: string,
         public Total_Amount?: number,
         public Created_By?: string,
         public Balance_Amount?: number,
