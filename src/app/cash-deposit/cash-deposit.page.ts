@@ -106,15 +106,26 @@ export class CashDepositPage implements OnInit {
     
     if(this.userID.length)
     {
-      // this.cashDepositHeader.Created_By = this.userID;
+      this.utilitySvc.presentLoading('Initializing Cash Deposit');
       this.cashDepositSub = this.depositSvc.newDeposit(this.userID)
+      .pipe(
+        finalize(
+          () => {
+            this.utilitySvc.loadingCtrl.dismiss();
+          }
+        )
+      )
       .subscribe(res => {
         console.log(`Initialize Cash Deposit`);
+        if(typeof res === 'string') {
+          this.utilitySvc.showAlert(res);
+          return;
+        }
         // FETCH THE DAMN cashCard
         this.FetchCard(res);
         
       }, error => {
-        this.utilitySvc.showAlert(error);
+        this.utilitySvc.showAlert(error.error.message);
       });
     }
   }

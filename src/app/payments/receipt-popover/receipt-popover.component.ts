@@ -71,12 +71,14 @@ export class ReceiptPopoverComponent implements OnInit {
     });
 
     const Total = this.paymentService.getTotals(this.Card.POS_Receipt_Lines.POS_Receipt_Lines, 'Total_Amount');
-    const VAT = this.Card?.Total_Amount * 0.16;
+    const VAT = this.Card?.VAT_Amount;
+    const Amount_Inc_VAT = this.Card?.Amount_Inc_VAT;
 
     this.myString += `
 
           Total Amount: ${Total}
           VAT: ${VAT}
+          Amount_Inc_VAT: ${Amount_Inc_VAT}
                    `;
   }
 

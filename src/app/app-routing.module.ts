@@ -151,6 +151,13 @@ const routes: Routes = [
             (m) => m.MonthlyReportPageModule
           ),
       },
+      {
+        path: "mpesa",
+        loadChildren: () => 
+        import("./payments/mpesa/mpesa.module").then(
+          (m) => m.MpesaPageModule
+        )
+      }
     ],
   },
   {
@@ -245,6 +252,7 @@ const routes: Routes = [
     ]
     
   },
+  
   
  
 ];

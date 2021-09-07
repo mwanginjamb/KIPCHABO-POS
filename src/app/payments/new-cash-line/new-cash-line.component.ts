@@ -193,7 +193,7 @@ export class NewCashLineComponent implements OnInit, OnDestroy {
       console.log(error.error);
       this.alertCtrl.create({
         header: 'Service Error!',
-        message: 'Connection problem: ' + error.error ,
+        message: 'Connection problem: ' + error.error.message ,
         buttons: [{ text: 'Okay', handler: () => this.modalCtrl.dismiss() }]
       })
       .then(alertEl => {

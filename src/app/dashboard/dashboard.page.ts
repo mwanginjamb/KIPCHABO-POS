@@ -52,6 +52,10 @@ export class DashboardPage implements OnInit {
     return this.router.navigate(['./items/availability']);
   }
 
+  showMpesa() {
+    return this.router.navigate(['./payments/mpesa']);
+  }
+
   async logout() {
     await this.auth.logout();
     this.router.navigate(['./auth']);

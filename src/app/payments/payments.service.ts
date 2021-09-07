@@ -9,6 +9,7 @@ import { ToastController } from '@ionic/angular';
 import { Cashreceiptline } from '../models/cashreceiptline.model';
 import { Customer } from '../models/customer.model';
 import { Subject } from 'rxjs';
+import { ITrasaction } from '../models/mpesa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +102,10 @@ export class PaymentsService {
 
   CustomerPriceGroups() {
     return this.http.get(`${this.url}site/get?service=CustomerPriceGroups`).pipe(take(1));
+  }
+
+  Mpesa() {
+    return this.http.get<ITrasaction[]>(`${this.url}site/get?service=MPESATransactions`).pipe(take(1));
   }
 
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){

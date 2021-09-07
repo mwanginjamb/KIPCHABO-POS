@@ -115,7 +115,7 @@ export class PaymentDetailPage implements OnInit {
       }
 
     }, error => {
-      alert(error);
+      alert(error.error.message);
     });
   }
 

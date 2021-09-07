@@ -90,7 +90,7 @@ export class NewPaymentPage implements OnInit, OnDestroy {
     
       if(typeof res === 'string')
       {
-        this.utilitySvc.showAlert(res);
+        // this.utilitySvc.showAlert(res);
         return false;
       }
       if (typeof res === 'object') {

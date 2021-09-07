@@ -23,7 +23,11 @@ const routes: Routes = [
   {
     path: 'monthly-report',
     loadChildren: () => import('./monthly-report/monthly-report.module').then( m => m.MonthlyReportPageModule)
+  },  {
+    path: 'mpesa',
+    loadChildren: () => import('./mpesa/mpesa.module').then( m => m.MpesaPageModule)
   }
+
 ];
 
 @NgModule({
