@@ -11,9 +11,6 @@ apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-community-camera-preview')
     implementation "com.android.support:support-v4:28.+"
-    implementation 'com.android.support:support-annotations:27.1.1'
-    implementation 'com.android.support:support-annotations:+'
-    implementation 'androidx.annotation:annotation:1.1.0'
 }
 
 

@@ -44,9 +44,6 @@ export class MpesaPage implements OnInit, OnDestroy {
     });
   }
 
-  sort(transactionArray: ITrasaction[]){
-    return transactionArray.sort((a,b) => (b.Receipt_No > a.Receipt_No) ? 1: -1);
-  }
 
   ngOnDestroy(){
     if ( this.mpesaSub ){
@@ -67,6 +64,10 @@ export class MpesaPage implements OnInit, OnDestroy {
     }else{ // Search Term not provide display all items
       this.FetchTransactions();
     }
+  }
+
+  sort(dataArray: ITrasaction[]){
+    return dataArray.sort((a,b) => (b.Transaction_Date > a.Transaction_Date) ? 1: -1);
   }
 
 }

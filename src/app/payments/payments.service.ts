@@ -105,7 +105,7 @@ export class PaymentsService {
   }
 
   Mpesa() {
-    return this.http.get<ITrasaction[]>(`${this.url}site/get?service=MPESATransactions`).pipe(take(1));
+    return this.http.get<ITrasaction[]>(`${this.url}site/get?service=MPESATRANSACTIONSLIVE`).pipe(take(1));
   }
 
   selectLine(CustomerNo: string, Line: number, ReceiptNo: string){

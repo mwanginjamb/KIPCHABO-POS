@@ -24,6 +24,8 @@
       <ion-col col-4 col-sm>Ref.</ion-col>
       <ion-col col-4 col-sm>Phone</ion-col>
       <ion-col col-4 col-sm>Name</ion-col>
+      <ion-col col col-sm>Txn. Date</ion-col>
+      <ion-col col col-sm>Amount</ion-col>
 
     </ion-row>
   </ion-grid>
@@ -35,21 +37,33 @@
       <ion-grid>
         <ion-row>
 
-          <ion-col col-4 col-sm>
+          <ion-col col col-sm>
             <ion-label>
               <h3>{{ transaction?.Receipt_No }}</h3>
             </ion-label>
           </ion-col>
 
-          <ion-col col-4 col-sm>
+          <ion-col col col-sm>
             <ion-label>
               <h3>{{ transaction?.Phone }}</h3>
             </ion-label>
           </ion-col>
 
-          <ion-col col-4 col-sm>
+          <ion-col col col-sm>
             <ion-label>
               <h3>{{ transaction?.Name }}</h3>
+            </ion-label>
+          </ion-col>
+
+          <ion-col col col-sm>
+            <ion-label>
+              <h3>{{ transaction?.Transaction_Date  }}</h3>
+            </ion-label>
+          </ion-col>
+
+          <ion-col col col-sm>
+            <ion-label>
+              <h3>{{ transaction?.Amount  }}</h3>
             </ion-label>
           </ion-col>
 
