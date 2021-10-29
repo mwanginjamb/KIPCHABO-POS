@@ -4,11 +4,13 @@ export class Requisitionline {
         public Item_No?: string,
         public Description?: string,
         public U_O_M?: string,
-        public Available_Stock_Kgs?: string,
-        public Available_Stock_pieces?: string,
-        public Pieces_To_Request?: string,
-        public Line_No?: string,
-        public Req_No?: string,
+        public Quantity_To_Request?: number,
+        public Pieces_In_qty_Requested?: number,
+        public Available_Stock_Kgs?: number,
+        public Available_Stock_pieces?: number,
+        public Total_Bags_Cartons?: number,
+        public Line_No?: any,
+        public Req_No?: string
 
     ) {}
 }

@@ -15,8 +15,8 @@ export class SalesService {
   url = environment.url;
   constructor(private http: HttpClient, private orderService: OrderService, private toastCtrl: ToastController) { }
 
-  get Sales() {
-    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/get?service=PostedSalesInvoices`).pipe(take(1));
+  Sales(userID: string) {
+    return this.http.get< Postedsalesinvoice[] >(`${this.url}site/get?service=PostedSalesInvoices&userid=${userID}`).pipe(take(1));
   }
 
   getSale(id: string){

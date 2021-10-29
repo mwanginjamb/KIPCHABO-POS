@@ -28,8 +28,8 @@ export class NewPaymentPage implements OnInit, OnDestroy {
 
   
   saleType = [
-    {'type': 'Cash', 'Code': 'Cash'},
-    { 'type': 'Credit', 'Code': 'Credit'}
+    {'type': 'MPESA', 'Code': 'M_PESA'},
+    { 'type': 'CASH / CREDIT', 'Code': 'CASH_x002B_CREDIT'}
   ];
 
   card: Receipt = new Receipt();

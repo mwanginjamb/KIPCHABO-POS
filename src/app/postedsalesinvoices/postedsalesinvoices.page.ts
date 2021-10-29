@@ -5,6 +5,7 @@ import { Postedsalesinvoice } from '../models/postedsalesinvoice.model';
 import { AlertController, IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from '../auth/auth-service';
 
 @Component({
   selector: 'app-postedsalesinvoices',
@@ -20,29 +21,37 @@ export class PostedsalesinvoicesPage implements OnInit, OnDestroy {
   sales: Postedsalesinvoice[];
   searchTerm: string = null;
   Total = 0;
+  user: any;
+  userID: string;
 
 
 
   constructor(
     private salesService: SalesService,
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
     ) { }
 
   ngOnInit() {
-    this.FetchSales();
+    this.setUser();
   }
 
   ionViewWillEnter() {
-    // this.FetchSales();
+    this.setUser();
   }
 
   ionViewDidEnter() {
-    // this.FetchSales();
+    this.FetchSales();
+  }
+
+  async setUser() {
+    this.user = await this.authService.getUser();
+    this.userID = this.user?.User_ID;
   }
 
   FetchSales() {
-    this.SalesSub = this.salesService.Sales
+    this.SalesSub = this.salesService.Sales(this.userID)
     .pipe(
       finalize( () => {
         this.isLoading = false;
